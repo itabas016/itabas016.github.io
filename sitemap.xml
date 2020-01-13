@@ -345,13 +345,6 @@
   </url>
   
   <url>
-    <loc>https://tech.itabas.com/2016/09/03/database/oracle-statements/</loc>
-    
-    <lastmod>2020-01-01T14:00:11.365Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://tech.itabas.com/2016/10/30/database/oracle-kt-troubleshooting-performance-monitor/</loc>
     
     <lastmod>2020-01-01T14:00:11.365Z</lastmod>
@@ -359,9 +352,9 @@
   </url>
   
   <url>
-    <loc>https://tech.itabas.com/2016/09/14/database/oracle-kt-object-operation/</loc>
+    <loc>https://tech.itabas.com/2016/09/03/database/oracle-statements/</loc>
     
-    <lastmod>2020-01-01T14:00:11.364Z</lastmod>
+    <lastmod>2020-01-01T14:00:11.365Z</lastmod>
     
   </url>
   
@@ -373,7 +366,14 @@
   </url>
   
   <url>
-    <loc>https://tech.itabas.com/2016/11/09/database/oracle-kt-ilm/</loc>
+    <loc>https://tech.itabas.com/2016/09/14/database/oracle-kt-object-operation/</loc>
+    
+    <lastmod>2020-01-01T14:00:11.364Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tech.itabas.com/2016/10/30/database/oracle-kt-instance-rac-memory/</loc>
     
     <lastmod>2020-01-01T14:00:11.363Z</lastmod>
     
@@ -387,7 +387,7 @@
   </url>
   
   <url>
-    <loc>https://tech.itabas.com/2016/10/30/database/oracle-kt-instance-rac-memory/</loc>
+    <loc>https://tech.itabas.com/2016/11/09/database/oracle-kt-ilm/</loc>
     
     <lastmod>2020-01-01T14:00:11.363Z</lastmod>
     
