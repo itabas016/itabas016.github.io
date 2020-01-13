@@ -637,9 +637,9 @@
             
             <tag> Git </tag>
             
-            <tag> Tips </tag>
-            
             <tag> Wiki </tag>
+            
+            <tag> Tips </tag>
             
         </tags>
         
@@ -730,9 +730,9 @@
             
             <tag> Git </tag>
             
-            <tag> Wiki </tag>
-            
             <tag> Git Hooks </tag>
+            
+            <tag> Wiki </tag>
             
         </tags>
         
@@ -880,44 +880,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Oracle - Materialized View]]></title>
-      <url>https://tech.itabas.com/2016/11/09/database/oracle-kt-materialized-view/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>A <code>materialized view</code>, or <code>snapshot</code> as they were previously known, is a table segment whose contents are periodically refreshed based on a query, either against a local or remote table. Using materialized views against remote tables is the simplest way to achieve replication of data between sites.</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><blockquote>
-<p>Oracle uses <code>materialized views</code> (also known as <strong>snapshots</strong> in prior releases) to replicate data to non-master sites in a replication environment and to cache <strong>expensive queries</strong> in a data warehouse environment. </p>
-</blockquote>
-<blockquote>
-<p>A <code>materialized view</code> is a replica of a target master from a <strong>single point</strong> in time. The master can be either a master table at a master site or a master materialized view at a materialized view site. Whereas in multi-master replication tables are continuously updated by other master sites, materialized views are updated from one or more masters through individual batch updates, known as a refreshes, from a single master site or master materialized view site.<br><img src="/../../../../ref/oracle-mv-view.png" alt="oracle-mv-view.png"></p>
-</blockquote>
-<h3 id="Create-Materialized-View"><a href="#Create-Materialized-View" class="headerlink" title="Create Materialized View"></a>Create Materialized View</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Master Database Site</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> DBA_MVIEW_LOGS <span class="keyword">WHERE</span> <span class="keyword">MASTER</span>=<span class="string">'&lt;BASE TABLE NAME&gt;'</span>,</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> <span class="keyword">LOG</span> <span class="keyword">ON</span> &lt;BASE <span class="keyword">TABLE</span>&gt; <span class="keyword">TABLESPACE</span> &lt;<span class="keyword">TABLESPACE</span> <span class="keyword">NAME</span>&gt; <span class="keyword">WITH</span> &lt;PRIMARY <span class="keyword">KEY</span>&gt;/&lt;<span class="keyword">ROWID</span>&gt;;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> <span class="keyword">LOG</span> <span class="keyword">ON</span> &lt;<span class="keyword">Schema</span>&gt;.&lt;Table_Name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- MView Database Site</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="keyword">LINK</span> &lt;<span class="keyword">NAME</span>&gt; <span class="keyword">CONNECT</span> <span class="keyword">TO</span> &lt;<span class="keyword">Master</span> DB <span class="keyword">Schema</span> <span class="keyword">Name</span>&gt; </span><br><span class="line"><span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> &lt; <span class="keyword">Master</span> DB <span class="keyword">Schema</span> <span class="keyword">Password</span>&gt; <span class="keyword">USING</span> <span class="string">'&lt;Master DB TNS&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> <span class="string">"USERNAME"</span>.<span class="string">"MVIEW_NAME"</span></span><br><span class="line"><span class="keyword">ORGANIZATION</span> <span class="keyword">HEAP</span> PCTFREE <span class="number">10</span> <span class="keyword">PCTUSED</span> <span class="number">0</span> <span class="keyword">INITRANS</span> <span class="number">2</span> <span class="keyword">MAXTRANS</span> <span class="number">255</span> <span class="keyword">NOCOMPRESS</span> NOLOGGING</span><br><span class="line"><span class="keyword">STORAGE</span>(<span class="keyword">INITIAL</span> <span class="number">1048576</span> <span class="keyword">NEXT</span> <span class="number">1048576</span> <span class="keyword">MINEXTENTS</span> <span class="number">1</span> <span class="keyword">MAXEXTENTS</span> <span class="number">2147483645</span></span><br><span class="line"><span class="keyword">PCTINCREASE</span> <span class="number">0</span> <span class="keyword">FREELISTS</span> <span class="number">1</span> <span class="keyword">FREELIST</span> <span class="keyword">GROUPS</span> <span class="number">1</span> <span class="keyword">BUFFER_POOL</span> <span class="keyword">DEFAULT</span>)</span><br><span class="line"><span class="keyword">TABLESPACE</span> <span class="string">"&lt;Tablespace Name&gt;"</span></span><br><span class="line"><span class="keyword">BUILD</span> <span class="keyword">IMMEDIATE</span></span><br><span class="line"><span class="keyword">USING</span> <span class="keyword">INDEX</span> PCTFREE <span class="number">10</span> <span class="keyword">INITRANS</span> <span class="number">2</span> <span class="keyword">MAXTRANS</span> <span class="number">255</span></span><br><span class="line"><span class="keyword">STORAGE</span>(<span class="keyword">INITIAL</span> <span class="number">1048576</span> <span class="keyword">NEXT</span> <span class="number">1048576</span> <span class="keyword">MINEXTENTS</span> <span class="number">1</span> <span class="keyword">MAXEXTENTS</span> <span class="number">2147483645</span></span><br><span class="line"><span class="keyword">PCTINCREASE</span> <span class="number">0</span> <span class="keyword">FREELISTS</span> <span class="number">1</span> <span class="keyword">FREELIST</span> <span class="keyword">GROUPS</span> <span class="number">1</span> <span class="keyword">BUFFER_POOL</span> <span class="keyword">DEFAULT</span>)</span><br><span class="line"><span class="keyword">TABLESPACE</span> <span class="string">""</span>&lt;<span class="keyword">Tablespace</span> <span class="keyword">Name</span>&gt;<span class="string">"</span></span><br><span class="line"><span class="string">REFRESH FAST ON DEMAND START WITH sysdate+0 NEXT TRUNC(SYSDATE+1)+6/24 -- Morning 6 AM</span></span><br><span class="line"><span class="string">-- REFRESH FAST ON DEMAND START WITH sysdate+0 NEXT SYSDATE + 5/(60*24)  -- Every 5 Mins</span></span><br><span class="line"><span class="string">-- REFRESH COMPLETE ON DEMAND START WITH sysdate+0 NEXT SYSDATE + 30/(60*24) -- Every 30 Mins</span></span><br><span class="line"><span class="string">-- REFRESH COMPLETE ON DEMAND START WITH sysdate+0 NEXT SYSDATE + 1</span></span><br><span class="line"><span class="string">WITH PRIMARY KEY USING DEFAULT LOCAL ROLLBACK SEGMENT</span></span><br><span class="line"><span class="string">DISABLE QUERY REWRITE</span></span><br><span class="line"><span class="string">--WITH ROWID USING DEFAULT LOCAL ROLLBACK SEGMENT</span></span><br><span class="line"><span class="string">DISABLE QUERY REWRITE</span></span><br><span class="line"><span class="string">AS SELECT</span></span><br><span class="line"><span class="string">COLUMN_1 Col_Alias_Name ,</span></span><br><span class="line"><span class="string">COLUMN_2 Col_Alias_Name,</span></span><br><span class="line"><span class="string">COLUMN_3 Col_Alias_Name,</span></span><br><span class="line"><span class="string">--NULL Col_Alias_Name,,</span></span><br><span class="line"><span class="string">--CAST(NULL as varchar2(1)) Col_Alias_Name,,</span></span><br><span class="line"><span class="string">FROM &lt;Master Schema&gt;.&lt;Master Base Table&gt;@&lt;DB_LINK Name&gt;;</span></span><br></pre></td></tr></table></figure>
-<h3 id="ALTER-DROP-Materialized-View"><a href="#ALTER-DROP-Materialized-View" class="headerlink" title="ALTER/DROP Materialized View"></a>ALTER/DROP Materialized View</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> &lt;MVIEW_NAME&gt;</span><br><span class="line"><span class="keyword">REFRESH</span> <span class="keyword">COMPLETE</span> <span class="keyword">ON</span> <span class="keyword">DEMAND</span> <span class="keyword">START</span> <span class="keyword">WITH</span> <span class="keyword">sysdate</span>+<span class="number">0</span> <span class="keyword">NEXT</span> <span class="keyword">SYSDATE</span> + <span class="number">30</span>/(<span class="number">60</span>*<span class="number">24</span>);</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> <span class="keyword">LOG</span> <span class="keyword">ON</span> &lt;MVIEW_NAME&gt;;</span><br></pre></td></tr></table></figure>
-<h3 id="Query-Materialized-View"><a href="#Query-Materialized-View" class="headerlink" title="Query Materialized View"></a>Query Materialized View</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Find All JOBs/MViews Related to Master DB</span></span><br><span class="line">col JOB FOR 9999</span><br><span class="line">col OWNER for a8</span><br><span class="line">col MASTER_LINK for a15</span><br><span class="line">col HOST for a10</span><br><span class="line">col FAST_REFRESHABLE for a8</span><br><span class="line">col STALENESS for a9</span><br><span class="line">col COMPILE_STATE for a8</span><br><span class="line">col MVIEW_NAME for a20</span><br><span class="line">col "REFRH MOD-METHOD BLD_MOD" for a22</span><br><span class="line">col INTERVAL FOR a24</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">  JOB</span><br><span class="line"> ,a.OWNER,MVIEW_NAME</span><br><span class="line"> ,UPDATABLE</span><br><span class="line"> ,REWRITE_ENABLED</span><br><span class="line"> ,MASTER_LINK</span><br><span class="line"> ,c.HOST</span><br><span class="line"> ,REFRESH_MODE||<span class="string">'-'</span>||REFRESH_METHOD||<span class="string">'-'</span>||BUILD_MODE <span class="string">"REFRH MOD-METHOD BLD_MOD"</span></span><br><span class="line"> ,FAST_REFRESHABLE</span><br><span class="line"> ,LAST_REFRESH_TYPE</span><br><span class="line"> ,to_char(LAST_REFRESH_DATE,<span class="string">'dd-Mon-yy hh24:mi:ss'</span>) LAST_REFRESH_DATE</span><br><span class="line"> ,COMPILE_STATE</span><br><span class="line"> ,<span class="built_in">INTERVAL</span></span><br><span class="line"> ,USE_NO_INDEX</span><br><span class="line"><span class="keyword">FROM</span>  DBA_MVIEWS a, DBA_REFRESH_CHILDREN b, DBA_DB_LINKS c</span><br><span class="line"><span class="keyword">WHERE</span> a.MVIEW_NAME=b.NAME</span><br><span class="line"><span class="keyword">AND</span>  a.OWNER=b.OWNER</span><br><span class="line"><span class="keyword">And</span>  MASTER_LINK <span class="keyword">in</span> (<span class="keyword">SELECT</span> <span class="string">'@'</span>||DB_LINK <span class="keyword">from</span> dba_db_links <span class="keyword">where</span> <span class="keyword">UPPER</span>(HOST) =<span class="string">'&lt;Master DB Name&gt;'</span>)</span><br><span class="line"><span class="keyword">AND</span>  <span class="keyword">SUBSTR</span>(a.MASTER_LINK,<span class="number">2</span>) = c.DB_LINK</span><br><span class="line"><span class="keyword">AND</span>  <span class="keyword">UPPER</span>(c.HOST) =<span class="string">'&lt;Master DB Name&gt;'</span></span><br><span class="line"><span class="keyword">Order</span> <span class="keyword">by</span> MASTER_LINK, MVIEW_NAME;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Query Materialized View Log in Master DB Site</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> DBA_MVIEW_LOGS <span class="keyword">WHERE</span> <span class="keyword">MASTER</span>=<span class="string">'&lt;BASE TABLE NAME&gt;'</span>;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Resources:<br><a href="http://durga-kar.blogspot.com/2015/02/materialized-view.html" target="_blank" rel="noopener">http://durga-kar.blogspot.com/2015/02/materialized-view.html</a></p>
-</blockquote>
-]]></content>
-      
-        <categories>
-            
-            <category> Database </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Oracle </tag>
-            
-            <tag> KT </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Oracle - ILM]]></title>
       <url>https://tech.itabas.com/2016/11/09/database/oracle-kt-ilm/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -945,6 +907,44 @@
 <h3 id="VPD-Virtual-Private-Database"><a href="#VPD-Virtual-Private-Database" class="headerlink" title="VPD - Virtual Private Database"></a>VPD - Virtual Private Database</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@IBSArch.par</span><br><span class="line"><span class="keyword">set</span> serveroutput <span class="keyword">on</span>;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">verify</span> <span class="keyword">off</span>;</span><br><span class="line"></span><br><span class="line">spool IBSVPD.log</span><br><span class="line"></span><br><span class="line">prompt</span><br><span class="line">prompt Attempting to <span class="keyword">create</span> the VPD <span class="keyword">profiles</span></span><br><span class="line">@@scripts/createvpdprofiles</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>These resource files see <a href="https://github.com/itabas016/ilm-script" target="_blank" rel="noopener">here</a>.</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Database </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Oracle </tag>
+            
+            <tag> KT </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Oracle - Materialized View]]></title>
+      <url>https://tech.itabas.com/2016/11/09/database/oracle-kt-materialized-view/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>A <code>materialized view</code>, or <code>snapshot</code> as they were previously known, is a table segment whose contents are periodically refreshed based on a query, either against a local or remote table. Using materialized views against remote tables is the simplest way to achieve replication of data between sites.</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><blockquote>
+<p>Oracle uses <code>materialized views</code> (also known as <strong>snapshots</strong> in prior releases) to replicate data to non-master sites in a replication environment and to cache <strong>expensive queries</strong> in a data warehouse environment. </p>
+</blockquote>
+<blockquote>
+<p>A <code>materialized view</code> is a replica of a target master from a <strong>single point</strong> in time. The master can be either a master table at a master site or a master materialized view at a materialized view site. Whereas in multi-master replication tables are continuously updated by other master sites, materialized views are updated from one or more masters through individual batch updates, known as a refreshes, from a single master site or master materialized view site.<br><img src="/../../../../ref/oracle-mv-view.png" alt="oracle-mv-view.png"></p>
+</blockquote>
+<h3 id="Create-Materialized-View"><a href="#Create-Materialized-View" class="headerlink" title="Create Materialized View"></a>Create Materialized View</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Master Database Site</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> DBA_MVIEW_LOGS <span class="keyword">WHERE</span> <span class="keyword">MASTER</span>=<span class="string">'&lt;BASE TABLE NAME&gt;'</span>,</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> <span class="keyword">LOG</span> <span class="keyword">ON</span> &lt;BASE <span class="keyword">TABLE</span>&gt; <span class="keyword">TABLESPACE</span> &lt;<span class="keyword">TABLESPACE</span> <span class="keyword">NAME</span>&gt; <span class="keyword">WITH</span> &lt;PRIMARY <span class="keyword">KEY</span>&gt;/&lt;<span class="keyword">ROWID</span>&gt;;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> <span class="keyword">LOG</span> <span class="keyword">ON</span> &lt;<span class="keyword">Schema</span>&gt;.&lt;Table_Name&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- MView Database Site</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="keyword">LINK</span> &lt;<span class="keyword">NAME</span>&gt; <span class="keyword">CONNECT</span> <span class="keyword">TO</span> &lt;<span class="keyword">Master</span> DB <span class="keyword">Schema</span> <span class="keyword">Name</span>&gt; </span><br><span class="line"><span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> &lt; <span class="keyword">Master</span> DB <span class="keyword">Schema</span> <span class="keyword">Password</span>&gt; <span class="keyword">USING</span> <span class="string">'&lt;Master DB TNS&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> <span class="string">"USERNAME"</span>.<span class="string">"MVIEW_NAME"</span></span><br><span class="line"><span class="keyword">ORGANIZATION</span> <span class="keyword">HEAP</span> PCTFREE <span class="number">10</span> <span class="keyword">PCTUSED</span> <span class="number">0</span> <span class="keyword">INITRANS</span> <span class="number">2</span> <span class="keyword">MAXTRANS</span> <span class="number">255</span> <span class="keyword">NOCOMPRESS</span> NOLOGGING</span><br><span class="line"><span class="keyword">STORAGE</span>(<span class="keyword">INITIAL</span> <span class="number">1048576</span> <span class="keyword">NEXT</span> <span class="number">1048576</span> <span class="keyword">MINEXTENTS</span> <span class="number">1</span> <span class="keyword">MAXEXTENTS</span> <span class="number">2147483645</span></span><br><span class="line"><span class="keyword">PCTINCREASE</span> <span class="number">0</span> <span class="keyword">FREELISTS</span> <span class="number">1</span> <span class="keyword">FREELIST</span> <span class="keyword">GROUPS</span> <span class="number">1</span> <span class="keyword">BUFFER_POOL</span> <span class="keyword">DEFAULT</span>)</span><br><span class="line"><span class="keyword">TABLESPACE</span> <span class="string">"&lt;Tablespace Name&gt;"</span></span><br><span class="line"><span class="keyword">BUILD</span> <span class="keyword">IMMEDIATE</span></span><br><span class="line"><span class="keyword">USING</span> <span class="keyword">INDEX</span> PCTFREE <span class="number">10</span> <span class="keyword">INITRANS</span> <span class="number">2</span> <span class="keyword">MAXTRANS</span> <span class="number">255</span></span><br><span class="line"><span class="keyword">STORAGE</span>(<span class="keyword">INITIAL</span> <span class="number">1048576</span> <span class="keyword">NEXT</span> <span class="number">1048576</span> <span class="keyword">MINEXTENTS</span> <span class="number">1</span> <span class="keyword">MAXEXTENTS</span> <span class="number">2147483645</span></span><br><span class="line"><span class="keyword">PCTINCREASE</span> <span class="number">0</span> <span class="keyword">FREELISTS</span> <span class="number">1</span> <span class="keyword">FREELIST</span> <span class="keyword">GROUPS</span> <span class="number">1</span> <span class="keyword">BUFFER_POOL</span> <span class="keyword">DEFAULT</span>)</span><br><span class="line"><span class="keyword">TABLESPACE</span> <span class="string">""</span>&lt;<span class="keyword">Tablespace</span> <span class="keyword">Name</span>&gt;<span class="string">"</span></span><br><span class="line"><span class="string">REFRESH FAST ON DEMAND START WITH sysdate+0 NEXT TRUNC(SYSDATE+1)+6/24 -- Morning 6 AM</span></span><br><span class="line"><span class="string">-- REFRESH FAST ON DEMAND START WITH sysdate+0 NEXT SYSDATE + 5/(60*24)  -- Every 5 Mins</span></span><br><span class="line"><span class="string">-- REFRESH COMPLETE ON DEMAND START WITH sysdate+0 NEXT SYSDATE + 30/(60*24) -- Every 30 Mins</span></span><br><span class="line"><span class="string">-- REFRESH COMPLETE ON DEMAND START WITH sysdate+0 NEXT SYSDATE + 1</span></span><br><span class="line"><span class="string">WITH PRIMARY KEY USING DEFAULT LOCAL ROLLBACK SEGMENT</span></span><br><span class="line"><span class="string">DISABLE QUERY REWRITE</span></span><br><span class="line"><span class="string">--WITH ROWID USING DEFAULT LOCAL ROLLBACK SEGMENT</span></span><br><span class="line"><span class="string">DISABLE QUERY REWRITE</span></span><br><span class="line"><span class="string">AS SELECT</span></span><br><span class="line"><span class="string">COLUMN_1 Col_Alias_Name ,</span></span><br><span class="line"><span class="string">COLUMN_2 Col_Alias_Name,</span></span><br><span class="line"><span class="string">COLUMN_3 Col_Alias_Name,</span></span><br><span class="line"><span class="string">--NULL Col_Alias_Name,,</span></span><br><span class="line"><span class="string">--CAST(NULL as varchar2(1)) Col_Alias_Name,,</span></span><br><span class="line"><span class="string">FROM &lt;Master Schema&gt;.&lt;Master Base Table&gt;@&lt;DB_LINK Name&gt;;</span></span><br></pre></td></tr></table></figure>
+<h3 id="ALTER-DROP-Materialized-View"><a href="#ALTER-DROP-Materialized-View" class="headerlink" title="ALTER/DROP Materialized View"></a>ALTER/DROP Materialized View</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> &lt;MVIEW_NAME&gt;</span><br><span class="line"><span class="keyword">REFRESH</span> <span class="keyword">COMPLETE</span> <span class="keyword">ON</span> <span class="keyword">DEMAND</span> <span class="keyword">START</span> <span class="keyword">WITH</span> <span class="keyword">sysdate</span>+<span class="number">0</span> <span class="keyword">NEXT</span> <span class="keyword">SYSDATE</span> + <span class="number">30</span>/(<span class="number">60</span>*<span class="number">24</span>);</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">MATERIALIZED</span> <span class="keyword">VIEW</span> <span class="keyword">LOG</span> <span class="keyword">ON</span> &lt;MVIEW_NAME&gt;;</span><br></pre></td></tr></table></figure>
+<h3 id="Query-Materialized-View"><a href="#Query-Materialized-View" class="headerlink" title="Query Materialized View"></a>Query Materialized View</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Find All JOBs/MViews Related to Master DB</span></span><br><span class="line">col JOB FOR 9999</span><br><span class="line">col OWNER for a8</span><br><span class="line">col MASTER_LINK for a15</span><br><span class="line">col HOST for a10</span><br><span class="line">col FAST_REFRESHABLE for a8</span><br><span class="line">col STALENESS for a9</span><br><span class="line">col COMPILE_STATE for a8</span><br><span class="line">col MVIEW_NAME for a20</span><br><span class="line">col "REFRH MOD-METHOD BLD_MOD" for a22</span><br><span class="line">col INTERVAL FOR a24</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">  JOB</span><br><span class="line"> ,a.OWNER,MVIEW_NAME</span><br><span class="line"> ,UPDATABLE</span><br><span class="line"> ,REWRITE_ENABLED</span><br><span class="line"> ,MASTER_LINK</span><br><span class="line"> ,c.HOST</span><br><span class="line"> ,REFRESH_MODE||<span class="string">'-'</span>||REFRESH_METHOD||<span class="string">'-'</span>||BUILD_MODE <span class="string">"REFRH MOD-METHOD BLD_MOD"</span></span><br><span class="line"> ,FAST_REFRESHABLE</span><br><span class="line"> ,LAST_REFRESH_TYPE</span><br><span class="line"> ,to_char(LAST_REFRESH_DATE,<span class="string">'dd-Mon-yy hh24:mi:ss'</span>) LAST_REFRESH_DATE</span><br><span class="line"> ,COMPILE_STATE</span><br><span class="line"> ,<span class="built_in">INTERVAL</span></span><br><span class="line"> ,USE_NO_INDEX</span><br><span class="line"><span class="keyword">FROM</span>  DBA_MVIEWS a, DBA_REFRESH_CHILDREN b, DBA_DB_LINKS c</span><br><span class="line"><span class="keyword">WHERE</span> a.MVIEW_NAME=b.NAME</span><br><span class="line"><span class="keyword">AND</span>  a.OWNER=b.OWNER</span><br><span class="line"><span class="keyword">And</span>  MASTER_LINK <span class="keyword">in</span> (<span class="keyword">SELECT</span> <span class="string">'@'</span>||DB_LINK <span class="keyword">from</span> dba_db_links <span class="keyword">where</span> <span class="keyword">UPPER</span>(HOST) =<span class="string">'&lt;Master DB Name&gt;'</span>)</span><br><span class="line"><span class="keyword">AND</span>  <span class="keyword">SUBSTR</span>(a.MASTER_LINK,<span class="number">2</span>) = c.DB_LINK</span><br><span class="line"><span class="keyword">AND</span>  <span class="keyword">UPPER</span>(c.HOST) =<span class="string">'&lt;Master DB Name&gt;'</span></span><br><span class="line"><span class="keyword">Order</span> <span class="keyword">by</span> MASTER_LINK, MVIEW_NAME;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Query Materialized View Log in Master DB Site</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> DBA_MVIEW_LOGS <span class="keyword">WHERE</span> <span class="keyword">MASTER</span>=<span class="string">'&lt;BASE TABLE NAME&gt;'</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Resources:<br><a href="http://durga-kar.blogspot.com/2015/02/materialized-view.html" target="_blank" rel="noopener">http://durga-kar.blogspot.com/2015/02/materialized-view.html</a></p>
 </blockquote>
 ]]></content>
       
@@ -2791,36 +2791,6 @@ To satisfy a</code>NOT NULL` constraint, every row in the table must <strong>con
     </entry>
     
     <entry>
-      <title><![CDATA[How to activate visual studio by command]]></title>
-      <url>https://tech.itabas.com/2016/06/27/tools/how-to-activate-visual-studio-by-command/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>vm agent 太多时候需要批量执行， 其实就一个<code>bat</code>脚本就可搞定。</p>
-</blockquote>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\Program Files (x86)\Microsoft Visual Studio <span class="number">14</span>.<span class="number">0</span>\Common7\IDE</span><br><span class="line">StorePID.exe xxxxx-xxxxx-xxxxx-xxxxx-xxxxx <span class="number">07060</span></span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>ps：最后5位是vs的MPC code, 根据不同的vs version 找到相对应的MPC code~</p>
-</blockquote>
-<p>Resource:<br><a href="https://msdn.microsoft.com/en-us/library/mt270173.aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/mt270173.aspx</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tools </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Script </tag>
-            
-            <tag> Visual Studio </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[An error occurred whild msbuild windows service]]></title>
       <url>https://tech.itabas.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -2863,6 +2833,36 @@ To satisfy a</code>NOT NULL` constraint, every row in the table must <strong>con
             <tag> CI </tag>
             
             <tag> Teamcity </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[How to activate visual studio by command]]></title>
+      <url>https://tech.itabas.com/2016/06/27/tools/how-to-activate-visual-studio-by-command/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>vm agent 太多时候需要批量执行， 其实就一个<code>bat</code>脚本就可搞定。</p>
+</blockquote>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\Program Files (x86)\Microsoft Visual Studio <span class="number">14</span>.<span class="number">0</span>\Common7\IDE</span><br><span class="line">StorePID.exe xxxxx-xxxxx-xxxxx-xxxxx-xxxxx <span class="number">07060</span></span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps：最后5位是vs的MPC code, 根据不同的vs version 找到相对应的MPC code~</p>
+</blockquote>
+<p>Resource:<br><a href="https://msdn.microsoft.com/en-us/library/mt270173.aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/mt270173.aspx</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Tools </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Script </tag>
+            
+            <tag> Visual Studio </tag>
             
         </tags>
         
