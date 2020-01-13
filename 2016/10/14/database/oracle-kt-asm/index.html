@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Oracle - ASM(Automatic Storage Management)"><meta name="keywords" content="Oracle, KT, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/10/14/database/oracle-kt-asm/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Oracle - ASM(Automatic Storage Management) - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Oracle - ASM(Automatic Storage Management)
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-10-14
+        </span><span class="post-category">
+            <a href="/categories/Database/">Database</a>
+            </span>
+        <span class="post-visits" data-url="/2016/10/14/database/oracle-kt-asm/" data-title="Oracle - ASM(Automatic Storage Management)">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Oracle-ASM-Instances"><span class="toc-text">Oracle ASM Instances</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Oracle-ASM-Disk-Groups"><span class="toc-text">Oracle ASM Disk Groups</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Oracle-ASM-Disks"><span class="toc-text">Oracle ASM Disks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Oracle-ASM-Files"><span class="toc-text">Oracle ASM Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-Use-ASM"><span class="toc-text">How to Use ASM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Start-amp-Stop"><span class="toc-text">Start &amp; Stop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adding-a-diskgroup"><span class="toc-text">Adding a diskgroup</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Recreating-a-diskgroup"><span class="toc-text">Recreating a diskgroup</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Rebalancing"><span class="toc-text">Rebalancing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Coverting-to-ASM"><span class="toc-text">Coverting to ASM</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Convert-a-database-to-ASM"><span class="toc-text">Convert a database to ASM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Convert-a-tablespace-to-ASM"><span class="toc-text">Convert a tablespace to ASM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Convert-a-datafile-to-ASM"><span class="toc-text">Convert a datafile to ASM</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Monitoring"><span class="toc-text">Monitoring</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p><code>Oracle ASM</code> is a volume manager and a file system for Oracle database files that supports <code>single-instance</code> Oracle Database and <code>Oracle Real Application Clusters</code> (<strong>Oracle RAC</strong>) configurations. <code>Oracle ASM</code> is Oracle’s recommended storage management solution that provides an alternative to conventional volume managers, file systems, and raw devices.</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>Oracle ASM uses <strong>disk groups</strong> to store data files, an Oracle ASM disk group is a collection of disks that Oracle ASM manages as a unit.<br>Within a disk group, Oracle ASM exposes a file system interface for Oracle database files. The content of files that are stored in <code>a disk group</code> is evenly distributed to eliminate hot spots and to provide uniform performance across the disks. </p>
+</blockquote>
+<h3 id="Oracle-ASM-Instances"><a href="#Oracle-ASM-Instances" class="headerlink" title="Oracle ASM Instances"></a>Oracle ASM Instances</h3><blockquote>
+<p>An <code>Oracle ASM instance</code> is built on the same technology as an Oracle Database instance. An Oracle ASM instance has a <code>System Global Area</code> (<strong>SGA</strong>) and background processes that are similar to those of Oracle Database. </p>
+</blockquote>
+<blockquote>
+<p>However, because Oracle ASM performs fewer tasks than a database, an Oracle ASM <strong>SGA</strong> is much smaller than a database <strong>SGA</strong>. In addition, Oracle ASM has a minimal performance effect on a server. Oracle ASM instances mount disk groups to make Oracle ASM files available to database instances; Oracle ASM instances do not mount databases. </p>
+</blockquote>
+<blockquote>
+<p>See the below structures:<br>Example - <strong>Oracle ASM Cluster with RAC</strong></p>
+</blockquote>
+<p><img src="/../../../../ref/oracle-asm-rac.gif" alt="oracle-asm-rac"></p>
+<blockquote>
+<p>PS. <code>Oracle ASM cluster</code> in an Oracle <code>RAC</code> environment where Oracle ASM provides a clustered pool of storage. There is one Oracle ASM instance for each node serving multiple <code>Oracle RAC</code> or <code>single-instance</code> databases in the cluster. All of the databases are consolidated and share the same <strong>two Oracle ASM disk groups</strong>.</p>
+</blockquote>
+<blockquote>
+<p>Example - <strong>Oracle ASM Cluster with single instance</strong></p>
+</blockquote>
+<p><img src="/../../../../ref/oracle-asm-single.gif" alt="oracle-asm-single"></p>
+<blockquote>
+<p>PS. <code>A clustered storage pool</code> can be shared by multiple <code>single-instance</code> Oracle Databases. In this case, multiple databases share common disk groups. A shared Oracle ASM storage pool is achieved by using Oracle Clusterware. However, in such environments an Oracle RAC license is not required.</p>
+</blockquote>
+<h3 id="Oracle-ASM-Disk-Groups"><a href="#Oracle-ASM-Disk-Groups" class="headerlink" title="Oracle ASM Disk Groups"></a>Oracle ASM Disk Groups</h3><blockquote>
+<p><code>A disk group</code> consists of multiple disks and is the <strong>fundamental</strong> object that Oracle ASM manages. Each disk group contains the metadata that is required for the management of space in the disk group. Disk group components include disks, files, and allocation units.</p>
+</blockquote>
+<blockquote>
+<p>Files are allocated from disk groups. Any Oracle ASM file is completely contained within a single disk group. However, a disk group might contain files belonging to several databases and a single database can use files from multiple disk groups. For most installations you need only a small number of disk groups, usually two, and rarely more than three. </p>
+</blockquote>
+<h3 id="Oracle-ASM-Disks"><a href="#Oracle-ASM-Disks" class="headerlink" title="Oracle ASM Disks"></a>Oracle ASM Disks</h3><blockquote>
+<p><code>Oracle ASM disks</code> are the storage devices that are provisioned to Oracle ASM disk groups. Examples of Oracle ASM disks include:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>A disk or partition from a storage array</li>
+<li>An entire disk or the partitions of a disk</li>
+<li>Logical volumes</li>
+<li>Network-attached files (<strong>NFS</strong>)</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Oracle ASM spreads the files proportionally across all of the disks in the disk group. This allocation pattern maintains every disk at the same capacity level and ensures that all of the disks in a disk group have the same <code>I/O</code> load. Because Oracle ASM <strong>load balances</strong> among all of the disks in a disk group, different Oracle ASM disks should not <strong>share the same physical drive</strong>.</p>
+</blockquote>
+<h3 id="Oracle-ASM-Files"><a href="#Oracle-ASM-Files" class="headerlink" title="Oracle ASM Files"></a>Oracle ASM Files</h3><blockquote>
+<p>Files that are stored in Oracle ASM disk groups are called <code>Oracle ASM files</code>. Each Oracle ASM file is contained within a <strong>single</strong> Oracle ASM disk group. Oracle Database communicates with Oracle ASM in terms of files.<br>This is similar to the way Oracle Database uses files on any file system. You can store the various file types in Oracle ASM disk groups.</p>
+</blockquote>
+<h3 id="How-to-Use-ASM"><a href="#How-to-Use-ASM" class="headerlink" title="How to Use ASM"></a>How to Use ASM</h3><h4 id="Start-amp-Stop"><a href="#Start-amp-Stop" class="headerlink" title="Start &amp; Stop"></a>Start &amp; Stop</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># start</span></span><br><span class="line">$ <span class="built_in">export</span> ORACLE_SID=+ASM</span><br><span class="line">$ sqlplus <span class="string">"/ as sysdba"</span></span><br><span class="line">SQL&gt; startup</span><br><span class="line">ASM instance started</span><br><span class="line">Total System Global Area   83886080 bytes</span><br><span class="line">Fixed Size                  1217836 bytes</span><br><span class="line">Variable Size              57502420 bytes</span><br><span class="line">ASM Cache                  25165824 bytes</span><br><span class="line">ASM diskgroups mounted</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop</span></span><br><span class="line">$ <span class="built_in">export</span> ORACLE_SID=+ASM</span><br><span class="line">$ sqlplus <span class="string">"/ as sysdba"</span></span><br><span class="line">SQL&gt; shutdown immediate</span><br></pre></td></tr></table></figure>
+<h4 id="Adding-a-diskgroup"><a href="#Adding-a-diskgroup" class="headerlink" title="Adding a diskgroup"></a>Adding a diskgroup</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; create diskgroup orag2 external redundancy disk 'ORCL:VOL5';</span><br><span class="line">Diskgroup created.</span><br><span class="line"></span><br><span class="line">SQL&gt; select group_number,disk_number,mode_status,name from v$asm_disk;</span><br><span class="line">GROUP_NUMBER DISK_NUMBER MODE_STATUS    NAME</span><br><span class="line"><span class="comment">------------ ----------- -------------- -------------------------------------</span></span><br><span class="line">           0           5 ONLINE</span><br><span class="line">           1           0 ONLINE         VOL1</span><br><span class="line">           1           1 ONLINE         VOL2</span><br><span class="line">           1           2 ONLINE         VOL3</span><br><span class="line">           1           3 ONLINE         VOL4</span><br><span class="line">           2           0 ONLINE         VOL5</span><br><span class="line">6 rows selected.</span><br></pre></td></tr></table></figure>
+<h4 id="Recreating-a-diskgroup"><a href="#Recreating-a-diskgroup" class="headerlink" title="Recreating a diskgroup"></a>Recreating a diskgroup</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="keyword">if</span>=/dev/zero of=/dev/rdsk/c1t4d0s4 bs=8192 count=12800</span><br><span class="line"><span class="comment"># When done, restart ASM and create the diskgroup from scratch.</span></span><br></pre></td></tr></table></figure>
+<h4 id="Rebalancing"><a href="#Rebalancing" class="headerlink" title="Rebalancing"></a>Rebalancing</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The rebalancing speed is controlled by the ASM_POWER_LIMIT initialization parameter.</span></span><br><span class="line"><span class="comment"># Setting it to 0 will disable disk rebalancing.</span></span><br><span class="line"><span class="comment"># To force rebalancing of a diskgroup:</span></span><br><span class="line">ALTER DISKGROUP data REBALANCE POWER 11 WAIT;</span><br></pre></td></tr></table></figure>
+<h4 id="Coverting-to-ASM"><a href="#Coverting-to-ASM" class="headerlink" title="Coverting to ASM"></a>Coverting to ASM</h4><blockquote>
+<p><strong>One can use <code>Rman</code> to convert a datafile, tablespace or entire database from/to <code>ASM</code>.</strong><br><strong>Here are the steps required to migrate an entire database to <code>ASM</code></strong></p>
+</blockquote>
+<h5 id="Convert-a-database-to-ASM"><a href="#Convert-a-database-to-ASM" class="headerlink" title="Convert a database to ASM"></a>Convert a database to ASM</h5><blockquote>
+<p>Ensure the database is using an <code>SPFILE</code> and not a <code>PFILE</code> (it’s about time after all!).<br>Set parameters on the target database.<br>For example, if we set both <code>DB_CREATE_FILE_DEST</code> and <code>DB_RECOVERY_FILE_DEST</code> we should get mirrored controlfiles and duplexed log files by default:</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter system set DB_CREATE_FILE_DEST = '+DATA';</span><br><span class="line">SQL&gt; alter system set DB_RECOVERY_FILE_DEST_SIZE = 17G;</span><br><span class="line">SQL&gt; alter system set DB_RECOVERY_FILE_DEST = '+RECOVER';</span><br><span class="line">SQL&gt; alter system set CONTROL_FILES = '+DATA';</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Start the database in <code>NOMOUNT</code> mode and <strong>restore the controlfile</strong> into the new location from the old location:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; connect target /</span><br><span class="line">RMAN&gt; STARTUP NOMOUNT</span><br><span class="line">RMAN&gt; RESTORE CONTROLFILE FROM 'old_control_file_name';</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>Mount the database and copy the database into the <code>ASM disk group</code>:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; ALTER DATABASE MOUNT;</span><br><span class="line">RMAN&gt; CONFIGURE DEVICE TYPE DISK PARALLELISM 8;</span><br><span class="line">RMAN&gt; BACKUP AS COPY DATABASE FORMAT '+DATA';</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>Switch <strong>all datafiles</strong> to the new <code>ASM</code> location and open the database:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; SWITCH DATABASE TO COPY;</span><br><span class="line">RMAN&gt; ALTER DATABASE OPEN;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>Add <strong>new tempfiles</strong> and drop the <strong>old tempfiles</strong>:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter tablespace temp add tempfile;</span><br><span class="line">SQL&gt; alter database tempfile '...' DROP;</span><br><span class="line">SQL&gt; select * from dba_temp_files;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>Optionally, move <code>SPFILE</code> into <code>ASM</code>:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; CREATE SPFILE '+DATA' FROM PFILE;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>Move <strong>redo log files</strong> into <code>ASM</code> - for each group:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; ALTER DATABASE DROP LOGFILE GROUP 1;</span><br><span class="line">SQL&gt; ALTER DATABASE ADD LOGFILE GROUP 1 SIZE 100M;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="Convert-a-tablespace-to-ASM"><a href="#Convert-a-tablespace-to-ASM" class="headerlink" title="Convert a tablespace to ASM"></a>Convert a tablespace to ASM</h5><blockquote>
+<p>Ensure the database in in <code>archive log mode</code>, and from <code>rman</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">connect target;</span><br><span class="line">sql <span class="string">"alter tablespace TSNAME offline"</span>;</span><br><span class="line">backup as copy tablespace TSNAME format <span class="string">'+DATA'</span>;</span><br><span class="line">switch tablespace TSNAME to copy;</span><br><span class="line">sql <span class="string">"alter tablespace TSNAME online"</span>;</span><br><span class="line"><span class="built_in">exit</span>;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="Convert-a-datafile-to-ASM"><a href="#Convert-a-datafile-to-ASM" class="headerlink" title="Convert a datafile to ASM"></a>Convert a datafile to ASM</h5><blockquote>
+<p>Ensure the database in in <code>archive log mode</code>, and from <code>rman</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">connect target;</span><br><span class="line">sql <span class="string">"alter database datafile '...' offline"</span>;</span><br><span class="line">backup as copy datafile <span class="string">'...'</span> format <span class="string">'+DATA'</span>;</span><br><span class="line">switch datafile <span class="string">'..'</span> to copy;</span><br><span class="line">sql <span class="string">"alter database datafile '...' online"</span>;</span><br><span class="line"><span class="built_in">exit</span>;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="Monitoring"><a href="#Monitoring" class="headerlink" title="Monitoring"></a>Monitoring</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">V$ASM_DISK <span class="comment">-- ASM disks</span></span><br><span class="line">V$ASM_DISK_STAT <span class="comment">-- cached view of V$ASM_DISK for faster access (used by Enterprise Manager)</span></span><br><span class="line">V$ASM_DISKGROUP <span class="comment">-- ASM diskgroups</span></span><br><span class="line">V$ASM_DISKGROUP_STAT <span class="comment">-- cached view of V$ASM_DISKGROUP for faster access (used by Enterprise Manager)</span></span><br><span class="line">V$ASM_OPERATION <span class="comment">-- status of ongoing disk operations (like rebalancing)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Resources:<br><a href="https://docs.oracle.com/cd/E11882_01/server.112/e18951/asmcon.htm#OSTMG94057" target="_blank" rel="noopener">https://docs.oracle.com/cd/E11882_01/server.112/e18951/asmcon.htm#OSTMG94057</a><br><a href="http://www.orafaq.com/wiki/Automatic_Storage_Management" target="_blank" rel="noopener">http://www.orafaq.com/wiki/Automatic_Storage_Management</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/10/14/database/oracle-kt-asm/">https://tech.itabas.com/2016/10/14/database/oracle-kt-asm/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Oracle/">Oracle</a>
+            <a href="/tags/KT/">KT</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/10/16/database/oracle-kt-different-exp-imp-datapump/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Oracle - What's the different between Traditional Export/Import and Datapump</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/10/14/database/oracle-kt-database-structure/">
+        <span class="next-text nav-default">Oracle - Database Structure</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/10/14/database/oracle-kt-asm/';
+        this.page.identifier = '2016/10/14/database/oracle-kt-asm/';
+        this.page.title = 'Oracle - ASM(Automatic Storage Management)';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

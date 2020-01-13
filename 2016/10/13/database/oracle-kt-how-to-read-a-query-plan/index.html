@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Oracle - How to Read a Query Plan"><meta name="keywords" content="Oracle, KT, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/10/13/database/oracle-kt-how-to-read-a-query-plan/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Oracle - How to Read a Query Plan - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Oracle - How to Read a Query Plan
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-10-13
+        </span><span class="post-category">
+            <a href="/categories/Database/">Database</a>
+            </span>
+        <span class="post-visits" data-url="/2016/10/13/database/oracle-kt-how-to-read-a-query-plan/" data-title="Oracle - How to Read a Query Plan">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-read-excution-plan-basic"><span class="toc-text">How to read excution plan - basic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Full-Table-Scan"><span class="toc-text">Full Table Scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Index-Unique-Scan"><span class="toc-text">Index Unique Scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Index-Fast-Full-Scan"><span class="toc-text">Index Fast Full Scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Index-Full-Scan"><span class="toc-text">Index Full Scan</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p>Goal: know how to generate and read a basic query plan.<br>Understand key phrases, such as <strong>Full Table Scan</strong> and <strong>Nested Loops</strong> should jump out as red flags. Be able to generate &amp; analyze a SQL query plan</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>When you fire an SQL query to Oracle, Oracle database internally creates a <strong>query execution plan</strong> in order to fetch the desired data from the physical tables. The query execution plan is nothing but a set of methods on how the database will access the data from the tables. This query execution plan is crucial as different execution plans will need different cost and time for the query execution.</p>
+</blockquote>
+<blockquote>
+<p>How the Execution Plan is created actually depends on what type of query optimizer is being used in your Oracle database. There are two different optimizer options – <strong>Rule based (RBO)</strong> and <strong>Cost based (CBO)</strong> Optimizer. For Oracle 10g, <strong>CBO</strong> is the default optimizer. Cost Based optimizer enforces Oracle to generate the optimization plan by taking all the related table statistics into consideration. On the other hand, <strong>RBO</strong> uses a fixed set of <strong>pre-defined rules</strong> to generate the query plan. Obviously such fixed set of rules may not always be able to create the plan that is most efficient in nature. This is because an efficient plan will depend heavily on the nature and volume of table’s data. Because of this reason, <strong>CBO</strong> is preferred over <strong>RBO</strong>.</p>
+</blockquote>
+<h3 id="How-to-read-excution-plan-basic"><a href="#How-to-read-excution-plan-basic" class="headerlink" title="How to read excution plan - basic"></a>How to read excution plan - basic</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> PLAN_TABLE_OUTPUT </span><br><span class="line">  <span class="keyword">FROM</span> <span class="keyword">TABLE</span>(DBMS_XPLAN.DISPLAY(<span class="literal">NULL</span>, <span class="string">'statement_id'</span>,<span class="string">'BASIC'</span>));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>See the below example, read detail execution four scan way:</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- create simple table - product</span></span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">table</span> (</span><br><span class="line">	<span class="keyword">ID</span> <span class="built_in">number</span>(<span class="number">10</span>)</span><br><span class="line">	<span class="keyword">NAME</span> <span class="built_in">varchar2</span>(<span class="number">100</span>)</span><br><span class="line">	DESCRIPTION <span class="built_in">varchar2</span>(<span class="number">255</span>)</span><br><span class="line">	SERVICE <span class="built_in">varchar2</span>(<span class="number">30</span>)</span><br><span class="line">	PART_NUM <span class="built_in">varchar2</span>(<span class="number">50</span>)</span><br><span class="line">	LOAD_DATE <span class="built_in">date</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- insert data 15000 records without index</span></span><br></pre></td></tr></table></figure>
+<h3 id="Full-Table-Scan"><a href="#Full-Table-Scan" class="headerlink" title="Full Table Scan"></a>Full Table Scan</h3><blockquote>
+<ul>
+<li>Whole table is read upto high water mark</li>
+<li>Uses multiblock input/output</li>
+<li>Buffer from FTS operation is stored in LRU end of buffer cache</li>
+</ul>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- explain plan</span></span><br><span class="line">SQL&gt; explain plan for select * from product;</span><br><span class="line">Explained.</span><br><span class="line"></span><br><span class="line"><span class="comment">-- query plan</span></span><br><span class="line">SQL&gt; select * from table(dbms_xplan.display);</span><br><span class="line">PLAN_TABLE_OUTPUT</span><br><span class="line"><span class="comment">----------------------------------------------------------</span></span><br><span class="line">Plan hash value: 3917577207</span><br><span class="line"><span class="comment">-------------------------------------</span></span><br><span class="line">| Id  | Operation          | Name   |</span><br><span class="line"><span class="comment">-------------------------------------</span></span><br><span class="line">|   0 | <span class="keyword">SELECT</span> <span class="keyword">STATEMENT</span>   |        |</span><br><span class="line">|   <span class="number">1</span> |  <span class="keyword">TABLE</span> <span class="keyword">ACCESS</span> <span class="keyword">FULL</span> | PRODUCT|</span><br><span class="line"><span class="comment">-------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- use RBO instead of CBO statistic </span></span><br><span class="line"><span class="keyword">SQL</span>&gt; <span class="keyword">Analyze</span> <span class="keyword">table</span> product <span class="keyword">compute</span> <span class="keyword">statistics</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- query plan</span></span><br><span class="line">SQL&gt; select * from table(dbms_xplan.display);</span><br><span class="line"></span><br><span class="line">PLAN_TABLE_OUTPUT</span><br><span class="line"><span class="comment">-----------------------------------------------------</span></span><br><span class="line">Plan hash value: 3917577207</span><br><span class="line"><span class="comment">-----------------------------------------------------</span></span><br><span class="line">| Id  | Operation          | Name    | Rows  | Bytes |</span><br><span class="line"><span class="comment">-----------------------------------------------------</span></span><br><span class="line">|   0 | <span class="keyword">SELECT</span> <span class="keyword">STATEMENT</span>   |         | <span class="number">15856</span> |  <span class="number">1254</span>K|</span><br><span class="line">|   <span class="number">1</span> |  <span class="keyword">TABLE</span> <span class="keyword">ACCESS</span> <span class="keyword">FULL</span> | PRODUCT | <span class="number">15856</span> |  <span class="number">1254</span>K|</span><br><span class="line"><span class="comment">-----------------------------------------------------</span></span><br></pre></td></tr></table></figure>
+<h3 id="Index-Unique-Scan"><a href="#Index-Unique-Scan" class="headerlink" title="Index Unique Scan"></a>Index Unique Scan</h3><blockquote>
+<ul>
+<li>Single block input/output<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- create index for test</span></span><br><span class="line">SQL&gt; create unique index idx_prod_id on product (id) compute statistics;</span><br><span class="line">Index created.</span><br><span class="line"></span><br><span class="line"><span class="comment">-- explain plan</span></span><br><span class="line">SQL&gt; explain plan for select id from product where id = 100;</span><br><span class="line">Explained.</span><br><span class="line"></span><br><span class="line"><span class="comment">-- query plan</span></span><br><span class="line">SQL&gt; select * from table(dbms_xplan.display);</span><br><span class="line"></span><br><span class="line">PLAN_TABLE_OUTPUT</span><br><span class="line"><span class="comment">---------------------------------------------------------</span></span><br><span class="line">Plan hash value: 2424962071</span><br><span class="line"><span class="comment">---------------------------------------------------------</span></span><br><span class="line">| Id  | Operation          | Name        | Rows  | Bytes |</span><br><span class="line"><span class="comment">---------------------------------------------------------</span></span><br><span class="line">|   0 | <span class="keyword">SELECT</span> <span class="keyword">STATEMENT</span>   |             |     <span class="number">1</span> |     <span class="number">4</span> |</span><br><span class="line">|*  <span class="number">1</span> |  <span class="keyword">INDEX</span> <span class="keyword">UNIQUE</span> <span class="keyword">SCAN</span> | IDX_PROD_ID |     <span class="number">1</span> |     <span class="number">4</span> |</span><br><span class="line"><span class="comment">---------------------------------------------------------</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="Index-Fast-Full-Scan"><a href="#Index-Fast-Full-Scan" class="headerlink" title="Index Fast Full Scan"></a>Index Fast Full Scan</h3><blockquote>
+<ul>
+<li>Multi block i/o possible</li>
+<li>Returned rows may not be in sorted order<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- explain plan</span></span><br><span class="line">SQL&gt; explain plan for select id from product where id&gt;10;</span><br><span class="line">Explained.</span><br><span class="line"></span><br><span class="line"><span class="comment">-- query plan</span></span><br><span class="line">SQL&gt; select * from table(dbms_xplan.display);</span><br><span class="line"></span><br><span class="line">PLAN_TABLE_OUTPUT</span><br><span class="line"><span class="comment">------------------------------------------------</span></span><br><span class="line">Plan hash value: 2179322443</span><br><span class="line"><span class="comment">--------------------------------------------------------</span></span><br><span class="line">| Id  | Operation            | Name       | Rows |Bytes |</span><br><span class="line"><span class="comment">--------------------------------------------------------</span></span><br><span class="line">|   0 | <span class="keyword">SELECT</span> <span class="keyword">STATEMENT</span>     |            | <span class="number">15849</span>|<span class="number">63396</span> |</span><br><span class="line">|*  <span class="number">1</span> |  <span class="keyword">INDEX</span> <span class="keyword">FAST</span> <span class="keyword">FULL</span> <span class="keyword">SCAN</span>| IDX_PROD_ID| <span class="number">15849</span>|<span class="number">63396</span> |</span><br><span class="line"><span class="comment">---------------------------------------------------------</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="Index-Full-Scan"><a href="#Index-Full-Scan" class="headerlink" title="Index Full Scan"></a>Index Full Scan</h3><blockquote>
+<ul>
+<li>Single block i/o</li>
+<li>Returned rows generally will be in sorted order</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Resources:<br><a href="https://dwbi.org/database/oracle/38-oracle-query-plan-a-10-minutes-guide" target="_blank" rel="noopener">https://dwbi.org/database/oracle/38-oracle-query-plan-a-10-minutes-guide</a><br><a href="https://dwbi.org/database/oracle/39-query-execution-plan-part2.html" target="_blank" rel="noopener">https://dwbi.org/database/oracle/39-query-execution-plan-part2.html</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/10/13/database/oracle-kt-how-to-read-a-query-plan/">https://tech.itabas.com/2016/10/13/database/oracle-kt-how-to-read-a-query-plan/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Oracle/">Oracle</a>
+            <a href="/tags/KT/">KT</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/10/14/database/oracle-kt-database-structure/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Oracle - Database Structure</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/10/10/tools/sublime-text-shortcuts/">
+        <span class="next-text nav-default">Sublime Text 快捷键备忘</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/10/13/database/oracle-kt-how-to-read-a-query-plan/';
+        this.page.identifier = '2016/10/13/database/oracle-kt-how-to-read-a-query-plan/';
+        this.page.title = 'Oracle - How to Read a Query Plan';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

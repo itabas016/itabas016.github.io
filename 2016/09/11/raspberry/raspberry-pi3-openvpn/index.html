@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Raspberry Pi3 搭建OpenVPN"><meta name="keywords" content="Raspberry, 树莓派, OpenVpn, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/09/11/raspberry/raspberry-pi3-openvpn/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Raspberry Pi3 搭建OpenVPN - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Raspberry Pi3 搭建OpenVPN
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-09-11
+        </span><span class="post-category">
+            <a href="/categories/Raspberry/">Raspberry</a>
+            </span>
+        <span class="post-visits" data-url="/2016/09/11/raspberry/raspberry-pi3-openvpn/" data-title="Raspberry Pi3 搭建OpenVPN">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Server"><span class="toc-text">Install Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-CA"><span class="toc-text">Generate CA</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Configure-parameters"><span class="toc-text">Configure parameters</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generate-CA-step-by-step"><span class="toc-text">Generate CA step by step</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Copy-CA-Keys-for-Client"><span class="toc-text">Copy CA Keys for Client</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-OpenVPN-Server"><span class="toc-text">Configure OpenVPN Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Start-OpenVPN"><span class="toc-text">Start OpenVPN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Client"><span class="toc-text">Install Client</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Client-configuration-sample"><span class="toc-text">Client configuration sample</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Support-ipv4"><span class="toc-text">Support ipv4</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Conigure-iptables"><span class="toc-text">Conigure iptables</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p><code>OpenVPN</code>采用<code>OpenSSL</code>加密，并且可以选择<code>443</code>端口。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Install-Server"><a href="#Install-Server" class="headerlink" title="Install Server"></a>Install Server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openvpn    </span><br><span class="line">cp -r /usr/share/doc/openvpn/examples/easy-rsa/ /etc/openvpn/</span><br></pre></td></tr></table></figure>
+<h3 id="Generate-CA"><a href="#Generate-CA" class="headerlink" title="Generate CA"></a>Generate CA</h3><h4 id="Configure-parameters"><a href="#Configure-parameters" class="headerlink" title="Configure parameters"></a>Configure parameters</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/openvpn/easy-rsa/2.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify ./vars parameters</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Increase this to 2048 if you</span></span><br><span class="line"><span class="comment"># are paranoid.  This will slow</span></span><br><span class="line"><span class="comment"># down TLS negotiation performance</span></span><br><span class="line"><span class="comment"># as well as the one-time DH parms</span></span><br><span class="line"><span class="comment"># generation process.</span></span><br><span class="line"><span class="built_in">export</span> KEY_SIZE=2048</span><br><span class="line"><span class="comment"># In how many days should the root CA key expire?</span></span><br><span class="line"><span class="built_in">export</span> CA_EXPIRE=3650</span><br><span class="line"><span class="comment"># In how many days should certificates expire?</span></span><br><span class="line"><span class="built_in">export</span> KEY_EXPIRE=3650</span><br><span class="line"><span class="comment"># These are the default values for fields</span></span><br><span class="line"><span class="comment"># which will be placed in the certificate.</span></span><br><span class="line"><span class="comment"># Don't leave any of these fields blank.</span></span><br><span class="line"><span class="built_in">export</span> KEY_COUNTRY=<span class="string">"TW"</span></span><br><span class="line"><span class="built_in">export</span> KEY_PROVINCE=<span class="string">"Taiwan"</span></span><br><span class="line"><span class="built_in">export</span> KEY_CITY=<span class="string">"Taipei"</span></span><br><span class="line"><span class="built_in">export</span> KEY_ORG=<span class="string">"TakoBear"</span></span><br><span class="line"><span class="built_in">export</span> KEY_EMAIL=<span class="string">"me@myhost.mydomain"</span></span><br><span class="line"><span class="built_in">export</span> KEY_EMAIL=mail@host.domain</span><br><span class="line"><span class="built_in">export</span> KEY_CN=changeme</span><br><span class="line"><span class="built_in">export</span> KEY_NAME=changeme</span><br><span class="line"><span class="built_in">export</span> KEY_OU=changeme</span><br><span class="line"><span class="built_in">export</span> PKCS11_MODULE_PATH=changeme</span><br><span class="line"><span class="built_in">export</span> PKCS11_PIN=1234</span><br></pre></td></tr></table></figure>
+<h4 id="Generate-CA-step-by-step"><a href="#Generate-CA-step-by-step" class="headerlink" title="Generate CA step by step"></a>Generate CA step by step</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ./vars</span><br><span class="line">./clean-all</span><br><span class="line">./build-ca</span><br><span class="line">./build-key-server server</span><br><span class="line">./build-key client</span><br><span class="line">./build-dh</span><br></pre></td></tr></table></figure>
+<h4 id="Copy-CA-Keys-for-Client"><a href="#Copy-CA-Keys-for-Client" class="headerlink" title="Copy CA Keys for Client"></a>Copy CA Keys for Client</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/openvpn/easy-rsa/2.0/keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># copy ca.crt client.crt client.key to local</span></span><br></pre></td></tr></table></figure>
+<h3 id="Configure-OpenVPN-Server"><a href="#Configure-OpenVPN-Server" class="headerlink" title="Configure OpenVPN Server"></a>Configure OpenVPN Server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> xxx.xxx.xxx.xxx    </span><br><span class="line">port 1194	<span class="comment">#default port is 1194    </span></span><br><span class="line">proto tcp	<span class="comment">#default protcol is UDP    </span></span><br><span class="line">dev tun</span><br><span class="line">ca /etc/openvpn/easy-rsa/2.0/keys/ca.crt</span><br><span class="line">cert /etc/openvpn/easy-rsa/2.0/keys/server.crt</span><br><span class="line">key /etc/openvpn/easy-rsa/2.0/keys/server.key      </span><br><span class="line">dh  /etc/openvpn/easy-rsa/2.0/keys/dh1024.pem    </span><br><span class="line">server 10.8.0.0 255.255.255.0    </span><br><span class="line">ifconfig-pool-persist ipp.txt</span><br><span class="line">push <span class="string">"redirect-gateway def1"</span>    </span><br><span class="line">push <span class="string">"dhcp-option DNS 8.8.8.8"</span></span><br><span class="line">push <span class="string">"dhcp-option DNS 8.8.4.4"</span>    </span><br><span class="line">client-to-client</span><br><span class="line">keepalive 10 120</span><br><span class="line">comp-lzo    </span><br><span class="line">max-clients 50    </span><br><span class="line">user nobody</span><br><span class="line">group nogroup    </span><br><span class="line">persist-key</span><br><span class="line">persist-tun    </span><br><span class="line">status openvpn-status.log    </span><br><span class="line"><span class="built_in">log</span>-append  openvpn.log    </span><br><span class="line">verb 3    </span><br><span class="line">mute 20</span><br></pre></td></tr></table></figure>
+<h3 id="Start-OpenVPN"><a href="#Start-OpenVPN" class="headerlink" title="Start OpenVPN"></a>Start OpenVPN</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/openvpn start</span><br></pre></td></tr></table></figure>
+<h3 id="Install-Client"><a href="#Install-Client" class="headerlink" title="Install Client"></a>Install Client</h3><blockquote>
+<p>Download URL: <a href="http://openvpn.se/download.html" target="_blank" rel="noopener">http://openvpn.se/download.html</a></p>
+</blockquote>
+<h4 id="Client-configuration-sample"><a href="#Client-configuration-sample" class="headerlink" title="Client configuration sample"></a>Client configuration sample</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vpn.ovpn</span></span><br><span class="line"></span><br><span class="line">client</span><br><span class="line">dev tun</span><br><span class="line">proto tcp</span><br><span class="line">remote example.org 1194    <span class="comment"># change example.org to your server ip</span></span><br><span class="line">resolv-retry infinite</span><br><span class="line">nobind</span><br><span class="line">persist-key</span><br><span class="line">persist-tun</span><br><span class="line">ca &amp;quot;C:\\Program Files\\OpenVPN\\easy-rsa\\keys\\ca.crt&amp;quot;</span><br><span class="line">cert &amp;quot;C:\\Program Files\\OpenVPN\\easy-rsa\\keys\\client.crt&amp;quot;</span><br><span class="line">key &amp;quot;C:\\Program Files\\OpenVPN\\easy-rsa\\keys\\client.key&amp;quot;</span><br><span class="line">remote-cert-tls server</span><br><span class="line">comp-lzo</span><br><span class="line">verb 3</span><br><span class="line">mute 20</span><br></pre></td></tr></table></figure>
+<h4 id="Support-ipv4"><a href="#Support-ipv4" class="headerlink" title="Support ipv4"></a>Support ipv4</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/sysctl.conf</span></span><br><span class="line">net.ipv4.ip_forward=1</span><br><span class="line"></span><br><span class="line"><span class="comment"># reload</span></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<h4 id="Conigure-iptables"><a href="#Conigure-iptables" class="headerlink" title="Conigure iptables"></a>Conigure iptables</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br><span class="line">iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o venet0 -j MASQUERADE</span><br><span class="line">iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT</span><br><span class="line">iptables -t nat -A PREROUTING -p udp -m udp --dport 53 -j DNAT --to-destination 8.8.8.8</span><br><span class="line">iptables -A INPUT -p udp --dport 1194 -j ACCEPT</span><br><span class="line">iptables -A INPUT -s 10.8.0.0/24 -p all -j ACCEPT</span><br><span class="line">iptables -A FORWARD -d 10.8.0.0/24 -j ACCEPT</span><br><span class="line">iptables -A INPUT -i tun+ -j ACCEPT</span><br><span class="line">iptables -A FORWARD -i tun+ -j ACCEPT</span><br><span class="line">iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT --to-source xxx.xxx.xxx.xxx</span><br><span class="line"></span><br><span class="line"># quick save</span><br><span class="line">iptables-save &amp;gt; /etc/network/iptables</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Resources:<br><a href="http://www.zhengyali.com/?p=52" target="_blank" rel="noopener">http://www.zhengyali.com/?p=52</a><br><a href="http://shumeipai.net/thread-578-1-1.html?_dsign=e5591959" target="_blank" rel="noopener">http://shumeipai.net/thread-578-1-1.html?_dsign=e5591959</a><br><a href="http://buzzdao.myds.me:1111/setup-l2tp-pptp-openvpn-on-ubuntu.html" target="_blank" rel="noopener">http://buzzdao.myds.me:1111/setup-l2tp-pptp-openvpn-on-ubuntu.html</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/09/11/raspberry/raspberry-pi3-openvpn/">https://tech.itabas.com/2016/09/11/raspberry/raspberry-pi3-openvpn/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Raspberry/">Raspberry</a>
+            <a href="/tags/树莓派/">树莓派</a>
+            <a href="/tags/OpenVpn/">OpenVpn</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/09/14/database/oracle-kt-object-operation/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Oracle - Basic SQL, Store Procedures(Functions, Packages)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/09/10/raspberry/raspberry-linux-crontab-examples/">
+        <span class="next-text nav-default">Raspberry & Linux Crontab Example</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/09/11/raspberry/raspberry-pi3-openvpn/';
+        this.page.identifier = '2016/09/11/raspberry/raspberry-pi3-openvpn/';
+        this.page.title = 'Raspberry Pi3 搭建OpenVPN';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

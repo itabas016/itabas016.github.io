@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Git command补漏"><meta name="keywords" content="Tools, Git, Tips, Wiki, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2017/04/08/tools/git_tips/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Git command补漏 - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Git command补漏
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-04-08
+        </span><span class="post-category">
+            <a href="/categories/Tools/">Tools</a>
+            </span>
+        <span class="post-visits" data-url="/2017/04/08/tools/git_tips/" data-title="Git command补漏">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git容易忘的command"><span class="toc-text">Git容易忘的command</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-xxx-–bare"><span class="toc-text">git xxx –bare</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-remote-xxx"><span class="toc-text">git remote xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-diff-xxx"><span class="toc-text">git diff xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-tag-xxx"><span class="toc-text">git tag xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-merge-xxx"><span class="toc-text">git merge xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-reset-xxx"><span class="toc-text">git reset xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-commit-xxx"><span class="toc-text">git commit xxx</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="Git容易忘的command"><a href="#Git容易忘的command" class="headerlink" title="Git容易忘的command"></a>Git容易忘的command</h2><a id="more"></a>
+<h3 id="git-xxx-–bare"><a href="#git-xxx-–bare" class="headerlink" title="git xxx –bare"></a>git xxx –bare</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git init empty repo only with .git element</span></span><br><span class="line">git init --bare</span><br><span class="line"></span><br><span class="line"><span class="comment"># git clone repo with all the git related revision history</span></span><br><span class="line">git <span class="built_in">clone</span> --bare wiki wiki.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># previous step git clone with bare equals the below command</span></span><br><span class="line">cp -Rf wiki/.git wiki.git</span><br></pre></td></tr></table></figure>
+<h3 id="git-remote-xxx"><a href="#git-remote-xxx" class="headerlink" title="git remote xxx"></a>git remote xxx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git remote add new repo address with specific port</span></span><br><span class="line">git remote add origin ssh://git@mydomain.com:12345/home/git/repo.git/</span><br></pre></td></tr></table></figure>
+<h3 id="git-diff-xxx"><a href="#git-diff-xxx" class="headerlink" title="git diff xxx"></a>git diff xxx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  git diff [&lt;options&gt;] [&lt;commit&gt; [&lt;commit&gt;]] [--] [&lt;path&gt;...]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># various ways to check working tree</span></span><br><span class="line">git diff</span><br><span class="line">git diff --cached</span><br><span class="line">git diff HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># comparing with arbitrary commits</span></span><br><span class="line">git diff <span class="built_in">test</span></span><br><span class="line">git diff HEAD -- ./<span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># comparing branches</span></span><br><span class="line">git diff xxbranch master</span><br><span class="line">git diff xxbranch..master</span><br><span class="line">git diff xxbranch...master</span><br></pre></td></tr></table></figure>
+<h3 id="git-tag-xxx"><a href="#git-tag-xxx" class="headerlink" title="git tag xxx"></a>git tag xxx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create tag</span></span><br><span class="line">git tag -a v1.0 -m <span class="string">"tag message detail"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># show someone tag</span></span><br><span class="line">git show v1.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># push local tags to origin branch</span></span><br><span class="line"><span class="comment"># just one tag</span></span><br><span class="line">git push origin v1.0</span><br><span class="line"><span class="comment"># all the local tags</span></span><br><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+<h3 id="git-merge-xxx"><a href="#git-merge-xxx" class="headerlink" title="git merge xxx"></a>git merge xxx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  git merge [&lt;options&gt;] [&lt;commit&gt;...]</span></span><br><span class="line"><span class="comment">#  or: git merge [&lt;options&gt;] &lt;msg&gt; HEAD &lt;commit&gt;</span></span><br><span class="line"></span><br><span class="line">git merge hotfix</span><br><span class="line">git merge fixes enhancements</span><br><span class="line">git merge --no-commit tempbranch</span><br><span class="line"></span><br><span class="line"><span class="comment"># if has conflict, use mergetool command</span></span><br><span class="line">git mergetool</span><br><span class="line">git <span class="built_in">log</span> --merge -p&lt;path&gt;</span><br><span class="line">git show :1:filename</span><br></pre></td></tr></table></figure>
+<h3 id="git-reset-xxx"><a href="#git-reset-xxx" class="headerlink" title="git reset xxx"></a>git reset xxx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  git reset [--mixed | --soft | --hard | --merge | --keep] [-q] [&lt;commit&gt;]</span></span><br><span class="line"><span class="comment">#  or: git reset [-q] &lt;tree-ish&gt; [--] &lt;paths&gt;...</span></span><br><span class="line"><span class="comment">#  or: git reset --patch [&lt;tree-ish&gt;] [--] [&lt;paths&gt;...]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># reset work tree to the last commit</span></span><br><span class="line">git reset --bard HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># just reset specific files</span></span><br><span class="line">git chechout -- &lt;specific.flie&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># How to fix the issue when after you commit</span></span><br><span class="line"><span class="comment"># The better way is create new commit to cover issue use revert</span></span><br><span class="line">git revert HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># if reset next-to-last commit</span></span><br><span class="line">git revert HEAD^</span><br></pre></td></tr></table></figure>
+<h3 id="git-commit-xxx"><a href="#git-commit-xxx" class="headerlink" title="git commit xxx"></a>git commit xxx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -a parameter contains git add and git commit</span></span><br><span class="line">git commit -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># -v parameter will display all the diff messages</span></span><br><span class="line">git commit -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># --amend will use the latest commit instead before commit</span></span><br><span class="line">git commit --amend -m <span class="string">"the latest commit with forgot files"</span></span><br></pre></td></tr></table></figure>
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2017/04/08/tools/git_tips/">https://tech.itabas.com/2017/04/08/tools/git_tips/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Tools/">Tools</a>
+            <a href="/tags/Git/">Git</a>
+            <a href="/tags/Tips/">Tips</a>
+            <a href="/tags/Wiki/">Wiki</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2017/08/26/tools/gdrive_backup/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">用Google Drive备份Vps数据</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2017/04/08/tools/ssh_key/">
+        <span class="next-text nav-default">SSH Key相关问题</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2017/04/08/tools/git_tips/';
+        this.page.identifier = '2017/04/08/tools/git_tips/';
+        this.page.title = 'Git command补漏';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Oracle - What's the different between Traditional Export/Import and Datapump"><meta name="keywords" content="Oracle, KT, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/10/16/database/oracle-kt-different-exp-imp-datapump/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Oracle - What's the different between Traditional Export/Import and Datapump - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Oracle - What's the different between Traditional Export/Import and Datapump
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-10-16
+        </span><span class="post-category">
+            <a href="/categories/Database/">Database</a>
+            </span>
+        <span class="post-visits" data-url="/2016/10/16/database/oracle-kt-different-exp-imp-datapump/" data-title="Oracle - What's the different between Traditional Export/Import and Datapump">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Datapump"><span class="toc-text">Datapump</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-database-directories"><span class="toc-text">Create database directories</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TABLE-BASED-IMPORT-AND-EXPORT"><span class="toc-text">TABLE BASED IMPORT AND EXPORT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SCHEMA-BASED-IMPORT-AND-EXPORT"><span class="toc-text">SCHEMA BASED IMPORT AND EXPORT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FULL-DATABASE-IMPORT-AND-EXPORT"><span class="toc-text">FULL DATABASE IMPORT AND EXPORT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Datapump-jobs"><span class="toc-text">Datapump jobs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Datapump-EXCLUDE-INCLUDE-parameters"><span class="toc-text">Datapump EXCLUDE/INCLUDE parameters</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advantages-of-Datapump"><span class="toc-text">Advantages of Datapump</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What’s-the-difference"><span class="toc-text">What’s the difference</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><h3 id="Datapump"><a href="#Datapump" class="headerlink" title="Datapump"></a>Datapump</h3><blockquote>
+<p><code>Datapump</code> is an ORACLE database external utility, which is used to transfer objects between databases. This utility is coming from <strong>ORACLE 10g</strong> database. It has more enhancements than the traditional <code>exp/imp</code> utilities. This utility also makes dump files, which are in binary formats with database objects, object metadata and their control information. The <code>expdp</code> and <code>impdp</code> commands can be executed in three ways,</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Command line interface</strong> (specify <code>expdp/impdp</code> parameters in command line)</li>
+<li><strong>Parameter file interface</strong> (specify <code>expdp/impdp</code> parameters in a separate file)</li>
+<li><strong>Interactive-command interface</strong> (entering various commands in export prompt)</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>There are five different modes of data unloading using expdp. They are,</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Full Export Mode</strong> (entire database is unloaded)</li>
+<li><strong>Schema Mode</strong> (this is the default mode, specific schemas are unloaded)</li>
+<li><strong>Table Mode</strong> (specified set of tables and their dependent objects are unloaded)</li>
+<li><strong>Tablespace Mode</strong> (the tables in the specified tablespace are unloaded)</li>
+<li><strong>Transportable Tablespace Mode</strong> (only the metadata for the tables and their dependent objects within a specified set of tablespaces are unloaded)</li>
+</ul>
+</blockquote>
+<h4 id="Create-database-directories"><a href="#Create-database-directories" class="headerlink" title="Create database directories"></a>Create database directories</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line"><span class="built_in">export</span> ORACLE_SID=orcl</span><br><span class="line">sqlplus / as sysdba</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- unlock user</span></span><br><span class="line">SQL&gt; ALTER USER scott IDENTIFIED BY tiger ACCOUNT UNLOCK;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- create dir</span></span><br><span class="line">SQL&gt; CREATE OR REPLACE DIRECTORY test_dir AS '/u01/app/oracle/oradata/orcl';</span><br><span class="line"></span><br><span class="line"><span class="comment">-- grant privilage</span></span><br><span class="line">SQL&gt; GRANT READ, WRITE ON DIRECTORY test_dir TO scott;</span><br><span class="line"><span class="keyword">Grant</span> succeeded.</span><br><span class="line"><span class="comment">-- select</span></span><br><span class="line"><span class="keyword">SQL</span>&gt; <span class="keyword">SELECT</span> directory_path <span class="keyword">FROM</span> dba_directories <span class="keyword">WHERE</span> directory_name = <span class="string">'DATA_PUMP_DIR'</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="TABLE-BASED-IMPORT-AND-EXPORT"><a href="#TABLE-BASED-IMPORT-AND-EXPORT" class="headerlink" title="TABLE BASED IMPORT AND EXPORT"></a>TABLE BASED IMPORT AND EXPORT</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> ORACLE_SID=orcl</span><br><span class="line">$ expdp scott/tiger tables=EMP,DEPT directory=TEST_DIR dumpfile=EMP_DEPT.dmp logfile=expEMP_DEPT.log</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">export</span> ORACLE_SID=orcl</span><br><span class="line">$ impdp scott/tiger tables=EMP,DEPT directory=TEST_DIR dumpfile=EMP_DEPT.dmp logfile=impEMP_DEPT.log</span><br><span class="line">CONTENT=&#123;ALL | DATA_ONLY | METADATA_ONLY&#125;</span><br><span class="line"><span class="comment"># All loads all the metadata as well as data from the source dump file.</span></span><br><span class="line"><span class="comment"># DATA_ONLY only loads row data into the tables no database objects are created.</span></span><br><span class="line"><span class="comment"># METADATA_ONLY only creates database objects, no data is inserted.</span></span><br></pre></td></tr></table></figure>
+<h4 id="SCHEMA-BASED-IMPORT-AND-EXPORT"><a href="#SCHEMA-BASED-IMPORT-AND-EXPORT" class="headerlink" title="SCHEMA BASED IMPORT AND EXPORT"></a>SCHEMA BASED IMPORT AND EXPORT</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> ORACLE_SID=orcl</span><br><span class="line">$ expdp scott/tiger schemas=SCOTT directory=TEST_DIR dumpfile=SCOTT.dmp logfile=expSCOTT.log</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">export</span> ORACLE_SID=orcl</span><br><span class="line">$ impdp scott/tiger schemas=SCOTT directory=TEST_DIR dumpfile=SCOTT.dmp logfile=impSCOTT.log</span><br><span class="line">CONTENT=&#123;ALL | DATA_ONLY | METADATA_ONLY&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="FULL-DATABASE-IMPORT-AND-EXPORT"><a href="#FULL-DATABASE-IMPORT-AND-EXPORT" class="headerlink" title="FULL DATABASE IMPORT AND EXPORT"></a>FULL DATABASE IMPORT AND EXPORT</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> ORACLE_SID=orcl</span><br><span class="line">$ expdp system/password full=Y directory=TEST_DIR dumpfile=DB10G.dmp logfile=expDB10G.log</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">export</span> ORACLE_SID=orcl</span><br><span class="line">$ impdp system/password full=Y directory=TEST_DIR dumpfile=DB10G.dmp logfile=impDB10G.log</span><br><span class="line">CONTENT=&#123;ALL | DATA_ONLY | METADATA_ONLY&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Datapump-jobs"><a href="#Datapump-jobs" class="headerlink" title="Datapump jobs"></a>Datapump jobs</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> dba_datapump_jobs;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Even if you exit the prompt or press <code>ctrl+c</code> at the command prompt or exit from the client side the datapump jobs will continue to run at the server.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- To reattach with the running job enter the following <span class="built_in">command</span>.</span><br><span class="line">$ expdp system/password attach=qq</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>If the <code>import</code> or <code>export</code> job is to be <strong>stopped temporarily</strong> then type the following command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-- press CTRL+C</span><br><span class="line">Export&gt; STOP_JOB=IMMEDIATE</span><br><span class="line">Are you sure you wish to stop this job ([y]/n): y</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>In order to resume the job do the following.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ORACLE_SID=orcl</span><br><span class="line"><span class="variable">$expdp</span> hr/hr ATTACH=qq</span><br><span class="line">Export&gt; CONTINUE_CLIENT</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="Datapump-EXCLUDE-INCLUDE-parameters"><a href="#Datapump-EXCLUDE-INCLUDE-parameters" class="headerlink" title="Datapump EXCLUDE/INCLUDE parameters"></a>Datapump EXCLUDE/INCLUDE parameters</h4><blockquote>
+<p>The <code>exclude</code> and <code>include</code> parameters availbale with expdp,impdp can be used as <strong>metadata filters</strong> so that one can specify any objects like <code>tables,indexes,triggers, procedure</code> to be excluded or included during export or import operation</p>
+</blockquote>
+<blockquote>
+<p>syntax:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">EXCLUDE=[object_type]:[name_clause],[object_type]:[name_clause]</span><br><span class="line">INCLUDE=[object_type]:[name_clause],[object_type]:[name_clause]</span><br><span class="line"></span><br><span class="line">-- examples</span><br><span class="line">expdp SCHEMAS=scott EXCLUDE=SEQUENCE,TABLE:”IN (’EMP’,<span class="string">'DEPT’)”;</span></span><br><span class="line"><span class="string">impdp SCHEMAS=scott INCLUDE=PACKAGE,FUNCTION, PROCEDURE,TABLE:”=’EMP’”</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>btw, use other way <code>xx.par</code> to store these parameters:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- Parameter file:exp.par</span><br><span class="line">DIRECTORY = my_dir</span><br><span class="line">DUMPFILE = exp_tab.dmp</span><br><span class="line">LOGFILE = exp_tab.log</span><br><span class="line">SCHEMAS = scott</span><br><span class="line">INCLUDE = TABLE:”IN (’EMP’, ‘DEPT’)”</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expdp system/manager parfile=exp.par</span><br></pre></td></tr></table></figure>
+<h3 id="Advantages-of-Datapump"><a href="#Advantages-of-Datapump" class="headerlink" title="Advantages of Datapump"></a>Advantages of Datapump</h3><blockquote>
+<ul>
+<li>Data Pump Export and Import operations are processed in the database as a Data Pump job, which is much more efficient that the client-side execution of original Export and Import. </li>
+<li>Data Pump operations can take advantage of the server’s parallel processes to read or write multiple data streams simultaneously.</li>
+<li>Data Pump differs from original Export and Import in that all jobs run primarily on the server using server processes. These server processes access files for the Data Pump jobs using directory objects that identify the location of the files. The directory objects enforce a security model that can be used by DBAs to control access to these files.</li>
+<li>Datapump has a very powerful interactive command-line mode which allows the user to monitor and control Data Pump Export and Import operations.Datapump allows you to disconnect and reconnect to the session</li>
+<li>Because Data Pump jobs run entirely on the server, you can start an export or import job, detach from it, and later reconnect to the job to monitor its progress.</li>
+<li>Data Pump gives you the ability to pass data between two databases over a network (via a database link), without creating a dump file on disk. </li>
+<li>Datapump uses the Direct Path data access method (which permits the server to bypass SQL and go right to the data blocks on disk) has been rewritten to be much more efficient and now supports Data Pump Import and Export.</li>
+<li>Another amazing feature is that you can “PAUSE” and “RESUME” data pump jobs on demand.</li>
+</ul>
+</blockquote>
+<h3 id="What’s-the-difference"><a href="#What’s-the-difference" class="headerlink" title="What’s the difference"></a>What’s the difference</h3><blockquote>
+<ul>
+<li>Datapump operates on a group of files called <strong>dump file sets</strong>. However, normal export operates on <strong>a single file</strong>.</li>
+<li>Datapump access files in the <strong>server</strong> (using <strong>ORACLE directories</strong>). Traditional export can access files in <strong>client</strong> and server both (not using ORACLE directories).</li>
+<li>Exports <code>(exp/imp)</code> represent database metadata information as <code>DDLs</code> in the dump file, but in datapump, it represents in <code>XML</code> document format.</li>
+<li>Datapump has parallel execution but in <code>exp/imp</code> <strong>single stream</strong> execution.</li>
+<li>Datapump does not support <code>sequential media</code> like <strong>tapes</strong>, but traditional export supports.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Resources:<br><a href="http://www.orafaq.com/wiki/Datapump" target="_blank" rel="noopener">http://www.orafaq.com/wiki/Datapump</a><br><a href="http://its-all-about-oracle.blogspot.com/2013/06/expimp-vs-datapump-expdpimpdp.html" target="_blank" rel="noopener">http://its-all-about-oracle.blogspot.com/2013/06/expimp-vs-datapump-expdpimpdp.html</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/10/16/database/oracle-kt-different-exp-imp-datapump/">https://tech.itabas.com/2016/10/16/database/oracle-kt-different-exp-imp-datapump/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Oracle/">Oracle</a>
+            <a href="/tags/KT/">KT</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/10/21/web/hexo-next-tutorial/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Hexo + Next 踩坑提醒</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/10/14/database/oracle-kt-asm/">
+        <span class="next-text nav-default">Oracle - ASM(Automatic Storage Management)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/10/16/database/oracle-kt-different-exp-imp-datapump/';
+        this.page.identifier = '2016/10/16/database/oracle-kt-different-exp-imp-datapump/';
+        this.page.title = 'Oracle - What's the different between Traditional Export/Import and Datapump';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

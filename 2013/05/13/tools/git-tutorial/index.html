@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Source Control - Git Tutorial"><meta name="keywords" content="Git, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2013/05/13/tools/git-tutorial/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Source Control - Git Tutorial - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Source Control - Git Tutorial
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2013-05-13
+        </span><span class="post-category">
+            <a href="/categories/Tools/">Tools</a>
+            </span>
+        <span class="post-visits" data-url="/2013/05/13/tools/git-tutorial/" data-title="Source Control - Git Tutorial">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Overview"><span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-command"><span class="toc-text">Basic command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advance-command"><span class="toc-text">Advance command</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-Submodule"><span class="toc-text">Git Submodule</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Merging-vs-Rebasing"><span class="toc-text">Merging vs Rebasing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Resetting-Checking-Out-and-Reverting"><span class="toc-text">Resetting, Checking Out, and Reverting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-Hooks"><span class="toc-text">Git Hooks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Refs-and-the-Reflog"><span class="toc-text">Refs and the Reflog</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p>能在刚开始开始时就能解除source control版本管理工具，那真是让你的开发之路清晰不少。正好所在的开发小组敢于大胆的汲取新知识，对于自己也是受益颇多。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><blockquote>
+<p>git初始化配置，<code>.git/config</code> 属性值在这个文件里。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config username</span></span><br><span class="line">git config –global user.name <span class="string">"Your Name"</span></span><br><span class="line"><span class="comment"># config email</span></span><br><span class="line">git config –global user.email <span class="string">"you@yourdomain.com"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>生成公钥</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ ls</span><br><span class="line">authorized_keys2  id_dsa       known_hosts</span><br><span class="line">config            id_dsa.pub</span><br><span class="line"></span><br><span class="line">$ ssh-keygen</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/Users/schacon/.ssh/id_rsa):</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /Users/schacon/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /Users/schacon/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">43:c5:5b:5f:b1:f1:50:43:ad:20:a6:92:6a:1f:9a:3a schacon@agadorlaptop.local</span><br><span class="line"></span><br><span class="line">$ cat ~/.ssh/id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU</span><br><span class="line">GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3</span><br><span class="line">Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA</span><br><span class="line">t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En</span><br><span class="line">mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx</span><br><span class="line">NrRFi9wrf+M7Q== schacon@agadorlaptop.local</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>PS. <code>git config --global</code>全局设置，<code>git config --global http.proxy http://127.0.0.1:1080/</code> 设置git走代理。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">$ git config --h</span><br><span class="line">error: unknown option `h<span class="string">'</span></span><br><span class="line"><span class="string">usage: git config [options]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Config file location</span></span><br><span class="line"><span class="string">    --global              use global config file</span></span><br><span class="line"><span class="string">    --system              use system config file</span></span><br><span class="line"><span class="string">    --local               use repository config file</span></span><br><span class="line"><span class="string">    -f, --file &lt;file&gt;     use given config file</span></span><br><span class="line"><span class="string">    --blob &lt;blob-id&gt;      read config from given blob object</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Action</span></span><br><span class="line"><span class="string">    --get                 get value: name [value-regex]</span></span><br><span class="line"><span class="string">    --get-all             get all values: key [value-regex]</span></span><br><span class="line"><span class="string">    --get-regexp          get values for regexp: name-regex [value-regex]</span></span><br><span class="line"><span class="string">    --get-urlmatch        get value specific for the URL: section[.var] URL</span></span><br><span class="line"><span class="string">    --replace-all         replace all matching variables: name value [value_regex]</span></span><br><span class="line"><span class="string">    --add                 add a new variable: name value</span></span><br><span class="line"><span class="string">    --unset               remove a variable: name [value-regex]</span></span><br><span class="line"><span class="string">    --unset-all           remove all matches: name [value-regex]</span></span><br><span class="line"><span class="string">    --rename-section      rename section: old-name new-name</span></span><br><span class="line"><span class="string">    --remove-section      remove a section: name</span></span><br><span class="line"><span class="string">    -l, --list            list all</span></span><br><span class="line"><span class="string">    -e, --edit            open an editor</span></span><br><span class="line"><span class="string">    --get-color &lt;slot&gt;    find the color configured: [default]</span></span><br><span class="line"><span class="string">    --get-colorbool &lt;slot&gt;</span></span><br><span class="line"><span class="string">                          find the color setting: [stdout-is-tty]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Type</span></span><br><span class="line"><span class="string">    --bool                value is "true" or "false"</span></span><br><span class="line"><span class="string">    --int                 value is decimal number</span></span><br><span class="line"><span class="string">    --bool-or-int         value is --bool or --int</span></span><br><span class="line"><span class="string">    --path                value is a path (file or directory name)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Other</span></span><br><span class="line"><span class="string">    -z, --null            terminate values with NUL byte</span></span><br><span class="line"><span class="string">    --includes            respect include directives on lookup</span></span><br></pre></td></tr></table></figure>
+<h3 id="Basic-command"><a href="#Basic-command" class="headerlink" title="Basic command"></a>Basic command</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">git config		初始化属性设置</span><br><span class="line">git init 		创建了一个git库，在当前目录中产生一个.git（git仓库） 的子目录。</span><br><span class="line">git add 		将当前工作目录中更改或者新增的文件加入到git的索引中.</span><br><span class="line">git commit 		提交当前工作目录的修改内容。</span><br><span class="line">git status 		查看版本库的状态。</span><br><span class="line">git <span class="built_in">log</span> 		查看历史日志，包含每次的版本变化。每次版本变化对应一个commit id。</span><br><span class="line">git merge 		把服务器上下载下来的代码和本地代码合并，或者进行分支合并。如果合并有冲突，git会有提示。。</span><br><span class="line">git checkout 	切换到分支。</span><br><span class="line">git clean		复位</span><br><span class="line">git mv 			重命名一个文件、目录或者链接。</span><br><span class="line">git branch 		创建分支。</span><br><span class="line">git branch -d 	删除分支。</span><br><span class="line">git rebase 		一般在将服务器最新内容合并到本地时使用，例如：在版本C时从服务器上获取内容到本地，修改了本地内容，此时想把本地修改的内容提交到服务器上；但发现服务器上的版本已经变为G了，此时就需要先执行Git rebase，将服务器上的最新版本合并到本地。例如： 用下面两幅图解释会比较清楚一些，rebase命令执行后，实际上是将分支点从C移到了G，这样分支也就具有了从C到G的功能。</span><br><span class="line">git reset 		库的逆转与恢复。git reset的概念比较复杂。它的命令形式：git reset [--mixed | --soft | --hard] [&lt;commit-ish&gt;] 。</span><br><span class="line">git reverse 	还原某次对版本的修改。</span><br><span class="line">git tag 		创建、列出、删除或者验证一个标签对象</span><br><span class="line">git <span class="built_in">clone</span> 		取出服务器的仓库的代码到本地建立的目录中。</span><br><span class="line">git remote		远端仓库</span><br><span class="line">git pull 		从服务器的仓库中获取代码，和本地代码合并。与服务器交互，从服务器上下载最新代码，等同于： Git fetch + Git merge。</span><br><span class="line">git push 		将本地commit的代码更新到远程版本库中，例如 “git push origin”就会将本地的代码更新到名为orgin的远程版本库中。</span><br><span class="line">git fetch 		从服务器的仓库中下载代码。	与服务器交互，从服务器上下载最新代码,相当于从远程获取最新版本到本地，不会自动merge，比git pull更安全些。</span><br></pre></td></tr></table></figure>
+<h3 id="Advance-command"><a href="#Advance-command" class="headerlink" title="Advance command"></a>Advance command</h3><h4 id="Git-Submodule"><a href="#Git-Submodule" class="headerlink" title="Git Submodule"></a>Git Submodule</h4><blockquote>
+<p>仓库子模块(git-submodule), 公共代码库一般都是以子仓库的模式存在和维护的。<br>详细的介绍会在后面的文章概述-&gt;<strong><a href="../../../../../2014/08/23/tools/git-submodule/">here</a></strong></p>
+</blockquote>
+<h4 id="Merging-vs-Rebasing"><a href="#Merging-vs-Rebasing" class="headerlink" title="Merging vs Rebasing"></a>Merging vs Rebasing</h4><blockquote>
+<p>git rebase 和 git merge 都是用来合并分支，只不过方式不太相同。git rebase 经常被人认为是一种 Git 巫术，初学者应该避而远之。但如果使用得当，它能省去太多烦恼。在这篇文章中，我们会通过比较找到Git工作流中所有可以使用rebase的机会。</p>
+</blockquote>
+<blockquote>
+<p>See the detail <strong><a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing/" target="_blank" rel="noopener">here</a></strong><br>译文参见 <strong><a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.1-%E4%BB%A3%E7%A0%81%E5%90%88%E5%B9%B6%EF%BC%9AMerge%E3%80%81Rebase%E7%9A%84%E9%80%89%E6%8B%A9" target="_blank" rel="noopener">这里</a></strong></p>
+</blockquote>
+<h4 id="Resetting-Checking-Out-and-Reverting"><a href="#Resetting-Checking-Out-and-Reverting" class="headerlink" title="Resetting, Checking Out, and Reverting"></a>Resetting, Checking Out, and Reverting</h4><blockquote>
+<p>git reset 、 git checkout 和 git revert 都是用来撤销代码仓库中的某些更改，所以我们经常弄混。在这篇文章中，我们比较最常见的用法，分析在什么场景下该用哪个命令。</p>
+</blockquote>
+<blockquote>
+<p>See the detail <strong><a href="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/" target="_blank" rel="noopener">here</a></strong><br>译文参见<strong><a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.2-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A%EF%BC%9AReset%E3%80%81Checkout%E3%80%81Revert%E7%9A%84%E9%80%89%E6%8B%A9" target="_blank" rel="noopener">这里</a></strong></p>
+</blockquote>
+<h4 id="Git-Hooks"><a href="#Git-Hooks" class="headerlink" title="Git Hooks"></a>Git Hooks</h4><blockquote>
+<p>Git 钩子是在 Git 仓库中特定事件发生时自动运行的脚本。它可以让你自定义Git内部的行为，在开始周期中的关键点触发自定义的行为，自动化或者优化你开发工作流中任意部分。</p>
+</blockquote>
+<blockquote>
+<p>See the detail <strong><a href="https://www.atlassian.com/git/tutorials/git-hooks" target="_blank" rel="noopener">here</a></strong><br>译文参见 <strong><a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.4-Git%E9%92%A9%E5%AD%90%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81" target="_blank" rel="noopener">这里</a></strong></p>
+</blockquote>
+<h4 id="Refs-and-the-Reflog"><a href="#Refs-and-the-Reflog" class="headerlink" title="Refs and the Reflog"></a>Refs and the Reflog</h4><blockquote>
+<p>提交是 Git 的精髓所在，你无时不刻不在创建和缓存提交、查看以前的提交，或者用各种Git命令在仓库间转移你的提交。在这章中，我们研究提交的各种引用方式，以及涉及到的 Git 命令的工作原理。我们还会学到如何使用 Git 的引用日志查看看似已经删除的提交。</p>
+</blockquote>
+<blockquote>
+<p>See the detail <strong><a href="https://www.atlassian.com/git/tutorials/refs-and-the-reflog" target="_blank" rel="noopener">here</a></strong><br>译文参见 <strong><a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.5-Git%E6%8F%90%E4%BA%A4%E5%BC%95%E7%94%A8%E5%92%8C%E5%BC%95%E7%94%A8%E6%97%A5%E5%BF%97" target="_blank" rel="noopener">这里</a></strong></p>
+</blockquote>
+<blockquote>
+<p>Resoures:<br><a href="https://www.atlassian.com/git/tutorials" target="_blank" rel="noopener">https://www.atlassian.com/git/tutorials</a><br><a href="https://git-scm.com/book/zh/v1/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5" target="_blank" rel="noopener">https://git-scm.com/book/zh/v1/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5</a><br><a href="https://www.atlassian.com/git/tutorials/advanced-overview" target="_blank" rel="noopener">https://www.atlassian.com/git/tutorials/advanced-overview</a><br><a href="https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97" target="_blank" rel="noopener">https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97</a><br><a href="https://github.com/geeeeeeeeek/git-recipes/wiki" target="_blank" rel="noopener">https://github.com/geeeeeeeeek/git-recipes/wiki</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2013/05/13/tools/git-tutorial/">https://tech.itabas.com/2013/05/13/tools/git-tutorial/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Git/">Git</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2014/08/23/tools/git-submodule/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Git submodule</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2013/03/27/database/sqlserver-database-restore/">
+        <span class="next-text nav-default">SqlServer还原脚本</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2013/05/13/tools/git-tutorial/';
+        this.page.identifier = '2013/05/13/tools/git-tutorial/';
+        this.page.title = 'Source Control - Git Tutorial';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

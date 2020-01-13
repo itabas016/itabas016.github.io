@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Package Manager - Yarn vs NPM"><meta name="keywords" content="NPM, package, Yarn, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/11/01/tools/yarn-vs-npm/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Package Manager - Yarn vs NPM - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Package Manager - Yarn vs NPM
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-11-01
+        </span><span class="post-category">
+            <a href="/categories/Tools/">Tools</a>
+            </span>
+        <span class="post-visits" data-url="/2016/11/01/tools/yarn-vs-npm/" data-title="Package Manager - Yarn vs NPM">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Functional-Differences"><span class="toc-text">Functional Differences</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CLI-Differences"><span class="toc-text">CLI Differences</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#yarn-global"><span class="toc-text">yarn global</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#yarn-install"><span class="toc-text">yarn install</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#yarn-add-–dev"><span class="toc-text">yarn add [–dev]</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#yarn-licenses-ls-generate-disclaimer"><span class="toc-text">yarn licenses [ls|generate-disclaimer]</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#yarn-why"><span class="toc-text">yarn why</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#yarn-upgrade-package"><span class="toc-text">yarn upgrade [package]</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#yarn-generate-lock-entry"><span class="toc-text">yarn generate-lock-entry</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><p>Yarn is a fast, reliable, and secure dependency management tool. Open Source —&gt; <a href="https://github.com/yarnpkg/yarn" target="_blank" rel="noopener">Github</a><br>Offical Documentation: <a href="https://yarnpkg.com/en/docs" target="_blank" rel="noopener">https://yarnpkg.com/en/docs</a></p>
+<blockquote>
+<p>Almost From Functional and CLI two parts to compare, see the below: </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Functional-Differences"><a href="#Functional-Differences" class="headerlink" title="Functional Differences"></a>Functional Differences</h2><p>In <code>package.json</code>, the file where both npm as Yarn keep track of the project’s dependencies, version numbers aren’t always exact. </p>
+<blockquote>
+<p>To avoid package version mis-matches, an exact installed version is pinned down in a lock file.<br>Every time a module is added, Yarn creates (or updates) a <code>yarn.lock</code> file.<br>This way you can guarantee another machine installs the exact same package, while still having a range of allowed versions defined in <code>package.json</code>.</p>
+</blockquote>
+<p>In npm, the <code>npm shrinkwrap</code> command generates a lock file as well, and <code>npm install</code> reads that file before reading <code>package.json</code>, much like how Yarn reads <code>yarn.lock</code> first. </p>
+<p><a href="https://yarnpkg.com/en/docs/configuration#toc-use-yarn-lock-to-pin-your-dependencies" target="_blank" rel="noopener">yarn.lock documentation</a><br><a href="https://docs.npmjs.com/cli/shrinkwrap" target="_blank" rel="noopener">npm shrinkwrap documentation</a></p>
+<h2 id="CLI-Differences"><a href="#CLI-Differences" class="headerlink" title="CLI Differences"></a>CLI Differences</h2><p>Other than some functional differences, Yarn also has different commands.<br>Some npm commands were removed, others modified and a couple of interesting commands were added.</p>
+<h5 id="yarn-global"><a href="#yarn-global" class="headerlink" title="yarn global"></a><a href="https://yarnpkg.com/en/docs/cli/global" target="_blank" rel="noopener"><code>yarn global</code></a></h5><h5 id="yarn-install"><a href="#yarn-install" class="headerlink" title="yarn install"></a><a href="https://yarnpkg.com/en/docs/cli/install" target="_blank" rel="noopener"><code>yarn install</code></a></h5><h5 id="yarn-add-–dev"><a href="#yarn-add-–dev" class="headerlink" title="yarn add [–dev]"></a><a href="https://yarnpkg.com/en/docs/cli/add" target="_blank" rel="noopener"><code>yarn add [–dev]</code></a></h5><h5 id="yarn-licenses-ls-generate-disclaimer"><a href="#yarn-licenses-ls-generate-disclaimer" class="headerlink" title="yarn licenses [ls|generate-disclaimer]"></a><a href="https://yarnpkg.com/en/docs/cli/licenses" target="_blank" rel="noopener"><code>yarn licenses [ls|generate-disclaimer]</code></a></h5><h5 id="yarn-why"><a href="#yarn-why" class="headerlink" title="yarn why"></a><a href="https://yarnpkg.com/en/docs/cli/why" target="_blank" rel="noopener"><code>yarn why</code></a></h5><h5 id="yarn-upgrade-package"><a href="#yarn-upgrade-package" class="headerlink" title="yarn upgrade [package]"></a><a href="https://yarnpkg.com/en/docs/cli/upgrade" target="_blank" rel="noopener"><code>yarn upgrade [package]</code></a></h5><h5 id="yarn-generate-lock-entry"><a href="#yarn-generate-lock-entry" class="headerlink" title="yarn generate-lock-entry"></a><a href="https://yarnpkg.com/en/docs/cli/generate-lock-entry" target="_blank" rel="noopener"><code>yarn generate-lock-entry</code></a></h5><p>Resources:<br><a href="https://www.sitepoint.com/yarn-vs-npm/" target="_blank" rel="noopener">https://www.sitepoint.com/yarn-vs-npm/</a><br><a href="https://www.berriart.com/blog/2016/10/npm-yarn-benchmark/" target="_blank" rel="noopener">https://www.berriart.com/blog/2016/10/npm-yarn-benchmark/</a><br><a href="https://github.com/appleboy/npm-vs-yarn" target="_blank" rel="noopener">https://github.com/appleboy/npm-vs-yarn</a></p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/11/01/tools/yarn-vs-npm/">https://tech.itabas.com/2016/11/01/tools/yarn-vs-npm/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/NPM/">NPM</a>
+            <a href="/tags/package/">package</a>
+            <a href="/tags/Yarn/">Yarn</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/11/04/database/oracle-kt-advanced-queue-job/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Oracle - Advanced Queue & Job</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/10/30/database/oracle-kt-troubleshooting-performance-monitor/">
+        <span class="next-text nav-default">Oracle - Trouble Shooting & performance monitor by OEM</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/11/01/tools/yarn-vs-npm/';
+        this.page.identifier = '2016/11/01/tools/yarn-vs-npm/';
+        this.page.title = 'Package Manager - Yarn vs NPM';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

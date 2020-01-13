@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="SS加速的解决方案"><meta name="keywords" content="Linux, Vps, SS, SS加速, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/09/06/vps/ss-speeder/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>SS加速的解决方案 - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">SS加速的解决方案
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-09-06
+        </span><span class="post-category">
+            <a href="/categories/Vps/">Vps</a>
+            </span>
+        <span class="post-visits" data-url="/2016/09/06/vps/ss-speeder/" data-title="SS加速的解决方案">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#net-speeder"><span class="toc-text">net-speeder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Installation"><span class="toc-text">Installation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ubuntu-debian"><span class="toc-text">ubuntu/debian</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#centos"><span class="toc-text">centos</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-use"><span class="toc-text">How to use</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kcptun"><span class="toc-text">kcptun</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Installation-1"><span class="toc-text">Installation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finalspeed"><span class="toc-text">finalspeed</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Installation-2"><span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-use-1"><span class="toc-text">How to use</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#windows-client-download"><span class="toc-text">windows client download</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#linux-amp-os-x-client-download"><span class="toc-text">linux &amp; os x client download</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p>根据vps的特点选择适合自己的加速方案，Openvz和Kvm以及Xen (<strong><a href="#more">如何检测Vps架构↓↓↓</a></strong>) 不同架构处理方式也是不同。</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#91yun check script</span><br><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/code/master/vm_check.sh &amp;&amp; bash vm_check.sh</span><br></pre></td></tr></table></figure>
+<h3 id="net-speeder"><a href="#net-speeder" class="headerlink" title="net-speeder"></a><a href="https://github.com/snooda/net-speeder" target="_blank" rel="noopener">net-speeder</a></h3><blockquote>
+<p>在高延迟不稳定链路上优化单线程下载速度</p>
+</blockquote>
+<blockquote>
+<p>开启了net-speeder的服务器上对外ping时看到的是4倍，实际网络上是2倍流量。另外两倍是内部dup出来的，不占用带宽。 另外，内部dup包并非是偷懒未判断。。。是为了更快触发快速重传的。 </p>
+</blockquote>
+<blockquote>
+<p>net-speeder不依赖ttl的大小，ttl的大小跟流量无比例关系。不存在windows的ttl大，发包就多的情况。</p>
+</blockquote>
+<h4 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h4><blockquote>
+<p>一键安装script</p>
+</blockquote>
+<h5 id="ubuntu-debian"><a href="#ubuntu-debian" class="headerlink" title="ubuntu/debian"></a>ubuntu/debian</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell wget --no-check-certificate https://raw.githubusercontent.com/tennfy/debian_netspeeder_tennfy/master/debian_netspeeder_tennfy.sh chmod a+x debian_netspeeder_tennfy.sh bash debian_netspeeder_tennfy.sh</span><br></pre></td></tr></table></figure>
+<h5 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://gist.github.com/LazyZhu/dc3f2f84c336a08fd6a5/rawd8aa4bcf955409e28a262ccf52921a65fe49da99/net_speeder_lazyinstall.sh sh net_speeder_lazyinstall.sh</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>source code <code>make</code> and <code>make install</code></p>
+</blockquote>
+<blockquote>
+<p><strong>net-speed</strong> <a href="https://github.com/snooda/net-speeder" target="_blank" rel="noopener">opensource</a></p>
+</blockquote>
+<h4 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h4><p><code>cp ./net_speeder /usr/bin</code></p>
+<blockquote>
+<p>#comments:<br><code>parameter: net_speeder netdisk rule (bpf)</code><br><code>net_speeder venet0 &quot;ip&quot;</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/net_speeder venet0 <span class="string">"ip"</span></span><br><span class="line"><span class="comment"># add netspeed to </span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'nohup /usr/bin/net_speeder venet0 "ip" &gt;/dev/null 2&gt;&amp;1 &amp;'</span> &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
+<h3 id="kcptun"><a href="#kcptun" class="headerlink" title="kcptun"></a><a href="https://github.com/xtaci/kcptun" target="_blank" rel="noopener">kcptun</a></h3><blockquote>
+<p>Kcptun是一个非常简单和快速的，基于 KCP 协议的 UDP 隧道，它可以将 TCP 流转换为 KCP+UDP 流。而 KCP 是一个快速可靠协议，能以比 TCP 浪费10%-20%的带宽的代价，换取平均延迟降低 30%-40%，且最大延迟降低三倍的传输效果。<br>Kcptun是 KCP 协议的一个简单应用，可以用于任意 TCP 网络程序的传输承载，以提高网络流畅度，降低掉线情况。由于 Kcptun 使用 Go 语言编写，内存占用低（经测试，在64M内存服务器上稳定运行），而且适用于所有平台，甚至 Arm 平台。</p>
+</blockquote>
+<h4 id="Installation-1"><a href="#Installation-1" class="headerlink" title="Installation"></a>Installation</h4><blockquote>
+<p><strong><a href="https://blog.kuoruan.com/110.html" target="_blank" rel="noopener">一键安装script</a></strong></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/kuoruan/kcptun_installer/master/kcptun.sh</span><br><span class="line">chmod +x ./kcptun.sh</span><br><span class="line">./kcptun.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># configure kcptun server port:</span></span><br><span class="line">please input kcptun server port [1-65535]: (default 29900)</span><br><span class="line"></span><br><span class="line"><span class="comment"># configure speed ip:</span></span><br><span class="line">please input speed ip [0.0.0.0 ~ 255.255.255.255]: (default 127.0.0.1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># configure speed port:</span></span><br><span class="line">please input speed port [1-65535]: (default 12948)</span><br><span class="line"></span><br><span class="line"><span class="comment"># configure kcptun password:</span></span><br><span class="line">please input kcptun password: (default it<span class="string">'s a secrect)</span></span><br></pre></td></tr></table></figure>
+<h3 id="finalspeed"><a href="#finalspeed" class="headerlink" title="finalspeed"></a><a href="https://github.com/91yun/finalspeed" target="_blank" rel="noopener">finalspeed</a></h3><blockquote>
+<p>FinalSpeed是高速双边加速软件,可加速所有基于tcp协议的网络服务,在高丢包和高延迟环境下,仍可达到90%的物理带宽利用率,即使高峰时段也能轻松跑满带宽.<br>适用与Openvz, 并且占用内存大</p>
+</blockquote>
+<h4 id="Installation-2"><a href="#Installation-2" class="headerlink" title="Installation"></a>Installation</h4><blockquote>
+<p>一键安装script</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/finalspeed/master/install_fs.sh &amp;&amp; bash install_fs.sh</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一键卸载script</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/finalspeed/master/install_fs.sh &amp;&amp; bash install_fs.sh uninstall</span><br></pre></td></tr></table></figure>
+<h4 id="How-to-use-1"><a href="#How-to-use-1" class="headerlink" title="How to use"></a>How to use</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># install path: /fs/</span><br><span class="line"># log path: /fs/server.log</span><br><span class="line"></span><br><span class="line"># start</span><br><span class="line">/etc/init.d/finalspeed start</span><br><span class="line"></span><br><span class="line"># stop</span><br><span class="line">/etc/init.d/finalspeed stop</span><br><span class="line"></span><br><span class="line"># check status&amp;log</span><br><span class="line">/etc/init.d/finalspeed status</span><br></pre></td></tr></table></figure>
+<h5 id="windows-client-download"><a href="#windows-client-download" class="headerlink" title="windows client download"></a><a href="https://github.com/91yun/finalspeed/raw/master/finalspeed_install1.0.exe" target="_blank" rel="noopener">windows client download</a></h5><h5 id="linux-amp-os-x-client-download"><a href="#linux-amp-os-x-client-download" class="headerlink" title="linux &amp; os x client download"></a><a href="https://raw.githubusercontent.com/91yun/finalspeed/master/finalspeed_client.zip" target="_blank" rel="noopener">linux &amp; os x client download</a></h5><p>Resource: <a href="https://www.91yun.org/archives/615" target="_blank" rel="noopener">https://www.91yun.org/archives/615</a></p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/09/06/vps/ss-speeder/">https://tech.itabas.com/2016/09/06/vps/ss-speeder/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Linux/">Linux</a>
+            <a href="/tags/Vps/">Vps</a>
+            <a href="/tags/SS/">SS</a>
+            <a href="/tags/SS加速/">SS加速</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/09/08/raspberry/access-raspberry/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">外网访问树莓派</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/09/03/database/oracle-statements/">
+        <span class="next-text nav-default">Oracle Statements - DDL, DML, DCL, TCL</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/09/06/vps/ss-speeder/';
+        this.page.identifier = '2016/09/06/vps/ss-speeder/';
+        this.page.title = 'SS加速的解决方案';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

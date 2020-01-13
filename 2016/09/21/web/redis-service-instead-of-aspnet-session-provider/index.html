@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Use Redis Service Instead of Asp.Net Session Provider"><meta name="keywords" content="Redis, Asp.Net, State Server, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/09/21/web/redis-service-instead-of-aspnet-session-provider/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Use Redis Service Instead of Asp.Net Session Provider - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Use Redis Service Instead of Asp.Net Session Provider
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-09-21
+        </span><span class="post-category">
+            <a href="/categories/Web/">Web</a>
+            </span>
+        <span class="post-visits" data-url="/2016/09/21/web/redis-service-instead-of-aspnet-session-provider/" data-title="Use Redis Service Instead of Asp.Net Session Provider">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Aspnet-Redis-Provider"><span class="toc-text">Aspnet Redis Provider</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Source-Code"><span class="toc-text">Source Code</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configuration-for-Application"><span class="toc-text">Configuration for Application</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Question"><span class="toc-text">Question</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p><code>Asp.Net</code> Session Provider can’t realize <code>Master-Slave</code> switching function, but the stable release of <code>Redis Sentinel</code> is shippedd since <code>Redis 2.8</code>. Certainly, the sentinel function is support <code>Monitoring</code>, <code>Notification</code>, <code>Automatic failover</code> and <code>Configuration provider</code>.</p>
+</blockquote>
+<blockquote>
+<p>If you want to know the extra information about <code>Redis Sentinel</code>, –&gt; <strong><a href="http://redis.io/topics/sentinel" target="_blank" rel="noopener">click here</a></strong></p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Aspnet-Redis-Provider"><a href="#Aspnet-Redis-Provider" class="headerlink" title="Aspnet Redis Provider"></a>Aspnet Redis Provider</h3><h4 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h4><blockquote>
+<p>Go back to session provider, I found an solution in github, the open source <strong><a href="https://github.com/Azure/aspnet-redis-providers" target="_blank" rel="noopener">see here</a></strong></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>If you just use redis make the session provider, this solution is completely instead of the Asp.Net session provider.</li>
+<li>But if you want <code>master-slave</code> switching or mutltiple instance used in redis master-slave swtiching, I fork the project and checkout a new branch, the code –&gt; <strong><a href="https://github.com/itabas016/aspnet-redis-providers" target="_blank" rel="noopener">see here</a></strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>BTW, How to install redis and redis sentinel please <strong><a href="../../../../2016/09/20/tools/chocolate-intall-redis-windows/">see here</a></strong>, And the detail <code>Redis Sentinel</code> configuration for windows please <strong><a href="https://github.com/itabas016/TutorialsPoint/blob/master/redis/sentinel.md" target="_blank" rel="noopener">see here</a></strong> </p>
+</blockquote>
+<p><img src="/../../../screenshots/redis-master-slave-sentinel.png" alt="redis-master-slave-sentinel"></p>
+<h4 id="Configuration-for-Application"><a href="#Configuration-for-Application" class="headerlink" title="Configuration for Application"></a>Configuration for Application</h4><blockquote>
+<p>PS. The sample <code>web.config</code> configuration for <code>Redis Single</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">sessionState</span> <span class="attr">mode</span>=<span class="string">"Custom"</span> <span class="attr">customProvider</span>=<span class="string">"MySessionStateStore"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">providers</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    &lt;add name="MySessionStateStore"</span></span><br><span class="line"><span class="comment">           host = "127.0.0.1" [String]</span></span><br><span class="line"><span class="comment">        port = "" [number]</span></span><br><span class="line"><span class="comment">        accessKey = "" [String]</span></span><br><span class="line"><span class="comment">        ssl = "false" [true|false]</span></span><br><span class="line"><span class="comment">        throwOnError = "true" [true|false]</span></span><br><span class="line"><span class="comment">        retryTimeoutInMilliseconds = "0" [number]</span></span><br><span class="line"><span class="comment">        databaseId = "0" [number]</span></span><br><span class="line"><span class="comment">        applicationName = "" [String]</span></span><br><span class="line"><span class="comment">        connectionTimeoutInMilliseconds = "5000" [number]</span></span><br><span class="line"><span class="comment">        operationTimeoutInMilliseconds = "5000" [number]</span></span><br><span class="line"><span class="comment">    /&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">"MySessionStateStore"</span> <span class="attr">type</span>=<span class="string">"Microsoft.Web.Redis.RedisSessionStateProvider"</span> <span class="attr">host</span>=<span class="string">"127.0.0.1"</span> <span class="attr">accessKey</span>=<span class="string">""</span> <span class="attr">ssl</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">providers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">sessionState</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>PS. The other sample <code>web.config</code> configuration for <code>Redis Sentinel</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">connectionStrings</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">"RedisConnection"</span> <span class="attr">connectionString</span>=<span class="string">"192.168.192.215:26379,192.168.192.205:26379,serviceName=mymaster,ssl=false"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">connectionStrings</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">sessionState</span> <span class="attr">mode</span>=<span class="string">"Custom"</span> <span class="attr">customProvider</span>=<span class="string">"MySessionStateStore"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">providers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">"MySessionStateStore"</span> <span class="attr">type</span>=<span class="string">"Microsoft.Web.Redis.RedisSessionStateProvider"</span></span></span><br><span class="line"><span class="tag">					<span class="attr">connectionString</span>=<span class="string">"RedisConnection"</span> <span class="attr">operationTimeoutInMilliseconds</span>=<span class="string">"5000"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">providers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">sessionState</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h4><blockquote>
+<p>Above this, I think a question about <code>redis master ip</code> when redis master instance is crash, how is it switched?<br>The answer in the <code>Redis Sentinel</code> configuration, because I input the redis sentinel <code>ip</code> and <code>port</code> in the <code>web config</code>, base on the <strong>quorum argument</strong>.</p>
+</blockquote>
+<blockquote>
+<p>So, if I don’t change the source code, I can’t get the <code>master ip</code> when master instance crashed, but it’s other way to get the IP, <code>Keepalived</code>, It will generate the <code>virtual IP</code>, and you can bind your redis instances ip, Ahha It’s only support on linux, so this solution is not suitable for me.</p>
+</blockquote>
+<blockquote>
+<p>And the detail configuration and How to realize it, please <strong><a href="../../../../2016/09/29/web/use-keepalived-switching-master-slave-solution/">see this article</a></strong> </p>
+</blockquote>
+<blockquote>
+<p>Resources:<br><a href="http://lib.csdn.net/article/redis/18114" target="_blank" rel="noopener">http://lib.csdn.net/article/redis/18114</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/09/21/web/redis-service-instead-of-aspnet-session-provider/">https://tech.itabas.com/2016/09/21/web/redis-service-instead-of-aspnet-session-provider/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Redis/">Redis</a>
+            <a href="/tags/Asp-Net/">Asp.Net</a>
+            <a href="/tags/State-Server/">State Server</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/09/24/vps/ngrok-server/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">自建Ngrok服务器 - 内网穿透</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/09/20/tools/chocolate-intall-redis-windows/">
+        <span class="next-text nav-default">Windows Install Redis Service by Chocolate</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/09/21/web/redis-service-instead-of-aspnet-session-provider/';
+        this.page.identifier = '2016/09/21/web/redis-service-instead-of-aspnet-session-provider/';
+        this.page.title = 'Use Redis Service Instead of Asp.Net Session Provider';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

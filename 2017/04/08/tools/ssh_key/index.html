@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="SSH Key相关问题"><meta name="keywords" content="Tools, Vps, Wiki, SSH, SSH key, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2017/04/08/tools/ssh_key/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>SSH Key相关问题 - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">SSH Key相关问题
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-04-08
+        </span><span class="post-category">
+            <a href="/categories/Tools/">Tools</a>
+            </span>
+        <span class="post-visits" data-url="/2017/04/08/tools/ssh_key/" data-title="SSH Key相关问题">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-ssh-key"><span class="toc-text">Generate ssh key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-public-key-to-Server"><span class="toc-text">Configure public key to Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keep-safe-authorized-keys"><span class="toc-text">Keep safe authorized_keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Disable-password-authentication"><span class="toc-text">Disable password authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-use-in-the-tool"><span class="toc-text">How to use in the tool</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>SSH Key分公钥和私钥, 私钥请自己妥善保管, 不要外泄。<br>另外采用ssh public key authentication是提升服务器安全与快捷措施之一。</p>
+<a id="more"></a>
+<h3 id="Generate-ssh-key"><a href="#Generate-ssh-key" class="headerlink" title="Generate ssh key"></a>Generate ssh key</h3><p>以github为例使用ssh-keygen生成相对应的key</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># please make sure .ssh folder is exist</span></span><br><span class="line"><span class="built_in">cd</span> ~/</span><br><span class="line">mkdir .ssh</span><br><span class="line"><span class="built_in">cd</span> /.ssh</span><br><span class="line"></span><br><span class="line"><span class="comment"># use ssh-keygen generate key</span></span><br><span class="line"><span class="comment"># if you want sign key name please add -f parameter, default is id_rsa</span></span><br><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"your_email@example.com"</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/git/.ssh/id_rsa):</span><br><span class="line"></span><br><span class="line"><span class="comment"># please input your password for private key, default is empty</span></span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br></pre></td></tr></table></figure>
+<h3 id="Configure-public-key-to-Server"><a href="#Configure-public-key-to-Server" class="headerlink" title="Configure public key to Server"></a>Configure public key to Server</h3><p>上传公钥到server有很多种方式了, 推荐使用<code>ssh-copy-id</code></p>
+<ul>
+<li><code>ssh-copy-id -i ~/.ssh/id_rsa.pub git@ip -p xx</code></li>
+</ul>
+<p>有可能会遇到一些问题比如说: <code>Permission denied (publickey).</code> 或者<code>bash: ssh-copy-id: command not found</code></p>
+<p>If it’s permission problem, please check current user whether has execute privilege to <code>.ssh</code> folder</p>
+<p>Else if you use windows command line, maybe you didn’t install this tiny script, please execute the below script:</p>
+<p>Maybe is works, good luck for you!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET_ID=<span class="string">"cat <span class="variable">$&#123;ID_FILE&#125;</span>"</span></span><br><span class="line">&#123; <span class="built_in">eval</span> <span class="string">"<span class="variable">$GET_ID</span>"</span> ; &#125; | ssh <span class="variable">$&#123;1%:&#125;</span> <span class="string">"umask 077; test -d .ssh || mkdir .ssh ; cat &gt;&gt; .ssh/authorized_keys"</span> || <span class="built_in">exit</span> 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>scp ~/.ssh/ ~/.ssh/id_rsa.pub -p xx user@ip:</code></li>
+</ul>
+<p>Attention please <code>:</code>, then login server execute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">rm ~/.ssh/id_rsa.pub</span><br><span class="line">chmod 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<h3 id="Keep-safe-authorized-keys"><a href="#Keep-safe-authorized-keys" class="headerlink" title="Keep safe authorized_keys"></a>Keep safe authorized_keys</h3><p>为了保证安全，您应该阻止其他用户添加新的公钥。<br>将 authorized_keys 的权限设置为对拥有者只读，其他用户没有任何权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<h3 id="Disable-password-authentication"><a href="#Disable-password-authentication" class="headerlink" title="Disable password authentication"></a>Disable password authentication</h3><p>采用公钥登录server后, 最好禁用密码登录.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br><span class="line"><span class="comment"># set PasswordAuthentication value is no</span></span><br><span class="line">RSAAuthentication yes</span><br><span class="line">AuthorizedKeysFile .ssh/authorized_keys</span><br><span class="line">PasswordAuthentication no</span><br><span class="line">ChallengeResponseAuthentication no</span><br><span class="line"></span><br><span class="line"><span class="comment"># restart sshd service</span></span><br><span class="line">service sshd restart</span><br></pre></td></tr></table></figure></p>
+<h3 id="How-to-use-in-the-tool"><a href="#How-to-use-in-the-tool" class="headerlink" title="How to use in the tool"></a>How to use in the tool</h3><ul>
+<li>使用 alias</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.bash_profile</span><br><span class="line"><span class="built_in">alias</span> ssh vps-gce =<span class="string">'ssh itabas016@xxx.xxx.xxx.xxx'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 ssh client端import public key,这个就比较简单了。常用的客户端比如Putty, SecureCRT, XShell, Mobile client推荐JuiceSSH</li>
+</ul>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2017/04/08/tools/ssh_key/">https://tech.itabas.com/2017/04/08/tools/ssh_key/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Tools/">Tools</a>
+            <a href="/tags/Vps/">Vps</a>
+            <a href="/tags/Wiki/">Wiki</a>
+            <a href="/tags/SSH/">SSH</a>
+            <a href="/tags/SSH-key/">SSH key</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2017/04/08/tools/git_tips/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Git command补漏</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2017/04/06/tools/git_hooks/">
+        <span class="next-text nav-default">Git Hooks快捷使用</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2017/04/08/tools/ssh_key/';
+        this.page.identifier = '2017/04/08/tools/ssh_key/';
+        this.page.title = 'SSH Key相关问题';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

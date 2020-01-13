@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Raspberry Pi3 打造无线中继服务器"><meta name="keywords" content="Raspberry, 树莓派, Wireless, Wireless Repeater, Wireless Bridger, Router, 无线中继, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Raspberry Pi3 打造无线中继服务器 - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Raspberry Pi3 打造无线中继服务器
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-11-13
+        </span><span class="post-category">
+            <a href="/categories/Raspberry/">Raspberry</a>
+            </span>
+        <span class="post-visits" data-url="/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/" data-title="Raspberry Pi3 打造无线中继服务器">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Static-IP"><span class="toc-text">Static IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS"><span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Forward"><span class="toc-text">Forward</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hostapd"><span class="toc-text">Hostapd</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯子部分"><span class="toc-text">梯子部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Shadowsocks"><span class="toc-text">Shadowsocks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redsocks"><span class="toc-text">Redsocks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPset-Rule"><span class="toc-text">IPset Rule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Firewall-Rule"><span class="toc-text">Firewall Rule</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><p>既然rasp又活了一开始想着用它来搞个WIFI中继。之前对这个原理不是很懂，也不知道具体是怎么实现的，这次搞一搞。</p>
+<p>后来摸索着不妨就单开个热点做梯子用，其实中继模式和桥接模式很类似，表面上看可以简单的说只是无线SSID广播不同的信号，实际在实现上还是有诸多区别，这里就记一下所趟的坑。</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>主要参考了网上的教程</p>
+<p>我的是一个板子(包含内置的有线网卡eth0和无线网卡wlan0)，一根网线，一个无线网卡wlan1(用来做梯子用)。</p>
+<h3 id="Static-IP"><a href="#Static-IP" class="headerlink" title="Static IP"></a>Static IP</h3><p>之前已经准备好了eth0静态ip, wlan0动态获取。主要是有线网卡比较稳定适合用静态ip。</p>
+<p>静态ip设置参照<a href="https://tech.itabas.com/2016/06/10/raspberry/raspberry-pi3-config/#Configure-static-IP-amp-WIFI">这里</a></p>
+<p>后面修改 <code>/etc/network/interfaces</code> 和 <code>/etc/dhcpcd.conf</code> 分别添加以下配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># modify /etc/network/interfaces</span></span><br><span class="line">sudo vim /etc/network/interfaces</span><br><span class="line"></span><br><span class="line"><span class="comment"># add wlan1 configuration</span></span><br><span class="line">allow-hotplug wlan1</span><br><span class="line">auto wlan1</span><br><span class="line">iface wlan1 inet manual</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify /etc/dhcpcd.conf</span></span><br><span class="line">sudo vim /etc/dhcpcd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># add wlan1 dhcp configuration</span></span><br><span class="line">interface wlan1</span><br><span class="line">static ip_address=192.168.20.1/24</span><br><span class="line">static routers=192.168.11.1</span><br><span class="line">static domain_name_servers=114.114.114.114 119.29.29.29</span><br></pre></td></tr></table></figure>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>然后修改 <code>/etc/dnsmasq.conf</code>配置wlan1网段(192.168.20.0/24)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># modify /etc/dnsmasq.conf</span></span><br><span class="line">sudo vim /etc/dnsmasq.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># uncomments add configuration</span></span><br><span class="line">no-resolv</span><br><span class="line">server=202.38.93.153</span><br><span class="line">server=202.141.162.123</span><br><span class="line">server=114.114.114.114</span><br><span class="line">server=119.29.29.29</span><br><span class="line"></span><br><span class="line">listen-address=127.0.0.1,192.168.20.1</span><br><span class="line">dhcp-range=192.168.20.50,192.168.20.150,12h</span><br></pre></td></tr></table></figure>
+<h3 id="Forward"><a href="#Forward" class="headerlink" title="Forward"></a>Forward</h3><p>开启包转发 <code>sudo vim /etc/sysctl.conf</code> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># uncomment</span></span><br><span class="line">net.ipv4.ip_forward=1</span><br><span class="line"></span><br><span class="line"><span class="comment"># run</span></span><br><span class="line">sudo sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># add iptables rule (nat rule for wlan0)</span></span><br><span class="line">sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
+<p><strong>PS.Tips:</strong> 使用<code>iptables-persistent</code>将防火墙rules保存至<code>/etc/iptables/rules.v4</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># save current rules</span></span><br><span class="line">sudo service netfilter-persistent save</span><br><span class="line"><span class="comment">#read current rules</span></span><br><span class="line">sudo service netfilter-persistent reload</span><br><span class="line"></span><br><span class="line"><span class="comment"># reload rules when restart rasp</span></span><br><span class="line">sudo vim /etc/rc.local</span><br><span class="line"><span class="comment"># add configuration</span></span><br><span class="line">iptables-restore &lt; /etc/iptables/rules.v4</span><br></pre></td></tr></table></figure>
+<h3 id="Hostapd"><a href="#Hostapd" class="headerlink" title="Hostapd"></a>Hostapd</h3><p>首先需要确保当前网卡wlan1是否具有APmode或用来做中继或桥接的功能。<code>iw list|grep -A10 &#39;Supported interface modes&#39;</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install hostapd</span></span><br><span class="line">sudo apt-get install hostapd</span><br><span class="line"></span><br><span class="line"><span class="comment"># check wlan adapter support current driver</span></span><br><span class="line">lsusb</span><br><span class="line"></span><br><span class="line"><span class="comment"># currently, my driver need use r8712u</span></span><br><span class="line"><span class="comment"># Bus 001 Device 005: ID 0bda:8171 Realtek Semiconductor Corp. RTL8188SU 802.11n WLAN Adapter</span></span><br><span class="line"><span class="comment"># if hostapd doesn't support current dirver, need find driver related hostapd and manually make it</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># modify hostapd configuration</span></span><br><span class="line">sudo /etc/hostapd/hostapd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># add configuration</span></span><br><span class="line">interface=wlan1</span><br><span class="line">driver=r8712udrv</span><br><span class="line">ssid=My_SSID_Name</span><br><span class="line">channel=10</span><br><span class="line">wmm_enabled=1</span><br><span class="line">wpa=2</span><br><span class="line">wpa_passphrase=MYPASSWORD</span><br><span class="line">wpa_key_mgmt=WPA-PSK</span><br><span class="line">wpa_pairwise=TKIP</span><br><span class="line">rsn_pairwise=CCMP</span><br><span class="line">auth_algs=1</span><br><span class="line">macaddr_acl=0</span><br><span class="line"></span><br><span class="line"><span class="comment"># test hostadp </span></span><br><span class="line">sudo hostapd -d /etc/hostapd/hostapd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># change DAEMON_CONF path</span></span><br><span class="line">sudo /etc/default/hostapd</span><br><span class="line"></span><br><span class="line">DAEMON_CONF=<span class="string">"/etc/hostapd/hostapd.conf"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># start SSID</span></span><br><span class="line">sudo service hostapd start</span><br></pre></td></tr></table></figure>
+<h2 id="梯子部分"><a href="#梯子部分" class="headerlink" title="梯子部分"></a>梯子部分</h2><h3 id="Shadowsocks"><a href="#Shadowsocks" class="headerlink" title="Shadowsocks"></a>Shadowsocks</h3><p>使用<code>redsocks + shadowsocks</code>, 直接<code>sudo pip install shadowsocks</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create shadowsocks json configuration</span></span><br><span class="line">sudo vim /etc/shadowsocks.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># add json content</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"server"</span>:<span class="string">"xxx.xxx.xxx.xxx"</span>,</span><br><span class="line">    <span class="string">"server_port"</span>:8989,</span><br><span class="line">    <span class="string">"local_address"</span>:<span class="string">"0.0.0.0"</span>,</span><br><span class="line">    <span class="string">"local_port"</span>:1080,</span><br><span class="line">    <span class="string">"password"</span>:<span class="string">"password"</span>,</span><br><span class="line">    <span class="string">"timeout"</span>:600,</span><br><span class="line">    <span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># test</span></span><br><span class="line">sudo sslocal -c /etc/shadowsocks.json -d start</span><br><span class="line"></span><br><span class="line"><span class="comment"># add autostart</span></span><br><span class="line">sudo sh -c <span class="string">"sslocal -c /etc/shadowsocks.conf -d start &gt;&gt; /etc/rc.local"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Redsocks"><a href="#Redsocks" class="headerlink" title="Redsocks"></a>Redsocks</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install</span></span><br><span class="line">sudo apt-get install redsocks</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify /etc/redsocks.conf</span></span><br><span class="line">sudo vim /etc/redsocks.conf</span><br><span class="line"></span><br><span class="line">redsocks &#123;  </span><br><span class="line">    local_ip = 0.0.0.0;</span><br><span class="line">    local_port = 12345; </span><br><span class="line">    ip = 127.0.0.1;</span><br><span class="line">    port = 1080;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># start</span></span><br><span class="line">sudo service redsocks start</span><br></pre></td></tr></table></figure>
+<h3 id="IPset-Rule"><a href="#IPset-Rule" class="headerlink" title="IPset Rule"></a>IPset Rule</h3><p><em>凡是国外ip都采用shadowsocks</em>, 其实这条规则有点大，如果下载BT的话风险会很大。目前先按<a href="https://story.tonylee.name" target="_blank" rel="noopener">tony1016</a>的配置来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># execute command</span></span><br><span class="line">curl <span class="string">'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest'</span> | grep ipv4 | grep CN | awk -F\| <span class="string">'&#123; printf("%s/%d\n", $4, 32-log($5)/log(2)) &#125;'</span> &gt; chnroute.txt  </span><br><span class="line"></span><br><span class="line"><span class="comment"># export ip to ipset</span></span><br><span class="line">sudo ipset create chnroute <span class="built_in">hash</span>:net  </span><br><span class="line">cat chnroute.txt | sudo xargs -I ip ipset add chnroute ip </span><br><span class="line"></span><br><span class="line"><span class="comment"># set autostart</span></span><br><span class="line">sudo sh -c <span class="string">"ipset save chnroute &gt; /etc/chnroute.ipset"</span></span><br><span class="line"></span><br><span class="line">sudo vim /etc/rc.local</span><br><span class="line"><span class="comment"># add configuration</span></span><br><span class="line">iptables-restore &lt; /etc/iptables/rules.v4</span><br></pre></td></tr></table></figure>
+<h3 id="Firewall-Rule"><a href="#Firewall-Rule" class="headerlink" title="Firewall Rule"></a>Firewall Rule</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># general rule for wlan0 wlan1</span></span><br><span class="line">sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE</span><br><span class="line">sudo iptables -A FORWARD -i wlan0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">sudo iptables -A FORWARD -i wlan1 -o wlan0 -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment"># shadowsocks rule</span></span><br><span class="line">sudo iptables -t nat -N SHADOWSOCKS</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 67.216.202.107 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 0.0.0.0/8 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 10.0.0.0/8 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 127.0.0.0/8 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 169.254.0.0/16 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 172.16.0.0/12 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 192.168.0.0/16 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 224.0.0.0/4 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -d 240.0.0.0/4 -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -m <span class="built_in">set</span> --match-set chnroute dst -j RETURN</span><br><span class="line">sudo iptables -t nat -A SHADOWSOCKS -p tcp -j REDIRECT --to-ports 12345</span><br><span class="line">sudo iptables -t nat -A OUTPUT -p tcp -j SHADOWSOCKS</span><br><span class="line">sudo iptables -t nat -A PREROUTING -p tcp -j SHADOWSOCKS</span><br><span class="line"></span><br><span class="line"><span class="comment"># save rules to /etc/iptables/rules.v4</span></span><br><span class="line">sudo sh -c <span class="string">"iptables-save &gt; /etc/iptables/rules.v4"</span></span><br></pre></td></tr></table></figure>
+<p>Reference: </p>
+<p><a href="https://story.tonylee.name/2016/03/31/yong-shu-mei-pai-da-zao-wu-xian-zhong-ji-ke-xue-shang-wang-lu-you-qi/" target="_blank" rel="noopener">用树莓派打造无线中继科学上网路由器</a><br><a href="https://wangye.org/blog/archives/845/" target="_blank" rel="noopener">将树莓派Raspberry Pi设置为无线路由器(WiFi热点AP,RTL8188CUS芯片)</a><br><a href="https://www.tongfu.info/build-wireless-router-cross-china-firewall-use-raspberrypi-and-realtek-8192cu-usb-dongle/" target="_blank" rel="noopener">树莓派打造科学上网无线路由器(基于Realtek 8192cu网卡)</a></p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/">https://tech.itabas.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Raspberry/">Raspberry</a>
+            <a href="/tags/树莓派/">树莓派</a>
+            <a href="/tags/Wireless/">Wireless</a>
+            <a href="/tags/Wireless-Repeater/">Wireless Repeater</a>
+            <a href="/tags/Wireless-Bridger/">Wireless Bridger</a>
+            <a href="/tags/Router/">Router</a>
+            <a href="/tags/无线中继/">无线中继</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2017/11/25/tools/baidu-pan-download-tool/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">安利一款百度云盘下载工具</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2017/11/10/raspberry/raspberry-pi3-funny-service/">
+        <span class="next-text nav-default">Raspberry Pi3 有趣玩法</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/';
+        this.page.identifier = '2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/';
+        this.page.title = 'Raspberry Pi3 打造无线中继服务器';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

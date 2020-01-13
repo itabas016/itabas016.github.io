@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Python 之旅 - 开篇"><meta name="keywords" content="Python, Iterator, Generator, Decorator, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2017/09/09/python/python-tutorial/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Python 之旅 - 开篇 - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Python 之旅 - 开篇
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-09
+        </span><span class="post-category">
+            <a href="/categories/Python/">Python</a>
+            </span>
+        <span class="post-visits" data-url="/2017/09/09/python/python-tutorial/" data-title="Python 之旅 - 开篇">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础-趟一遍"><span class="toc-text">基础(趟一遍)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Func-函数"><span class="toc-text">Func(函数)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Decorator"><span class="toc-text">Decorator</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OOP"><span class="toc-text">OOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO-文件操作和序列化"><span class="toc-text">IO(文件操作和序列化)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thread-线程"><span class="toc-text">Thread(线程)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Async-异步"><span class="toc-text">Async(异步)</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><p>Python基础还是照着<a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="noopener">廖雪峰的教程</a>撸了一遍。<br>教程的学习路线开始太过平缓，后期直线上升很容易扯着蛋~</p>
+<a id="more"></a>
+<h2 id="基础-趟一遍"><a href="#基础-趟一遍" class="headerlink" title="基础(趟一遍)"></a>基础(趟一遍)</h2><p><strong>PS. Basic on python 3.5</strong> (所有源码 –&gt; <a href="https://github.com/itabas016/PythonTrip/tree/master/course_liao" target="_blank" rel="noopener">source code</a>)</p>
+<h3 id="Func-函数"><a href="#Func-函数" class="headerlink" title="Func(函数)"></a>Func(函数)</h3><ul>
+<li>递归函数 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/function/recur_func.py" target="_blank" rel="noopener">recur_func.py</a>]</li>
+<li>Map/Reduce [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/function/map_reduce.py" target="_blank" rel="noopener">map_reduce.py</a>]</li>
+<li>过滤器 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/function/filter.py" target="_blank" rel="noopener">filter.py</a>]</li>
+<li>排序 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/function/sorted.py" target="_blank" rel="noopener">sorted.py</a>]</li>
+<li>格式化 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/function/format_input.py" target="_blank" rel="noopener">format_input.py</a>]</li>
+<li>装饰器 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/function/decorator.py" target="_blank" rel="noopener">decorator.py</a>]</li>
+<li>偏函数 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/function/partial_func.py" target="_blank" rel="noopener">partial_func.py</a>]</li>
+<li>高阶函数 - 迭代器 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/advance/ex_iterator.py" target="_blank" rel="noopener">ex_iterator.py</a>]</li>
+<li>高阶函数 - 生成器 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/advance/ex_generator.py" target="_blank" rel="noopener">ex_generator.py</a>]</li>
+<li>高阶函数 - 切片与列表 [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/advance/ex_slice.py" target="_blank" rel="noopener">ex_slice.py</a>, <a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/advance/ex_list.py" target="_blank" rel="noopener">ex_list.py</a>]</li>
+</ul>
+<h4 id="Decorator"><a href="#Decorator" class="headerlink" title="Decorator"></a>Decorator</h4><p>如上面的例子，装饰如果嵌套太多容易混。没有参数的装饰器比较容易理解，但是有参数的比如一个函数参数是一个返回函数然后这个函数返回结果做为参数传递给另一个函数。<code>Fun(A)(p1=Func(B)(p2=Func(C)(p3=&#39;&#39;)))</code><br>装饰器函数也可以简单理解成闭包。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(text)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">        @functools.wraps(func)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            print(<span class="string">'%s %s():'</span> % (text, func.__name__))</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    <span class="keyword">return</span> decorator</span><br></pre></td></tr></table></figure></p>
+<h3 id="OOP"><a href="#OOP" class="headerlink" title="OOP"></a>OOP</h3><p><code>Class</code>: [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/oop/ex_element.py" target="_blank" rel="noopener">ex_element.py</a>], <code>Instance</code>: [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/oop/ex_instance.py" target="_blank" rel="noopener">ex_instance.py</a>], <code>Property</code>: [<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/oop/ex_property.py" target="_blank" rel="noopener">ex_property.py</a>]以及类的初始化，封装继承[<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/oop/ex_extend.py" target="_blank" rel="noopener">ex_extend.py</a>]与多态。</p>
+<p><strong>PS:</strong> <code>__init__</code>初始化的第一个参数永远是<code>self</code>，表示创建的实例本身。如果属性的变量名是以<code>__</code>开头，那么这是一个私有(private)变量，只允许类内部访问。如果获取一个对象的所有属性和方法，使用<code>dir()</code>函数，判断对象是哪种类型使用<code>isinstance(object, Type)</code></p>
+<h3 id="IO-文件操作和序列化"><a href="#IO-文件操作和序列化" class="headerlink" title="IO(文件操作和序列化)"></a>IO(文件操作和序列化)</h3><p>文件操作<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/io/operation_file.py" target="_blank" rel="noopener">operation_file.py</a>, 引入<code>with</code>的好处是默认调用<code>close</code>方法，因为实现<code>try...finally</code>语句块，无论文件操作出现任何异常最后都能关闭文件操作。</p>
+<p>序列化简单用<code>pickle</code>模块<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/io/ex_pickle.py" target="_blank" rel="noopener">ex_pickle.py</a>和<code>json</code>模块<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/io/ex_json.py" target="_blank" rel="noopener">ex_json.py</a></p>
+<p><strong>PS:</strong> <code>pickle</code>主要用于Python特定二进制格式之间的转换，<code>json</code>对象反序列化成<code>instance</code>对象，编写转换函数(见上述例子)即可实现。后面会介绍其它的反序列化方法。</p>
+<h3 id="Thread-线程"><a href="#Thread-线程" class="headerlink" title="Thread(线程)"></a>Thread(线程)</h3><p>首先python的多线程多适用于<code>IO</code>密集型，如果是<code>CPU</code>密集型，python的多线程不如单线程效率高。如果在<code>CPU</code>密集型中使用<code>concurrent</code>需要导入<code>multiprocessing</code>库，这个库是基于<code>multi process</code>实现了类<code>multi thread</code>的API接口，并且用<code>pickle</code>部分地实现了变量共享。</p>
+<p>基本用法：[<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/thread/ex_thread.py" target="_blank" rel="noopener">ex_thread.py</a>]<br>进程：[<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/thread/ex_process.py" target="_blank" rel="noopener">ex_process.py</a>]<br>队列及锁：[<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/thread/ex_queue.py" target="_blank" rel="noopener">ex_queue.py</a>, <a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/thread/ex_lock.py" target="_blank" rel="noopener">ex_lock.py</a>]<br>分布式进程：[<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/thread/task_master.py" target="_blank" rel="noopener">task_master.py</a>, <a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/thread/task_worker.py" target="_blank" rel="noopener">task_worker.py</a>]</p>
+<h3 id="Async-异步"><a href="#Async-异步" class="headerlink" title="Async(异步)"></a>Async(异步)</h3><p>异步<code>IO</code>的核心是协程(Coroutine)，协程没有线程的安全问题，一个进程可以同时存在多个协程，但同时只有一个协程是激活的，而且协程的激活和休眠又通过程序来控制，而不是操作系统控制的。<br>并且最大的优势就是协程极高的执行效率。因为子程序切换不是线程切换，因此没有线程切换的开销，和多线程比线程数量越多，协程的性能优势就越明显。<br>第二大优势就是不需要多线程的锁机制，因为只有一个线程，也不存在同时写变量冲突，在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多。</p>
+<p>通常用法是多进程+协程，生产者-消费者模型：[<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/async/coroutine.py" target="_blank" rel="noopener">coroutine.py</a>]</p>
+<p><code>asynicio</code>类库是python3.4支持异步IO的标准库。教程里有两个简单例子[<a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/async/async_hello.py" target="_blank" rel="noopener">async_hello.py</a>, <a href="https://github.com/itabas016/PythonTrip/blob/master/course_liao/async/async_wget.py" target="_blank" rel="noopener">async_wget.py</a>]需要重点理解下<a href="mailto:`@asyncio.coroutine" target="_blank" rel="noopener">`@asyncio.coroutine</a><code>, 另外在python3.5后引入了</code>async<code>和</code>await<code>等价于</code>@asyncio.coroutine &lt;=&gt; async<code>,</code>yield from &lt;=&gt; await`</p>
+<p>线程和异步这一块，看的时候就头大，后面还会再研究~</p>
+<p>References:<br><a href="http://www.dabeaz.com/coroutines/index.html" target="_blank" rel="noopener">A Curious Course on Coroutines and Concurrency</a><br><a href="http://www.jianshu.com/p/0e4ff7c856d3" target="_blank" rel="noopener">python多线程</a><br><a href="https://www.zhihu.com/question/23474039" target="_blank" rel="noopener">为什么有人说 Python 的多线程是鸡肋呢？</a></p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2017/09/09/python/python-tutorial/">https://tech.itabas.com/2017/09/09/python/python-tutorial/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Python/">Python</a>
+            <a href="/tags/Iterator/">Iterator</a>
+            <a href="/tags/Generator/">Generator</a>
+            <a href="/tags/Decorator/">Decorator</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2017/09/17/python/iterator-difference-with-generator/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Python - 迭代器和生成器区别(Iterator vs Generator)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2017/08/29/vps/vps_bbr/">
+        <span class="next-text nav-default">Vps开启bbr加速</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2017/09/09/python/python-tutorial/';
+        this.page.identifier = '2017/09/09/python/python-tutorial/';
+        this.page.title = 'Python 之旅 - 开篇';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

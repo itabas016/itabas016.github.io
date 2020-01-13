@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Oracle - Instance - RAC, Memory - SGA, PGA"><meta name="keywords" content="Oracle, KT, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/10/30/database/oracle-kt-instance-rac-memory/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Oracle - Instance - RAC, Memory - SGA, PGA - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Oracle - Instance - RAC, Memory - SGA, PGA
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-10-30
+        </span><span class="post-category">
+            <a href="/categories/Database/">Database</a>
+            </span>
+        <span class="post-visits" data-url="/2016/10/30/database/oracle-kt-instance-rac-memory/" data-title="Oracle - Instance - RAC, Memory - SGA, PGA">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Real-Application-Clusters-RAC"><span class="toc-text">Real Application Clusters(RAC)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Structures"><span class="toc-text">Memory Structures</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#System-Global-Area-SGA"><span class="toc-text">System Global Area(SGA)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Database-Buffer-Cache-of-the-SGA"><span class="toc-text">Database Buffer Cache of the SGA</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Redo-Log-Buffer-of-the-SGA"><span class="toc-text">Redo Log Buffer of the SGA</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Shared-Pool-of-the-SGA"><span class="toc-text">Shared Pool of the SGA</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Program-Global-Area-PGA"><span class="toc-text">Program Global Area(PGA)</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><p>An Oracle database server consists of an Oracle database and an Oracle instance. Every time a database is started, a system global area (<strong>SGA</strong>) is allocated and Oracle background processes are started. The combination of the background processes and memory buffers is called an Oracle instance.</p>
+<a id="more"></a>
+<h3 id="Real-Application-Clusters-RAC"><a href="#Real-Application-Clusters-RAC" class="headerlink" title="Real Application Clusters(RAC)"></a>Real Application Clusters(RAC)</h3><blockquote>
+<p>Multiple Instance Systems, Real Application Clusters (RAC) takes advantage of such architecture by running multiple instances that share a single physical database. In most applications, RAC enables access to a single database by users on multiple computers with increased performance.</p>
+</blockquote>
+<p><img src="/../../../ref/oracle-rac-structure.jpg" alt="oracle-rac-structre"></p>
+<blockquote>
+<p>At a very high level, <code>RAC architecture</code> consists of these components:</p>
+<ul>
+<li>Physical Nodes or Hosts</li>
+<li>Physical Interconnects and interconnect protocols</li>
+<li>Cluster Manager Software and Cluster Ready Services</li>
+<li>Oracle Instances and Cache Fusion</li>
+<li>Shared Disk System</li>
+<li>Clustered File System, Raw Devices, Automatic Storage Management</li>
+<li>Network Services</li>
+<li>Workload Management Services ? Virtual IP configuration</li>
+</ul>
+</blockquote>
+<h3 id="Memory-Structures"><a href="#Memory-Structures" class="headerlink" title="Memory Structures"></a>Memory Structures</h3><blockquote>
+<p>For example, memory stores program code being run and data shared among users. Two basic memory structures are associated with Oracle: the system global area and the program global area. The following subsections explain each in detail.</p>
+</blockquote>
+<p><img src="/../../../ref/oracle-memory-structure.gif" alt="oracle-mem-structure"></p>
+<h4 id="System-Global-Area-SGA"><a href="#System-Global-Area-SGA" class="headerlink" title="System Global Area(SGA)"></a>System Global Area(SGA)</h4><blockquote>
+<p>The <code>System Global Area (SGA)</code> is a shared memory region that contains data and control information for one Oracle instance. Oracle allocates the <code>SGA</code> when an instance starts and deallocates it when the instance shuts down. Each instance has its own <code>SGA</code>.</p>
+</blockquote>
+<blockquote>
+<p>The information stored in the SGA is divided into several types of memory structures, including the <code>database buffers</code>, <code>redo log buffer</code>, and <code>the shared pool</code>.</p>
+</blockquote>
+<h5 id="Database-Buffer-Cache-of-the-SGA"><a href="#Database-Buffer-Cache-of-the-SGA" class="headerlink" title="Database Buffer Cache of the SGA"></a>Database Buffer Cache of the SGA</h5><blockquote>
+<p><code>Database buffers</code> store the most recently used blocks of data. The set of database buffers in an instance is the database buffer cache. The buffer cache contains modified as well as unmodified blocks. Because the most recently (and often, the most frequently) used data is kept in memory, less disk I/O is necessary, and performance is improved.</p>
+</blockquote>
+<blockquote>
+<p>With automatic SGA management, you can simply set the <code>SGA_TARGET</code> initialization parameter to <code>1G</code>. If an application needs more shared pool memory, it can obtain that memory by acquiring it from the free memory in the buffer cache.</p>
+</blockquote>
+<h5 id="Redo-Log-Buffer-of-the-SGA"><a href="#Redo-Log-Buffer-of-the-SGA" class="headerlink" title="Redo Log Buffer of the SGA"></a>Redo Log Buffer of the SGA</h5><blockquote>
+<p>The <code>redo log buffer</code> stores redo entries—a log of changes made to the database. The redo entries stored in the redo log buffers are written to an online redo log, which is used if database recovery is necessary. The size of the redo log is static.</p>
+</blockquote>
+<h5 id="Shared-Pool-of-the-SGA"><a href="#Shared-Pool-of-the-SGA" class="headerlink" title="Shared Pool of the SGA"></a>Shared Pool of the SGA</h5><blockquote>
+<p>The <code>shared pool</code> contains shared memory constructs, such as shared SQL areas. A shared SQL area is required to process every unique SQL statement submitted to a database. A shared SQL area contains information such as the parse tree and execution plan for the corresponding statement. A single shared SQL area is used by multiple applications that issue the same statement, leaving more shared memory for other uses.</p>
+</blockquote>
+<blockquote>
+<p><a href="https://docs.oracle.com/cd/B19306_01/server.102/b14220/memory.htm#i10093" target="_blank" rel="noopener">The detail plain see here</a></p>
+</blockquote>
+<h4 id="Program-Global-Area-PGA"><a href="#Program-Global-Area-PGA" class="headerlink" title="Program Global Area(PGA)"></a>Program Global Area(PGA)</h4><blockquote>
+<p>The <code>Program Global Area (PGA)</code> is a memory buffer that contains data and control information for a server process. A PGA is created by Oracle when a server process is started. The information in a PGA depends on the Oracle configuration.</p>
+</blockquote>
+<blockquote>
+<p>It is a <strong>nonshared memory</strong> created by Oracle when a server process is started. Access to it is exclusive to that server process and is read and written only by Oracle code acting on behalf of it. The total PGA memory allocated by each server process attached to an Oracle instance is also referred to as the aggregated PGA memory allocated by the instance.</p>
+</blockquote>
+<blockquote>
+<p>Resources:<br><a href="https://docs.oracle.com/cd/E11882_01/rac.112/e41960/admcon.htm#RACAD1111" target="_blank" rel="noopener">https://docs.oracle.com/cd/E11882_01/rac.112/e41960/admcon.htm#RACAD1111</a><br><a href="https://docs.oracle.com/cd/B19306_01/server.102/b14220/memory.htm" target="_blank" rel="noopener">https://docs.oracle.com/cd/B19306_01/server.102/b14220/memory.htm</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/10/30/database/oracle-kt-instance-rac-memory/">https://tech.itabas.com/2016/10/30/database/oracle-kt-instance-rac-memory/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Oracle/">Oracle</a>
+            <a href="/tags/KT/">KT</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/10/30/database/oracle-kt-troubleshooting-performance-monitor/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Oracle - Trouble Shooting & performance monitor by OEM</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/10/29/tools/slove-npm-package-slow-speed/">
+        <span class="next-text nav-default">npm package下载超级慢有没有</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/10/30/database/oracle-kt-instance-rac-memory/';
+        this.page.identifier = '2016/10/30/database/oracle-kt-instance-rac-memory/';
+        this.page.title = 'Oracle - Instance - RAC, Memory - SGA, PGA';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

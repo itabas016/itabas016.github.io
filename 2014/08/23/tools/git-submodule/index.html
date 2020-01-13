@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Git submodule"><meta name="keywords" content="Git, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2014/08/23/tools/git-submodule/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Git submodule - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Git submodule
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2014-08-23
+        </span><span class="post-category">
+            <a href="/categories/Tools/">Tools</a>
+            </span>
+        <span class="post-visits" data-url="/2014/08/23/tools/git-submodule/" data-title="Git submodule">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-repo-with-submodule"><span class="toc-text">Create repo with submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Update-repo-with-submodule"><span class="toc-text">Update repo with submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modify-repo-with-submodule"><span class="toc-text">Modify repo with submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rename-Move-repo-with-submodule"><span class="toc-text">Rename/Move repo with submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete-repo-with-submodule"><span class="toc-text">Delete repo with submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Tricks"><span class="toc-text">Quick Tricks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Submodule-foreach"><span class="toc-text">Submodule foreach</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Useful-alias-commands"><span class="toc-text">Useful alias commands</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p>Normally, <code>git-submodule</code> is benefit as sub project on the third party solution or integration solution. So Let us talk about it.</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Create-repo-with-submodule"><a href="#Create-repo-with-submodule" class="headerlink" title="Create repo with submodule"></a>Create repo with submodule</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### solution 1</span></span><br><span class="line"><span class="comment">## prepare</span></span><br><span class="line"><span class="built_in">cd</span> /</span><br><span class="line">mkdir testproj</span><br><span class="line"><span class="built_in">cd</span> testproj</span><br><span class="line">mkdir test_master_proj test_sub_a_proj test_sub_b_proj</span><br><span class="line"><span class="built_in">cd</span> test_master_proj</span><br><span class="line"></span><br><span class="line"><span class="comment"># create master project</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test_master_proj"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git remote add origin git@github.com:itabas016/test_master_proj.git</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># create sub a project</span></span><br><span class="line"><span class="built_in">cd</span> ../test_sub_a_proj</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test_sub_a_proj"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit for sub a"</span></span><br><span class="line">git remote add origin git@github.com:itabas016/test_sub_a_proj.git</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># create sub b project</span></span><br><span class="line"><span class="built_in">cd</span> ../test_sub_b_proj</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test_sub_b_proj"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit for sub b"</span></span><br><span class="line">git remote add origin git@github.com:itabas016/test_sub_b_proj.git</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># add the third repo for master</span></span><br><span class="line">git submodule add git@github.com:itabas016/test_sub_a_proj.git subA</span><br><span class="line">git submodule add git@github.com:itabas016/test_sub_b_proj.git subB</span><br><span class="line">git status</span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   .gitmodules</span><br><span class="line">        new file:   subA</span><br><span class="line">        new file:   subB</span><br><span class="line"></span><br><span class="line"><span class="comment"># push the third submodule to master</span></span><br><span class="line">git commit -m <span class="string">'thirdpart submodule A&amp;B added.'</span></span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### solution 2</span></span><br><span class="line"><span class="comment"># Just use clone</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># clone repo</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:itabas016/test_master_proj.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># init sub repo</span></span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line"></span><br><span class="line"><span class="comment"># another quick way to clone master with recursive</span></span><br><span class="line">git <span class="built_in">clone</span> --recursive git@github.com:itabas016/test_master_proj.git</span><br></pre></td></tr></table></figure>
+<h3 id="Update-repo-with-submodule"><a href="#Update-repo-with-submodule" class="headerlink" title="Update repo with submodule"></a>Update repo with submodule</h3><blockquote>
+<p>normally, the repo update is used <code>git pull</code>, it will be resolve the conflict automatic. But when update the master repo, you should attent the sub repo whether has update, see the below:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># master pull</span></span><br><span class="line">git pull</span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># if submodule has changed</span></span><br><span class="line">git submodule update</span><br><span class="line"></span><br><span class="line"><span class="comment"># sometime should be run this command</span></span><br><span class="line">git submodule update --remote</span><br><span class="line"></span><br><span class="line"><span class="comment"># if submodule has other denpendency repo and has updated</span></span><br><span class="line">git submodule foreach <span class="string">"git submodule update"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># same as submodule master branch</span></span><br><span class="line">git submodule update --remote --rescursive</span><br><span class="line"></span><br><span class="line"><span class="comment"># if just update one submodule repo</span></span><br><span class="line"><span class="built_in">cd</span> subA/</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># if subA has denpendency with other repo</span></span><br><span class="line">git submodule foreach <span class="string">"git pull"</span> --recursive</span><br></pre></td></tr></table></figure>
+<h3 id="Modify-repo-with-submodule"><a href="#Modify-repo-with-submodule" class="headerlink" title="Modify repo with submodule"></a>Modify repo with submodule</h3><blockquote>
+<p>when execute <code>git submodule update</code> don’t checkout any branch, so the HEAD of submodule is detached state.<br>when modify submodule repo, remember checkout related feature branch. </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ../test_sub_a_proj</span><br><span class="line">git checkout master</span><br><span class="line"></span><br><span class="line">[submodule <span class="string">"subA"</span>]</span><br><span class="line">	path = subA</span><br><span class="line">	url = git@github.com:itabas016/test_sub_a_proj.git</span><br><span class="line">	branch = master</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify subA folder</span></span><br><span class="line"><span class="comment"># modify README.md add new line</span></span><br><span class="line"></span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"new comments added."</span></span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line">git add test_sub_a_proj</span><br><span class="line">git commit -m <span class="string">'submodule updated'</span></span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># if modify submodule repo before your change forgot to checkout remote master branch, </span></span><br><span class="line"><span class="comment"># and have a commit in your local. Now we should use `cherry-pick` </span></span><br><span class="line"><span class="comment"># switch submodule from detach state to remote master.</span></span><br><span class="line"></span><br><span class="line">git cherry-pick a</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="Rename-Move-repo-with-submodule"><a href="#Rename-Move-repo-with-submodule" class="headerlink" title="Rename/Move repo with submodule"></a>Rename/Move repo with submodule</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use copy instead of move behavior</span></span><br><span class="line">mkdir framework</span><br><span class="line">cp -R subA framework/</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify relatation config</span></span><br><span class="line"><span class="comment"># mainly .gitmodules, .git/config</span></span><br><span class="line"></span><br><span class="line">sed -i <span class="string">'s@subA@framework/subA@'</span> .gitmodules</span><br><span class="line">sed -i <span class="string">'s@subA@framework/subA@'</span> framework/subA/.git</span><br><span class="line">mv .git/modules/subA .git/modules/framework/subA</span><br><span class="line">sed -i <span class="string">'s@subA@framework/subA@'</span> .git/modules/framework/subA/config</span><br><span class="line"></span><br><span class="line">git rm --cached subA</span><br><span class="line">git add framework/subA .gitmodules</span><br><span class="line">git submodule sync -- framework/subA</span><br><span class="line"></span><br><span class="line"><span class="comment"># also use the below command:</span></span><br><span class="line"><span class="built_in">cd</span> ../test_master_proj</span><br><span class="line">git rm --cached subA</span><br><span class="line">rm -rf subA</span><br><span class="line">rm -rf .git/modules/subA</span><br><span class="line">nano -w .gitmodules</span><br><span class="line">...remove subA...</span><br><span class="line">nano -w .git/config</span><br><span class="line">...remove subA...</span><br><span class="line">git submodule add git@github.com:itabas016/test_sub_a_proj.git framework/subA -b master</span><br><span class="line">git add .gitmodules</span><br><span class="line">git commit -m <span class="string">'subA moved to framework/subA/.'</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="Delete-repo-with-submodule"><a href="#Delete-repo-with-submodule" class="headerlink" title="Delete repo with submodule"></a>Delete repo with submodule</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ../test_master_proj</span><br><span class="line">git rm --cached framework/subA</span><br><span class="line">$ rm -rf framework/subA</span><br><span class="line">$ rm -rf .git/modules/framework/subA</span><br><span class="line"></span><br><span class="line"><span class="comment"># remove git record: cached and folder</span></span><br><span class="line">git rm --cached framework/subA</span><br><span class="line">$ rm -rf framework/subA</span><br><span class="line">$ rm -rf .git/modules/framework/subA</span><br><span class="line"></span><br><span class="line"><span class="comment"># update configuration and commit</span></span><br><span class="line">$ git add .gitmodule</span><br><span class="line">$ git commit -m <span class="string">'framework/subA submodule removed.'</span></span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="Quick-Tricks"><a href="#Quick-Tricks" class="headerlink" title="Quick Tricks"></a>Quick Tricks</h3><h4 id="Submodule-foreach"><a href="#Submodule-foreach" class="headerlink" title="Submodule foreach"></a>Submodule foreach</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># keep all the submodule changes</span></span><br><span class="line">git submodule foreach <span class="string">'git stash'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># switch checkout all the submodule to a new branch</span></span><br><span class="line">git submodule foreach <span class="string">'git checkout -b featureA'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># generate difference master with all the submodules</span></span><br><span class="line">git diff; git submodule foreach <span class="string">'git diff'</span></span><br></pre></td></tr></table></figure>
+<h4 id="Useful-alias-commands"><a href="#Useful-alias-commands" class="headerlink" title="Useful alias commands"></a>Useful alias commands</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git config alias.sdiff <span class="string">'!'</span><span class="string">"git diff &amp;&amp; git submodule foreach 'git diff'"</span></span><br><span class="line">git config alias.spush <span class="string">'push --recurse-submodules=on-demand'</span></span><br><span class="line">git config alias.supdate <span class="string">'submodule update --remote --merge'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># then run the below commands:</span></span><br><span class="line">git supdate</span><br><span class="line">git spush</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Resources:<br><a href="http://easior.is-programmer.com/posts/42541.html" target="_blank" rel="noopener">http://easior.is-programmer.com/posts/42541.html</a><br><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2014/08/23/tools/git-submodule/">https://tech.itabas.com/2014/08/23/tools/git-submodule/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Git/">Git</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2015/08/15/vps/ss-vps/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">科学上网</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2013/05/13/tools/git-tutorial/">
+        <span class="next-text nav-default">Source Control - Git Tutorial</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2014/08/23/tools/git-submodule/';
+        this.page.identifier = '2014/08/23/tools/git-submodule/';
+        this.page.title = 'Git submodule';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Use Keepalived Switching Master-Slave Solution"><meta name="keywords" content="Linux, Redis, Nginx, HAProxy, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/09/29/web/use-keepalived-switching-master-slave-solution/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Use Keepalived Switching Master-Slave Solution - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Use Keepalived Switching Master-Slave Solution
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-09-29
+        </span><span class="post-category">
+            <a href="/categories/Web/">Web</a>
+            </span>
+        <span class="post-visits" data-url="/2016/09/29/web/use-keepalived-switching-master-slave-solution/" data-title="Use Keepalived Switching Master-Slave Solution">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Keepalived-Overview"><span class="toc-text">Keepalived Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Keepalived"><span class="toc-text">Install Keepalived</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keepalived-sketch"><span class="toc-text">Keepalived sketch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keepalived-Nginx"><span class="toc-text">Keepalived + Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Monitor-Nginx"><span class="toc-text">Monitor Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configure-keepalived"><span class="toc-text">Configure keepalived</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-amp-Result"><span class="toc-text">Test &amp; Result</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keepalived-HAProxy"><span class="toc-text">Keepalived + HAProxy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HAProxy-configuration"><span class="toc-text">HAProxy configuration</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keepalived-Redis"><span class="toc-text">Keepalived + Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Redis-scripts"><span class="toc-text">Redis scripts</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#check-redis-server-is-alive"><span class="toc-text">check redis server is alive</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#check-redis-server-switching-master"><span class="toc-text">check redis server switching master</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#redis-backup-script-from-master-before-failover"><span class="toc-text">redis backup script from master before failover</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Configure-Keepalived"><span class="toc-text">Configure Keepalived</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><h3 id="Keepalived-Overview"><a href="#Keepalived-Overview" class="headerlink" title="Keepalived Overview"></a>Keepalived Overview</h3><blockquote>
+<p>Keepalived is a lightweight and high availability framework solution in Linux, It is seem as <code>HeartBeat</code>, <code>RoseHA</code>, has similar function that implement the service and the high availability of the network, but there are difference that <strong>HeartBeat</strong> is very professional and functional, but the deployment is very complex.</p>
+</blockquote>
+<blockquote>
+<p>So Compare with <strong>HeartBeat</strong>, <strong>Keepalived</strong> is mainly through the virtual routing redundancy protocol(<strong>VRRP</strong>) to achive high availability, and the installation and configuraion is very simple.</p>
+</blockquote>
+<blockquote>
+<p><strong>Keepalived</strong> has three modules, <strong>core</strong>, <strong>check</strong> and <strong>vrrp</strong></p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Install-Keepalived"><a href="#Install-Keepalived" class="headerlink" title="Install Keepalived"></a>Install Keepalived</h3><blockquote>
+<p>you can download the latest verion in the offical site: <a href="http://www.keepalived.org" target="_blank" rel="noopener">http://www.keepalived.org</a>, Currently, the latest version is <code>1.3.2</code>.<br>the other way, just install by <code>yum</code> or <code>apt-get</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># download&amp;unpack</span></span><br><span class="line">yum install openssl-devel</span><br><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line">wget http://www.keepalived.org/software/keepalived-1.3.2.tar.gz</span><br><span class="line">tar xzf keepalived-1.3.2.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># make&amp;make install</span></span><br><span class="line"><span class="built_in">cd</span> keepalived-1.3.2</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># copy configuration file</span></span><br><span class="line">cp /usr/<span class="built_in">local</span>/etc/rc.d/init.d/keepalived /etc/init.d/</span><br><span class="line">cp /usr/<span class="built_in">local</span>/etc/sysconfig/keepalived /etc/sysconfig/</span><br><span class="line"></span><br><span class="line"><span class="comment"># chmod&amp;chkconfig</span></span><br><span class="line">chmod +x /etc/init.d/keepalived</span><br><span class="line">chkconfig --add keepalived</span><br><span class="line">chkconfig keepalived on</span><br><span class="line"></span><br><span class="line">mkdir /etc/keepalived</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/sbin/keepalived /usr/sbin/</span><br><span class="line"></span><br><span class="line"><span class="comment"># simple way to install stable version</span></span><br><span class="line">yum install -y keepalived</span><br><span class="line"></span><br><span class="line"><span class="comment"># maybe add firewall rule</span></span><br><span class="line">iptables -I INPUT -i eth0 -d 192.168.193.0/8 -p vrrp -j ACCEPT</span><br><span class="line">iptables -I OUTPUT -o eth0 -d 192.168.193.0/8 -p vrrp -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line"></span><br><span class="line"><span class="comment"># use</span></span><br><span class="line">service keepalived start</span><br><span class="line">service keepalived reload</span><br></pre></td></tr></table></figure>
+<h3 id="Keepalived-sketch"><a href="#Keepalived-sketch" class="headerlink" title="Keepalived sketch"></a>Keepalived sketch</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">                   +-------------+</span><br><span class="line">                   |    router   |</span><br><span class="line">                   +-------------+</span><br><span class="line">                          |</span><br><span class="line">                          +</span><br><span class="line">    MASTER            keepalived          BACKUP</span><br><span class="line">192.168.193.225    192.168.193.202    192.168.193.226</span><br><span class="line">+-------------+    +-------------+    +-------------+</span><br><span class="line">| instance01  |----|  virtualIP  |----|  instance02 |</span><br><span class="line">+-------------+    +-------------+    +-------------+</span><br><span class="line">                          |</span><br><span class="line">       +------------------+------------------+</span><br><span class="line">       |                  |                  |</span><br><span class="line">+-------------+    +-------------+    +-------------+</span><br><span class="line">|    web01    |    |    web02    |    |    web03    |</span><br><span class="line">+-------------+    +-------------+    +-------------+</span><br></pre></td></tr></table></figure>
+<h3 id="Keepalived-Nginx"><a href="#Keepalived-Nginx" class="headerlink" title="Keepalived + Nginx"></a>Keepalived + Nginx</h3><h4 id="Monitor-Nginx"><a href="#Monitor-Nginx" class="headerlink" title="Monitor Nginx"></a>Monitor Nginx</h4><blockquote>
+<p>Check the nginx status, when the process is not working try to start nginx, if it fail then stop keepalived.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#/etc/keepalived/check_nginx.sh</span></span><br><span class="line">counter=$(ps -C nginx --no-heading|wc -l)</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$&#123;counter&#125;</span>"</span> = <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">    /usr/<span class="built_in">local</span>/bin/nginx</span><br><span class="line">    sleep 2</span><br><span class="line">    counter=$(ps -C nginx --no-heading|wc -l)</span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$&#123;counter&#125;</span>"</span> = <span class="string">"0"</span> ]; <span class="keyword">then</span></span><br><span class="line">        /etc/init.d/keepalived stop</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h4 id="Configure-keepalived"><a href="#Configure-keepalived" class="headerlink" title="Configure keepalived"></a>Configure keepalived</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">    notification_email &#123;</span><br><span class="line">        admin@example.com</span><br><span class="line">    &#125;</span><br><span class="line">    notification_email_from daily_notice@example.com</span><br><span class="line">    smtp_server mail.example.com</span><br><span class="line">    smtp_connect_timeout 30</span><br><span class="line">    router_id LVS_DEVEL</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">	# execute instance service script</span><br><span class="line">    script &quot;/etc/keepalived/check_nginx.sh&quot;</span><br><span class="line">    interval 2</span><br><span class="line">    weight -5</span><br><span class="line">    fall 3  </span><br><span class="line">    rise 2</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">	# state: MASTER|BACKUP</span><br><span class="line">    state MASTER</span><br><span class="line">    interface eth0</span><br><span class="line">    # instance ip addr</span><br><span class="line">    mcast_src_ip 192.168.193.225</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    # priority: MASTER &gt; BACKUP</span><br><span class="line">    priority 101</span><br><span class="line">    advert_int 2</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.193.202</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">    	# configure monitor module</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Test-amp-Result"><a href="#Test-amp-Result" class="headerlink" title="Test &amp; Result"></a>Test &amp; Result</h4><blockquote>
+<p>please check the server message from <code>/var/log/messages</code></p>
+</blockquote>
+<h3 id="Keepalived-HAProxy"><a href="#Keepalived-HAProxy" class="headerlink" title="Keepalived + HAProxy"></a>Keepalived + HAProxy</h3><blockquote>
+<p>Baisclly it is seem as nginx configuration, show the below sketck and monitor script:</p>
+</blockquote>
+<p><img src="/../../../../ref/hapka.png" alt="ha-sketch"></p>
+<h4 id="HAProxy-configuration"><a href="#HAProxy-configuration" class="headerlink" title="HAProxy configuration"></a>HAProxy configuration</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/haproxy.conf</span></span><br><span class="line">global</span><br><span class="line">    daemon</span><br><span class="line">    <span class="built_in">log</span> 127.0.0.1 local0 debug</span><br><span class="line">    maxconn 50000</span><br><span class="line">    nbproc 1</span><br><span class="line"></span><br><span class="line">defaults</span><br><span class="line">    mode http</span><br><span class="line">    timeout connect 5s</span><br><span class="line">    timeout client 25s</span><br><span class="line">    timeout server 25s</span><br><span class="line">    timeout queue 10s</span><br><span class="line"></span><br><span class="line"><span class="comment"># Handle Incoming HTTP Connection Requests on the virtual IP address controlled by Keepalived</span></span><br><span class="line">listen  http-incoming</span><br><span class="line">    mode http</span><br><span class="line">    <span class="built_in">bind</span> 192.168.193.202:80</span><br><span class="line"><span class="comment"># Use each server in turn, according to its weight value</span></span><br><span class="line">    balance roundrobin</span><br><span class="line"><span class="comment"># Verify that service is available</span></span><br><span class="line">    option httpchk OPTIONS * HTTP/1.1\r\nHost:\ www</span><br><span class="line"><span class="comment"># Insert X-Forwarded-For header</span></span><br><span class="line">    option forwardfor</span><br><span class="line"><span class="comment"># Define the back-end servers, which can handle up to 512 concurrent connections each</span></span><br><span class="line">    server websvr1 192.168.193.225:80 weight 1 maxconn 512 check</span><br><span class="line">    server websvr2 192.168.193.226:80 weight 1 maxconn 512 check</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>And the <strong>keepalived</strong> configuration is same as the <a href="#Configure-keepalived">previous profile</a>.</p>
+</blockquote>
+<h3 id="Keepalived-Redis"><a href="#Keepalived-Redis" class="headerlink" title="Keepalived + Redis"></a>Keepalived + Redis</h3><blockquote>
+<p>Currently, use the <strong>Redis Sentinel</strong> completely solved the master failover incident, but also use the <em>Keepalived</em> to solve the switching master-slave.</p>
+</blockquote>
+<blockquote>
+<p>First, we should write some scripts to monitor redis status:</p>
+</blockquote>
+<h4 id="Redis-scripts"><a href="#Redis-scripts" class="headerlink" title="Redis scripts"></a>Redis scripts</h4><h5 id="check-redis-server-is-alive"><a href="#check-redis-server-is-alive" class="headerlink" title="check redis server is alive"></a>check redis server is alive</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">###/etc/keepalived/scripts/redis_check.sh</span></span><br><span class="line">ALIVE=`/usr/bin/redis-cli PING`</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$ALIVE</span>"</span> == <span class="string">"PONG"</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$ALIVE</span></span><br><span class="line">  <span class="built_in">exit</span> 0</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$ALIVE</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h5 id="check-redis-server-switching-master"><a href="#check-redis-server-switching-master" class="headerlink" title="check redis server switching master"></a>check redis server switching master</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">###/etc/keepalived/scripts/redis_master.sh</span></span><br><span class="line">REDISCLI=<span class="string">"redis-cli"</span></span><br><span class="line">LOGFILE=<span class="string">"/etc/keepalived/log/redis-state.log"</span></span><br><span class="line">pid=$$</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[slaver]"</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[slaver] Run 'SLAVEOF 10.20.112.27 6379'"</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line"><span class="variable">$REDISCLI</span> SLAVEOF 10.20.112.27 6379 &gt;&gt; <span class="variable">$LOGFILE</span>  2&gt;&amp;1</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[slaver] wait 10 sec for data sync from old master"</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line">sleep 10 </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[slaver] data rsync from old mater ok..."</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[master] Run slaveof no one,close master/slave"</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line"><span class="variable">$REDISCLI</span> SLAVEOF NO ONE &gt;&gt; <span class="variable">$LOGFILE</span> 2&gt;&amp;1</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[master] wait other slave connect...."</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br></pre></td></tr></table></figure>
+<h5 id="redis-backup-script-from-master-before-failover"><a href="#redis-backup-script-from-master-before-failover" class="headerlink" title="redis backup script from master before failover"></a>redis backup script from master before failover</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">###/etc/keepalived/scripts/redis_backup.sh</span></span><br><span class="line"><span class="comment">###/etc/keepalived/scripts/redis_fault.sh</span></span><br><span class="line"><span class="comment">###/etc/keepalived/scripts/redis_stop.sh</span></span><br><span class="line">REDISCLI=<span class="string">"redis-cli"</span></span><br><span class="line">LOGFILE=<span class="string">"/etc/keepalived/log/redis-state.log"</span></span><br><span class="line">pid=$$</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[master]"</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[master] Being slave state..."</span> &gt;&gt; <span class="variable">$LOGFILE</span> 2&gt;&amp;1</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[master] wait 10 sec for data sync from old master"</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line">sleep 10</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[master] data rsync from old mater ok..."</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[slaver] Run 'SLAVEOF 10.20.112.27 6379'"</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br><span class="line"><span class="variable">$REDISCLI</span> SLAVEOF 10.20.112.27 6379 &gt;&gt; <span class="variable">$LOGFILE</span>  2&gt;&amp;1</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +'%Y-%m-%d:%H:%M:%S'`|<span class="variable">$pid</span>|state:[slaver] slave connect to 10.20.112.27 ok..."</span> &gt;&gt; <span class="variable">$LOGFILE</span></span><br></pre></td></tr></table></figure>
+<h4 id="Configure-Keepalived"><a href="#Configure-Keepalived" class="headerlink" title="Configure Keepalived"></a>Configure Keepalived</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">    notification_email &#123;</span><br><span class="line">        admin@example.com</span><br><span class="line">    &#125;</span><br><span class="line">    notification_email_from daily_notice@example.com</span><br><span class="line">    smtp_server mail.example.com</span><br><span class="line">    smtp_connect_timeout 30</span><br><span class="line">    router_id LVS_DEVEL</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script chk_redis &#123; </span><br><span class="line">        script &quot;/etc/keepalived/scripts/redis_check.sh&quot;</span><br><span class="line">        weight -20</span><br><span class="line">        interval 2                                     </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123; </span><br><span class="line">        state backup                            </span><br><span class="line">        interface eth0                          </span><br><span class="line">        virtual_router_id 51</span><br><span class="line">        nopreempt</span><br><span class="line">        priority 200      </span><br><span class="line">        advert_int 5                      </span><br><span class="line">        track_script &#123; </span><br><span class="line">            chk_redis                     </span><br><span class="line">        &#125; </span><br><span class="line">        virtual_ipaddress &#123; </span><br><span class="line">             192.168.193.202                        </span><br><span class="line">        &#125;</span><br><span class="line">        notify_master /etc/keepalived/scripts/redis_master.sh</span><br><span class="line">        notify_backup /etc/keepalived/scripts/redis_backup.sh</span><br><span class="line">        notify_fault  /etc/keepalived/scripts/redis_fault.sh</span><br><span class="line">        notify_stop   /etc/keepalived/scripts/redis_stop.sh </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>And the detail information please check the below resoures –&gt;</p>
+</blockquote>
+<blockquote>
+<p>Resources:<br><a href="https://docs.oracle.com/cd/E37670_01/E41138/html/section_sm3_svy_4r.html" target="_blank" rel="noopener">https://docs.oracle.com/cd/E37670_01/E41138/html/section_sm3_svy_4r.html</a><br><a href="http://seanlook.com/2015/05/18/nginx-keepalived-ha/" target="_blank" rel="noopener">http://seanlook.com/2015/05/18/nginx-keepalived-ha/</a><br><a href="https://www.centos.bz/2012/02/nginx-keepalived-high-availability/" target="_blank" rel="noopener">https://www.centos.bz/2012/02/nginx-keepalived-high-availability/</a><br><a href="https://my.oschina.net/guol/blog/182491" target="_blank" rel="noopener">https://my.oschina.net/guol/blog/182491</a></p>
+</blockquote>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/09/29/web/use-keepalived-switching-master-slave-solution/">https://tech.itabas.com/2016/09/29/web/use-keepalived-switching-master-slave-solution/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Linux/">Linux</a>
+            <a href="/tags/Redis/">Redis</a>
+            <a href="/tags/Nginx/">Nginx</a>
+            <a href="/tags/HAProxy/">HAProxy</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/10/10/tools/sublime-text-shortcuts/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Sublime Text 快捷键备忘</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/09/27/database/oracle-kt-database-administrations/">
+        <span class="next-text nav-default">Oracle - Database Administrations</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/09/29/web/use-keepalived-switching-master-slave-solution/';
+        this.page.identifier = '2016/09/29/web/use-keepalived-switching-master-slave-solution/';
+        this.page.title = 'Use Keepalived Switching Master-Slave Solution';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

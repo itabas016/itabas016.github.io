@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Vps性能检测"><meta name="keywords" content="Tools, Vps, Wiki, Vps Performance, 性能, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2017/08/27/vps/vps_performance-check/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Vps性能检测 - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Vps性能检测
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-08-27
+        </span><span class="post-category">
+            <a href="/categories/Vps/">Vps</a>
+            </span>
+        <span class="post-visits" data-url="/2017/08/27/vps/vps_performance-check/" data-title="Vps性能检测">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vps-指标"><span class="toc-text">Vps 指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bench-Detail"><span class="toc-text">Bench Detail</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cpu"><span class="toc-text">Cpu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Disk-IO"><span class="toc-text">Disk IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network"><span class="toc-text">Network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unix-Bench-Score"><span class="toc-text">Unix Bench Score</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><blockquote>
+<p>折腾了两天Vps, 真可恨呢~</p>
+</blockquote>
+<p>几个月前挂了个hello-world在gce上, 也忘记关了. 今天一看账单扣了我60多刀, 我滴个神呢. 白花花的银子就这么没了. </p>
+<p>可是手贱又把gcp的内存从1.7改成了0.6, 想着能省就省点吧. 鬼知道重新分配了个ip, 原来直联日本, 现在搞得要绕美国了, 延迟老高了. 哎~</p>
+<a id="more"></a>
+<p><img src="../../../../../screenshots/wiki/vps-trace-detail-1.png" alt="detail-trace"></p>
+<p><img src="../../../../../screenshots/wiki/vps-trace-detail-2.png" alt="trace-gui"></p>
+<blockquote>
+<p>不管怎么说gcp好是好，可还是太贵了, 于是又想着以前的Bandwagon Vps内存256还是OVZ的, 反正也快到期了, 要不换一个大点内存的. 就选了个年付LA直联中国的.</p>
+</blockquote>
+<blockquote>
+<p>鬼知道测试下来的指标太不满意了. 广大同胞们都把Bandwagon玩坏了. 哎~</p>
+</blockquote>
+<p><img src="../../../../../screenshots/wiki/vps-d-trace-detail-3.png" alt="detail-trace"></p>
+<p><img src="../../../../../screenshots/wiki/vps-d-trace-detail-4.png" alt="trace-gui"></p>
+<h2 id="Vps-指标"><a href="#Vps-指标" class="headerlink" title="Vps 指标"></a>Vps 指标</h2><h3 id="Bench-Detail"><a href="#Bench-Detail" class="headerlink" title="Bench Detail"></a>Bench Detail</h3><p>直接用<a href="https://teddysun.com/444.html" target="_blank" rel="noopener">秋水逸冰</a>的<a href="https://github.com/teddysun/across/blob/master/bench.sh" target="_blank" rel="noopener">bench.sh</a>脚本跑出的结果很是一般:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- bench.sh | bash</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line">curl -Lso- bench.sh | bash</span><br></pre></td></tr></table></figure>
+<p><img src="../../../../../screenshots/wiki/vps-d-bench-detail.png" alt="bench-detail"></p>
+<p>于是又单独查看了Cpu, Memory, Disk等各项参数, swap也没开, 硬盘读写简直了…</p>
+<h3 id="Cpu"><a href="#Cpu" class="headerlink" title="Cpu"></a>Cpu</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo</span><br></pre></td></tr></table></figure>
+<p><img src="../../../../../screenshots/wiki/vps-d-cpu.png" alt="vps-d-cpu"></p>
+<h3 id="Disk-IO"><a href="#Disk-IO" class="headerlink" title="Disk IO"></a>Disk IO</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="keyword">if</span>=/dev/zero of=<span class="built_in">test</span> bs=64k count=4k oflag=dsync</span><br><span class="line">dd <span class="keyword">if</span>=/dev/zero of=<span class="built_in">test</span> bs=8k count=256k conv=fdatasync</span><br></pre></td></tr></table></figure>
+<p><img src="../../../../../screenshots/wiki/vps-d-io.png" alt="vps-d-io"></p>
+<p>相比之前的vps简直差太多了, LA机房直联中国严重超售了: </p>
+<p><img src="../../../../../screenshots/wiki/vps-io.png" alt="vps-io"></p>
+<h3 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h3><p>首先测试vps的download和upload, <a href="https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py" target="_blank" rel="noopener">speedtest.py</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py</span><br><span class="line">chmod +x speedtest.py</span><br><span class="line">./speedtest.py</span><br></pre></td></tr></table></figure>
+<p><img src="../../../../../screenshots/wiki/vps-d-speedtest.png" alt="vps-d-speedtest"></p>
+<p>然后用mtr分别测试联通和电信：</p>
+<p><img src="../../../../../screenshots/wiki/vps-d-mtr.png" alt="vps-d-mtr"></p>
+<h3 id="Unix-Bench-Score"><a href="#Unix-Bench-Score" class="headerlink" title="Unix Bench Score"></a>Unix Bench Score</h3><p>最后用<a href="https://teddysun.com/245.html" target="_blank" rel="noopener">秋水逸冰</a>的<a href="https://github.com/teddysun/across/raw/master/unixbench.sh" target="_blank" rel="noopener">unixbench.sh</a>脚本跑分测试了一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh</span><br><span class="line">chmod +x unixbench.sh</span><br><span class="line">./unixbench.sh</span><br></pre></td></tr></table></figure>
+<p><img src="../../../../../screenshots/wiki/vps-d-unix-bench.png" alt="vps-d-unix-bench"></p>
+<p>跑分倒还可以，只是这个磁盘读写不能让人满意. 现在倒是不知道该如何取舍了~</p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2017/08/27/vps/vps_performance-check/">https://tech.itabas.com/2017/08/27/vps/vps_performance-check/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Tools/">Tools</a>
+            <a href="/tags/Vps/">Vps</a>
+            <a href="/tags/Wiki/">Wiki</a>
+            <a href="/tags/Vps-Performance/">Vps Performance</a>
+            <a href="/tags/性能/">性能</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2017/08/29/vps/vps_bbr/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Vps开启bbr加速</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2017/08/26/tools/gdrive_backup/">
+        <span class="next-text nav-default">用Google Drive备份Vps数据</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2017/08/27/vps/vps_performance-check/';
+        this.page.identifier = '2017/08/27/vps/vps_performance-check/';
+        this.page.title = 'Vps性能检测';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

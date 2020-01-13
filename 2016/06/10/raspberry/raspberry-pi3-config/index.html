@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Raspberry Pi3 配置"><meta name="keywords" content="Raspberry, 树莓派, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2016/06/10/raspberry/raspberry-pi3-config/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?55dddc0bcf5586602b667550911fde04";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-50282295-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50282295-4');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz",
+      appKey: "Sd1OLyWqAE53kPjgBvFXuaCJ"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
+</script>
+
+    <title>Raspberry Pi3 配置 - ITABAS</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">ITABAS</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/tags">
+        <li class="mobile-menu-item">Tags
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">ITABAS</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            Tags
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Raspberry Pi3 配置
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-06-10
+        </span><span class="post-category">
+            <a href="/categories/Raspberry/">Raspberry</a>
+            </span>
+        <span class="post-visits" data-url="/2016/06/10/raspberry/raspberry-pi3-config/" data-title="Raspberry Pi3 配置">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Rasp-config"><span class="toc-text">Rasp config</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Update-software-resource"><span class="toc-text">Update software resource</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configure-static-IP-amp-WIFI"><span class="toc-text">Configure static IP &amp; WIFI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remote"><span class="toc-text">Remote</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ohters-configuration"><span class="toc-text">ohters configuration</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="Rasp-config"><a href="#Rasp-config" class="headerlink" title="Rasp config"></a>Rasp config</h2><p>直接<code>$sudo raspi-config</code>进入：</p>
+<ul>
+<li><code>Expand Filesystem</code>：将系统扩展到整个SD卡，必须执行，一路敲回车即可</li>
+<li><code>Change User Password</code>：修改密码及账号，若要修改，请牢记</li>
+<li><code>Boot Options</code>：启动选项，选<code>desktop</code>，下次启动将直接进入桌面系统</li>
+<li><code>Wait for Network at Boot</code>：等待网络唤醒，服务器模式</li>
+<li><code>Internationalisation Options</code>：地区和语言设置，选择<code>zh_CN UTF-8</code>，即可切换到中文模式</li>
+<li><code>Enable Camera</code>：CSI摄像头开启或关闭，选择enable则开启</li>
+<li><code>Add to Rastrack</code>：将树莓派加入Rastrack社区</li>
+<li><code>Overclock</code>：超频，一般不超频，若要超频请谨慎操作，并做好散热</li>
+<li><code>Advanced Options</code>：高级选项，包括<code>Overscan</code>, <code>Hostname</code>, <code>Memory Split(内存分配)</code>, <code>SSH</code>等</li>
+<li><code>About raspi-config</code>：本机相关信息。</li>
+</ul>
+<a id="more"></a>
+<h2 id="Update-software-resource"><a href="#Update-software-resource" class="headerlink" title="Update software resource"></a>Update software resource</h2><p>如果不熟悉自带的nano编辑器，请安装编辑利器<code>vim</code>, 修改sources, 不然update太慢了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//install vim</span><br><span class="line">$ sudo apt-get install vim -y</span><br><span class="line"></span><br><span class="line">$ sudo vim /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"><span class="comment">#modify</span></span><br><span class="line">deb http://mirrors.aliyun.com/raspbian/raspbian/ jessie main non-free contrib rpi</span><br><span class="line">deb-src http://mirrors.aliyun.com/raspbian/raspbian/ jessie main non-free contrib rpi</span><br><span class="line"></span><br><span class="line">//update</span><br><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line">//upgrade</span><br><span class="line">$ sudo apt-get upgrade -y</span><br></pre></td></tr></table></figure>
+<h2 id="Configure-static-IP-amp-WIFI"><a href="#Configure-static-IP-amp-WIFI" class="headerlink" title="Configure static IP &amp; WIFI"></a>Configure static IP &amp; WIFI</h2><p><em><del>默认是启用DHCP自动获取IP. 修改network配置</del></em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/network/interfaces</span><br></pre></td></tr></table></figure></p>
+<p><em><del>如果设置有线网卡ip</del></em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iface eth0 inet static </span><br><span class="line">address 192.168.1.2 <span class="comment"># 设定的静态IP地址 </span></span><br><span class="line">netmask 255.255.255.0 <span class="comment"># 网络掩码 </span></span><br><span class="line">gateway 192.168.1.1 <span class="comment"># 网关</span></span><br></pre></td></tr></table></figure></p>
+<p><em><del>如果设置无线网卡</del></em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iface wlan0 inet static </span><br><span class="line">wpa-ssid Your_Wifi_SSID </span><br><span class="line">wpa-psk Your_Wifi_Password </span><br><span class="line">address 192.168.1.2 <span class="comment"># 设定的静态IP地址 </span></span><br><span class="line">netmask 255.255.255.0 <span class="comment"># 网络掩码 </span></span><br><span class="line">gateway 192.168.1.1 <span class="comment"># 网关 </span></span><br><span class="line">network 192.168.1.1 <span class="comment"># 网络地址</span></span><br><span class="line"><span class="comment">#wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>PS.以上方法很长时间导致我无法ssh树莓派，迫使吃灰中。最近有空闲下来，重新刷了jessie</strong></p>
+<p><strong>!!!! <code>/etc/network/interface</code>里面明明写的很清楚：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># interfaces(5) file used by ifup(8) and ifdown(8)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Please note that this file is written to be used with dhcpcd</span></span><br><span class="line"><span class="comment"># For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Include files from /etc/network/interfaces.d:</span></span><br><span class="line"><span class="built_in">source</span>-directory /etc/network/interfaces.d</span><br><span class="line"></span><br><span class="line">auto lo</span><br><span class="line">iface lo inet loopback</span><br><span class="line"></span><br><span class="line">iface eth0 inet manual</span><br><span class="line"></span><br><span class="line">allow-hotplug wlan0</span><br><span class="line">auto wlan0</span><br><span class="line">iface wlan0 inet manual</span><br><span class="line">    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
+<p>于是 查看<code>dhcpcd</code>文档，<code>man dhcpcd.conf</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">static value</span><br><span class="line">             Configures a static value.  If you <span class="built_in">set</span> ip_address <span class="keyword">then</span> dhcpcd will not attempt to obtain a lease and</span><br><span class="line">             just use the value <span class="keyword">for</span> the address with an infinite lease time.</span><br><span class="line"></span><br><span class="line">             Here is an example <span class="built_in">which</span> configures a static address, routes and dns.</span><br><span class="line">                   interface eth0</span><br><span class="line">                   static ip_address=192.168.0.10/24</span><br><span class="line">                   static routers=192.168.0.1</span><br><span class="line">                   static domain_name_servers=192.168.0.1</span><br><span class="line"></span><br><span class="line">             Here is an example <span class="keyword">for</span> PPP <span class="built_in">which</span> gives the destination a default route.  It uses the special destination</span><br><span class="line">             keyword to insert the destination address into the value.</span><br><span class="line">                   interface ppp0</span><br><span class="line">                   static ip_address=</span><br><span class="line">                   destination routers</span><br></pre></td></tr></table></figure>
+<p>所以只需在<code>/etc/dhcpcd.conf</code>下面加上以下设置</p>
+<p><strong>PS.目前的策略仍是eth0静态IP, wlan0自动获取IP, wlan1中继</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface eth0</span><br><span class="line">static ip_address=192.168.11.x/24</span><br><span class="line">static routers=192.168.11.1</span><br><span class="line">static domain_name_servers=114.114.114.114 119.29.29.29</span><br><span class="line"><span class="comment"># dns server using telcom dns or dnspod dns</span></span><br></pre></td></tr></table></figure></p>
+<p>然后配置无线SSID认证：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c <span class="string">"wpa_passphrase your_ssid your_password &gt;&gt; /etc/wpa_supplicant/wpa_supplicant.conf"</span></span><br></pre></td></tr></table></figure></p>
+<p>最后restart network即可。</p>
+<h2 id="Remote"><a href="#Remote" class="headerlink" title="Remote"></a>Remote</h2><p>因为默认是打开ssh的，所以通过vnc访问rasp需要安装xrdp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install xrdp</span><br></pre></td></tr></table></figure></p>
+<h2 id="ohters-configuration"><a href="#ohters-configuration" class="headerlink" title="ohters configuration"></a>ohters configuration</h2><p>设置中文，系统却显示乱码，是因为系统缺少中文字库。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy</span><br></pre></td></tr></table></figure></p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://tech.itabas.com">itabas016</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://tech.itabas.com/2016/06/10/raspberry/raspberry-pi3-config/">https://tech.itabas.com/2016/06/10/raspberry/raspberry-pi3-config/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
+    </p>
+  </div>
+      <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden>
+    <label class="reward-button" for="reward">Reward</label>
+    <div class="qr-code"><label class="qr-code-image" for="reward">
+          <img class="image" src="/images/collect_qrcode_1505745819720.jpg" title="wechat">
+        </label>
+      </div>
+  </div><footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Raspberry/">Raspberry</a>
+            <a href="/tags/树莓派/">树莓派</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/06/16/raspberry/raspberry-pi3-service/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Raspberry Pi3 服务部署</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/06/09/raspberry/Raspberry-pi3-tutorial/">
+        <span class="next-text nav-default">Raspberry Pi3 Tutorial</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:me@itabas.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://www.twitter.com/itabas16" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://www.facebook.com/itabas16" class="iconfont icon-facebook" title="facebook"></a>
+        <a href="https://github.com/itabas016" class="iconfont icon-github" title="github"></a>
+        <a href="http://weibo.com/struthio" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://www.instagram.com/itabas016/" class="iconfont icon-instagram" title="instagram"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">itabas016</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://tech.itabas.com/2016/06/10/raspberry/raspberry-pi3-config/';
+        this.page.identifier = '2016/06/10/raspberry/raspberry-pi3-config/';
+        this.page.title = 'Raspberry Pi3 配置';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//itabas016.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>
