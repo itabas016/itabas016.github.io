@@ -153,11 +153,11 @@
         
         <tags>
             
+            <tag> Linux </tag>
+            
             <tag> Command Line </tag>
             
             <tag> Download </tag>
-            
-            <tag> Linux </tag>
             
             <tag> Tools </tag>
             
@@ -206,13 +206,13 @@
             
             <tag> 树莓派 </tag>
             
+            <tag> Linux </tag>
+            
             <tag> Command Line </tag>
             
             <tag> Download </tag>
             
             <tag> BaiduYun </tag>
-            
-            <tag> Linux </tag>
             
             <tag> Tools </tag>
             
@@ -726,9 +726,9 @@
             
             <tag> Tools </tag>
             
-            <tag> Shortcut </tag>
-            
             <tag> Git </tag>
+            
+            <tag> Shortcut </tag>
             
             <tag> Git Hooks </tag>
             
@@ -1103,44 +1103,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Oracle - Trouble Shooting & performance monitor by OEM]]></title>
-      <url>https://tech.itabas.com/2016/10/30/database/oracle-kt-troubleshooting-performance-monitor/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>The goals of Oracle troubleshooting include:</p>
-<ul>
-<li>Learn a troubleshooting methodology for use in analyzing any Oracle database</li>
-<li>Understand <strong>ratio-based</strong> and <strong>bottleneck troubleshooting analysis</strong></li>
-<li>Learn troubleshooting techniques for <strong>monitoring and optimizing</strong> memory usage </li>
-<li>Know how to quickly pinpoint and resolve <strong>I/O</strong> hotspots at the database, storage and object level </li>
-<li>Using scripts to uncover <strong>session-related</strong> bottlenecks </li>
-<li>Understand techniques for locating and fixing problem SQL</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-<h3 id="Oracle-Stored-Procedures-Tips"><a href="#Oracle-Stored-Procedures-Tips" class="headerlink" title="Oracle Stored Procedures Tips"></a>Oracle Stored Procedures Tips</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- prototype defines the syntax for compiling or decompiling a procedure.</span></span><br><span class="line"><span class="keyword">Alter</span> <span class="keyword">procedure</span> &lt;procedure_name&gt; compile | decompile;</span><br></pre></td></tr></table></figure>
-<h3 id="Monitor-oracle-performance-by-OEM"><a href="#Monitor-oracle-performance-by-OEM" class="headerlink" title="Monitor oracle performance by OEM"></a>Monitor oracle performance by OEM</h3><h4 id="Proactive-Database-Tuning"><a href="#Proactive-Database-Tuning" class="headerlink" title="Proactive Database Tuning"></a>Proactive Database Tuning</h4><h4 id="Reactive-Database-Tuning"><a href="#Reactive-Database-Tuning" class="headerlink" title="Reactive Database Tuning"></a>Reactive Database Tuning</h4><h4 id="SQL-Tuning"><a href="#SQL-Tuning" class="headerlink" title="SQL Tuning"></a>SQL Tuning</h4><blockquote>
-<p>Resources:<br><a href="https://docs.oracle.com/cd/B28359_01/server.111/b28275/toc.htm" target="_blank" rel="noopener">https://docs.oracle.com/cd/B28359_01/server.111/b28275/toc.htm</a></p>
-</blockquote>
-]]></content>
-      
-        <categories>
-            
-            <category> Database </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Oracle </tag>
-            
-            <tag> KT </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Oracle - Instance - RAC, Memory - SGA, PGA]]></title>
       <url>https://tech.itabas.com/2016/10/30/database/oracle-kt-instance-rac-memory/</url>
       <content type="html"><![CDATA[<p>An Oracle database server consists of an Oracle database and an Oracle instance. Every time a database is started, a system global area (<strong>SGA</strong>) is allocated and Oracle background processes are started. The combination of the background processes and memory buffers is called an Oracle instance.</p>
@@ -1195,6 +1157,44 @@
 </blockquote>
 <blockquote>
 <p>Resources:<br><a href="https://docs.oracle.com/cd/E11882_01/rac.112/e41960/admcon.htm#RACAD1111" target="_blank" rel="noopener">https://docs.oracle.com/cd/E11882_01/rac.112/e41960/admcon.htm#RACAD1111</a><br><a href="https://docs.oracle.com/cd/B19306_01/server.102/b14220/memory.htm" target="_blank" rel="noopener">https://docs.oracle.com/cd/B19306_01/server.102/b14220/memory.htm</a></p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Database </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Oracle </tag>
+            
+            <tag> KT </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Oracle - Trouble Shooting & performance monitor by OEM]]></title>
+      <url>https://tech.itabas.com/2016/10/30/database/oracle-kt-troubleshooting-performance-monitor/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>The goals of Oracle troubleshooting include:</p>
+<ul>
+<li>Learn a troubleshooting methodology for use in analyzing any Oracle database</li>
+<li>Understand <strong>ratio-based</strong> and <strong>bottleneck troubleshooting analysis</strong></li>
+<li>Learn troubleshooting techniques for <strong>monitoring and optimizing</strong> memory usage </li>
+<li>Know how to quickly pinpoint and resolve <strong>I/O</strong> hotspots at the database, storage and object level </li>
+<li>Using scripts to uncover <strong>session-related</strong> bottlenecks </li>
+<li>Understand techniques for locating and fixing problem SQL</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h3 id="Oracle-Stored-Procedures-Tips"><a href="#Oracle-Stored-Procedures-Tips" class="headerlink" title="Oracle Stored Procedures Tips"></a>Oracle Stored Procedures Tips</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- prototype defines the syntax for compiling or decompiling a procedure.</span></span><br><span class="line"><span class="keyword">Alter</span> <span class="keyword">procedure</span> &lt;procedure_name&gt; compile | decompile;</span><br></pre></td></tr></table></figure>
+<h3 id="Monitor-oracle-performance-by-OEM"><a href="#Monitor-oracle-performance-by-OEM" class="headerlink" title="Monitor oracle performance by OEM"></a>Monitor oracle performance by OEM</h3><h4 id="Proactive-Database-Tuning"><a href="#Proactive-Database-Tuning" class="headerlink" title="Proactive Database Tuning"></a>Proactive Database Tuning</h4><h4 id="Reactive-Database-Tuning"><a href="#Reactive-Database-Tuning" class="headerlink" title="Reactive Database Tuning"></a>Reactive Database Tuning</h4><h4 id="SQL-Tuning"><a href="#SQL-Tuning" class="headerlink" title="SQL Tuning"></a>SQL Tuning</h4><blockquote>
+<p>Resources:<br><a href="https://docs.oracle.com/cd/B28359_01/server.111/b28275/toc.htm" target="_blank" rel="noopener">https://docs.oracle.com/cd/B28359_01/server.111/b28275/toc.htm</a></p>
 </blockquote>
 ]]></content>
       
@@ -1993,9 +1993,9 @@ To satisfy a</code>NOT NULL` constraint, every row in the table must <strong>con
             
             <tag> Redis </tag>
             
-            <tag> Nginx </tag>
-            
             <tag> HAProxy </tag>
+            
+            <tag> Nginx </tag>
             
         </tags>
         
@@ -2791,6 +2791,36 @@ To satisfy a</code>NOT NULL` constraint, every row in the table must <strong>con
     </entry>
     
     <entry>
+      <title><![CDATA[How to activate visual studio by command]]></title>
+      <url>https://tech.itabas.com/2016/06/27/tools/how-to-activate-visual-studio-by-command/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>vm agent 太多时候需要批量执行， 其实就一个<code>bat</code>脚本就可搞定。</p>
+</blockquote>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\Program Files (x86)\Microsoft Visual Studio <span class="number">14</span>.<span class="number">0</span>\Common7\IDE</span><br><span class="line">StorePID.exe xxxxx-xxxxx-xxxxx-xxxxx-xxxxx <span class="number">07060</span></span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps：最后5位是vs的MPC code, 根据不同的vs version 找到相对应的MPC code~</p>
+</blockquote>
+<p>Resource:<br><a href="https://msdn.microsoft.com/en-us/library/mt270173.aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/mt270173.aspx</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Tools </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Script </tag>
+            
+            <tag> Visual Studio </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[An error occurred whild msbuild windows service]]></title>
       <url>https://tech.itabas.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -2833,36 +2863,6 @@ To satisfy a</code>NOT NULL` constraint, every row in the table must <strong>con
             <tag> CI </tag>
             
             <tag> Teamcity </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[How to activate visual studio by command]]></title>
-      <url>https://tech.itabas.com/2016/06/27/tools/how-to-activate-visual-studio-by-command/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>vm agent 太多时候需要批量执行， 其实就一个<code>bat</code>脚本就可搞定。</p>
-</blockquote>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\Program Files (x86)\Microsoft Visual Studio <span class="number">14</span>.<span class="number">0</span>\Common7\IDE</span><br><span class="line">StorePID.exe xxxxx-xxxxx-xxxxx-xxxxx-xxxxx <span class="number">07060</span></span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>ps：最后5位是vs的MPC code, 根据不同的vs version 找到相对应的MPC code~</p>
-</blockquote>
-<p>Resource:<br><a href="https://msdn.microsoft.com/en-us/library/mt270173.aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/mt270173.aspx</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tools </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Script </tag>
-            
-            <tag> Visual Studio </tag>
             
         </tags>
         

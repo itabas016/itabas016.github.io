@@ -90,11 +90,11 @@
       <category term="Tools" scheme="https://tech.itabas.com/categories/Tools/"/>
     
     
+      <category term="Linux" scheme="https://tech.itabas.com/tags/Linux/"/>
+    
       <category term="Command Line" scheme="https://tech.itabas.com/tags/Command-Line/"/>
     
       <category term="Download" scheme="https://tech.itabas.com/tags/Download/"/>
-    
-      <category term="Linux" scheme="https://tech.itabas.com/tags/Linux/"/>
     
       <category term="Tools" scheme="https://tech.itabas.com/tags/Tools/"/>
     
@@ -128,13 +128,13 @@
     
       <category term="树莓派" scheme="https://tech.itabas.com/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/"/>
     
+      <category term="Linux" scheme="https://tech.itabas.com/tags/Linux/"/>
+    
       <category term="Command Line" scheme="https://tech.itabas.com/tags/Command-Line/"/>
     
       <category term="Download" scheme="https://tech.itabas.com/tags/Download/"/>
     
       <category term="BaiduYun" scheme="https://tech.itabas.com/tags/BaiduYun/"/>
-    
-      <category term="Linux" scheme="https://tech.itabas.com/tags/Linux/"/>
     
       <category term="Tools" scheme="https://tech.itabas.com/tags/Tools/"/>
     
@@ -464,9 +464,9 @@
     
       <category term="Tools" scheme="https://tech.itabas.com/tags/Tools/"/>
     
-      <category term="Shortcut" scheme="https://tech.itabas.com/tags/Shortcut/"/>
-    
       <category term="Git" scheme="https://tech.itabas.com/tags/Git/"/>
+    
+      <category term="Shortcut" scheme="https://tech.itabas.com/tags/Shortcut/"/>
     
       <category term="Git Hooks" scheme="https://tech.itabas.com/tags/Git-Hooks/"/>
     
