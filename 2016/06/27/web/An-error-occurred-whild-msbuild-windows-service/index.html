@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="An error occurred whild msbuild windows service"><meta name="keywords" content="Powershell, MSbuild, CI, Teamcity, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://tech.itabas.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/">
+<meta name="description" content="An error occurred whild msbuild windows service"><meta name="keywords" content="Powershell, MSbuild, CI, Teamcity, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://ebanbox.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,12 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>An error occurred whild msbuild windows service - ITABAS</title>
-  </head>
+    <title>An error occurred whild msbuild windows service - 个人记录 | Technology</title>
+  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+</head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">ITABAS</a>
+    <a href="/." class="logo">个人记录 | Technology</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -90,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">ITABAS</a>
+  <a href="/." class="logo">个人记录 | Technology</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -149,10 +150,12 @@
 <p>但是我的agent vm 有很多台，于是写了个script</p>
 </blockquote>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#add_registy_procbuild_ps.ps1</span></span><br><span class="line"><span class="variable">$ProcBuildRegistryPath</span> = <span class="string">"HKCU:\Software\Microsoft\VisualStudio\14.0_Config\MSBuild"</span></span><br><span class="line"><span class="variable">$ProcBuildRegistryName</span> = <span class="string">"EnableOutOfProcBuild"</span></span><br><span class="line"><span class="variable">$ProcBuildValue</span> = <span class="string">"0"</span></span><br><span class="line"></span><br><span class="line"><span class="string">"Add DWORD paramter for Proc build registry..."</span></span><br><span class="line"><span class="keyword">IF</span>(!(<span class="built_in">Test-Path</span> <span class="variable">$ProcBuildRegistryPath</span>)) &#123;</span><br><span class="line">     <span class="string">"Add:"</span></span><br><span class="line">     <span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$ProcBuildRegistryPath</span> <span class="literal">-Force</span> | <span class="built_in">Out-Null</span></span><br><span class="line">          <span class="built_in">New-ItemProperty</span> <span class="literal">-Path</span> <span class="variable">$ProcBuildRegistryPath</span> <span class="literal">-Name</span> <span class="variable">$ProcBuildRegistryName</span> <span class="literal">-Value</span> <span class="variable">$ProcBuildValue</span> `</span><br><span class="line">               <span class="literal">-PropertyType</span> DWORD <span class="literal">-Force</span> | <span class="built_in">Out-Null</span> &#125;</span><br><span class="line"><span class="keyword">ELSE</span> &#123;</span><br><span class="line">     <span class="string">"Modify:"</span></span><br><span class="line">     <span class="built_in">New-ItemProperty</span> <span class="literal">-Path</span> <span class="variable">$ProcBuildRegistryPath</span> <span class="literal">-Name</span> <span class="variable">$ProcBuildRegistryName</span> <span class="literal">-Value</span> <span class="variable">$ProcBuildValue</span> `</span><br><span class="line">          <span class="literal">-PropertyType</span> DWORD <span class="literal">-Force</span> | <span class="built_in">Out-Null</span> &#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>then execute this script in cmd</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell -ExecutionPolicy ByPass -File \\172.16.xx.xx\c$\script\add_registy_procbuild_ps.ps1</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Good Job, 完美解决~</p>
 </blockquote>
@@ -162,11 +165,11 @@
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://tech.itabas.com">itabas016</a>
+      <a href="https://ebanbox.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://tech.itabas.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/">https://tech.itabas.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/</a>
+      <a href="https://ebanbox.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/">https://ebanbox.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -228,9 +231,9 @@
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">itabas016</span>
-    <span class="icp">
-      <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-    </span>
+  </span>
+  <span class="icp">
+    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
   </span>
 </div>
 </footer>
@@ -240,7 +243,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://tech.itabas.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/';
+        this.page.url = 'https://ebanbox.com/2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/';
         this.page.identifier = '2016/06/27/web/An-error-occurred-whild-msbuild-windows-service/';
         this.page.title = 'An error occurred whild msbuild windows service';
     };

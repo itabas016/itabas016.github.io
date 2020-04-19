@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Oracle - Database Administrations"><meta name="keywords" content="Oracle, KT, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://tech.itabas.com/2016/09/27/database/oracle-kt-database-administrations/">
+<meta name="description" content="Oracle - Database Administrations"><meta name="keywords" content="Oracle, KT, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://ebanbox.com/2016/09/27/database/oracle-kt-database-administrations/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,12 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Oracle - Database Administrations - ITABAS</title>
-  </head>
+    <title>Oracle - Database Administrations - 个人记录 | Technology</title>
+  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+</head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">ITABAS</a>
+    <a href="/." class="logo">个人记录 | Technology</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -90,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">ITABAS</a>
+  <a href="/." class="logo">个人记录 | Technology</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -152,6 +153,7 @@
 </ul>
 </blockquote>
 <a id="more"></a>
+
 <h3 id="Import-and-export-of-database"><a href="#Import-and-export-of-database" class="headerlink" title="Import and export of database"></a>Import and export of database</h3><blockquote>
 <p>Oracle’s <code>export</code> (<strong>exp</strong>) and <code>import</code> (<strong>imp</strong>) utilities are used to perform logical database backup and recovery. When exporting, database objects are dumped to <strong>a binary file</strong> which can then be imported into another Oracle database.<br>This <code>exp/imp</code> is different from <code>expdp/impdp</code> in <code>Data Pump</code>, The detail about datapump will talk in other article.<br>The <code>export/import</code> utilities are commonly used to perform the following tasks:</p>
 </blockquote>
@@ -166,11 +168,15 @@
 </ul>
 </blockquote>
 <h4 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h4><blockquote>
-<p>Look for the <code>imp</code> and <code>exp</code> executables in your <code>$ORACLE_HOME/bin</code> directory. One can run them interactively, using command line parameters, or using parameter files. Look at the <code>imp/exp</code> parameters before starting. These parameters can be listed by executing the following commands: <code>exp help=yes</code> or <code>imp help=yes</code>.<br>The following examples demonstrate how the <code>imp/exp</code> utilities can be used:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">exp scott/tiger file=emp.dmp log=emp.log tables=emp rows=yes indexes=no</span><br><span class="line">exp scott/tiger file=emp.dmp tables=(emp,dept)</span><br><span class="line"></span><br><span class="line">imp scott/tiger file=emp.dmp full=yes</span><br><span class="line">imp scott/tiger file=emp.dmp fromuser=scott touser=scott tables=dept</span><br><span class="line"></span><br><span class="line"><span class="comment">-- using a parameter file:</span></span><br><span class="line">exp userid=scott/tiger@orcl parfile=export.txt</span><br><span class="line"></span><br><span class="line"><span class="comment">--where export.txt contains:</span></span><br><span class="line">BUFFER=10000000</span><br><span class="line">FILE=account.dmp</span><br><span class="line">FULL=n</span><br><span class="line">OWNER=scott</span><br><span class="line">GRANTS=y</span><br><span class="line">COMPRESS=y</span><br></pre></td></tr></table></figure></p>
+<p>Look for the <code>imp</code> and <code>exp</code> executables in your <code>$ORACLE_HOME/bin</code> directory. One can run them interactively, using command line parameters, or using parameter files. Look at the <code>imp/exp</code> parameters before starting. These parameters can be listed by executing the following commands: <code>exp help=yes</code> or <code>imp help=yes</code>.<br>The following examples demonstrate how the <code>imp/exp</code> utilities can be used:</p>
 </blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">exp scott/tiger file=emp.dmp log=emp.log tables=emp rows=yes indexes=no</span><br><span class="line">exp scott/tiger file=emp.dmp tables=(emp,dept)</span><br><span class="line"></span><br><span class="line">imp scott/tiger file=emp.dmp full=yes</span><br><span class="line">imp scott/tiger file=emp.dmp fromuser=scott touser=scott tables=dept</span><br><span class="line"></span><br><span class="line"><span class="comment">-- using a parameter file:</span></span><br><span class="line">exp userid=scott/tiger@orcl parfile=export.txt</span><br><span class="line"></span><br><span class="line"><span class="comment">--where export.txt contains:</span></span><br><span class="line">BUFFER=10000000</span><br><span class="line">FILE=account.dmp</span><br><span class="line">FULL=n</span><br><span class="line">OWNER=scott</span><br><span class="line">GRANTS=y</span><br><span class="line">COMPRESS=y</span><br></pre></td></tr></table></figure>
+
 <h4 id="Export-with-query"><a href="#Export-with-query" class="headerlink" title="Export with query"></a>Export with query</h4><blockquote>
-<p>From Oracle 8i one can use the <code>QUERY=</code> export parameter to selectively unload a subset of the data from a table. You may need to escape special chars on the command line.<br>For example: <code>query=\&quot;where deptno=10\&quot;</code>. Look at these examples:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exp scott/tiger tables=emp query="where deptno=10"</span><br><span class="line">exp scott/tiger file=abc.dmp tables=abc query=\"where sex=\'f\'\" rows=yes</span><br></pre></td></tr></table></figure></p>
+<p>From Oracle 8i one can use the <code>QUERY=</code> export parameter to selectively unload a subset of the data from a table. You may need to escape special chars on the command line.<br>For example: <code>query=\&quot;where deptno=10\&quot;</code>. Look at these examples:</p>
 </blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exp scott/tiger tables=emp query="where deptno=10"</span><br><span class="line">exp scott/tiger file=abc.dmp tables=abc query=\"where sex=\'f\'\" rows=yes</span><br></pre></td></tr></table></figure>
+
 <h4 id="Other-Questions"><a href="#Other-Questions" class="headerlink" title="Other Questions"></a>Other Questions</h4><blockquote>
 <p>Before one imports rows into <strong>already populated tables</strong>, one needs to <strong>truncate</strong> or <strong>drop</strong> these tables to get rid of the old data. If not, the new data will be <strong>appended to the existing tables</strong>. One must always <code>DROP</code> existing Sequences before re-importing. If the sequences are not dropped, they will generate numbers inconsistent with the rest of the database.<br>Note: It is also advisable to <strong>drop indexes</strong> before importing to speed up the import process. Indexes can easily be recreated after the data was successfully imported.</p>
 </blockquote>
@@ -193,10 +199,11 @@
 </blockquote>
 <blockquote>
 <ul>
-<li><strong>OPEN</strong><br>PS. Normal mode to start database. If occurred any error, please use <code>STARTUP FORCE</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">sqlplus / as sysdba</span><br><span class="line">SQL&gt; HELP STARTUP</span><br><span class="line">[FORCE] [RESTRICT] [PFILE=filename] [QUIET] [ MOUNT [dbname] |</span><br><span class="line">[ OPEN [open_db_options] [dbname] ] | NOMOUNT ]</span><br></pre></td></tr></table></figure>
-</li>
+<li><strong>OPEN</strong><br>PS. Normal mode to start database. If occurred any error, please use <code>STARTUP FORCE</code></li>
 </ul>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">sqlplus / as sysdba</span><br><span class="line">SQL&gt; HELP STARTUP</span><br><span class="line">[FORCE] [RESTRICT] [PFILE=filename] [QUIET] [ MOUNT [dbname] |</span><br><span class="line">[ OPEN [open_db_options] [dbname] ] | NOMOUNT ]</span><br></pre></td></tr></table></figure>
+
 <h4 id="Stop-database"><a href="#Stop-database" class="headerlink" title="Stop database"></a>Stop database</h4><blockquote>
 <p>Shutdown the database has four methods: </p>
 <ul>
@@ -215,15 +222,21 @@
 </blockquote>
 <blockquote>
 <ul>
-<li><strong>ABORT</strong><br>This mode will ignore everything. Be careful~<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">sqlplus / as sysdba</span><br><span class="line">SQL&gt; HELP SHUTDOWN</span><br><span class="line">SHUTDOWN [ABORT|IMMEDIATE|NORMAL|TRANSACTIONAL [LOCAL]]</span><br></pre></td></tr></table></figure>
-</li>
+<li><strong>ABORT</strong><br>This mode will ignore everything. Be careful~</li>
 </ul>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">sqlplus / as sysdba</span><br><span class="line">SQL&gt; HELP SHUTDOWN</span><br><span class="line">SHUTDOWN [ABORT|IMMEDIATE|NORMAL|TRANSACTIONAL [LOCAL]]</span><br></pre></td></tr></table></figure>
+
 <h3 id="Starting-and-stopping-Nodes-in-the-RAC"><a href="#Starting-and-stopping-Nodes-in-the-RAC" class="headerlink" title="Starting and stopping Nodes in the RAC"></a>Starting and stopping Nodes in the RAC</h3><h4 id="Start-Node"><a href="#Start-Node" class="headerlink" title="Start Node"></a>Start Node</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check status of instance</span></span><br><span class="line">$ <span class="variable">$CRS_HOME</span>/bin/crs_stat</span><br><span class="line"></span><br><span class="line"><span class="comment"># seen cases when CRS says OFFLINE but pmon is still running so double checking here</span></span><br><span class="line">$ ps -ef | grep &lt;instance_name&gt; | grep pmon</span><br><span class="line"></span><br><span class="line"><span class="comment"># start one of the instance on one of the nodes if not running</span></span><br><span class="line">$ srvctl start database -d &lt;database name&gt; -i &lt;instance name&gt;</span><br></pre></td></tr></table></figure>
+
 <h4 id="Stop-Node"><a href="#Stop-Node" class="headerlink" title="Stop Node"></a>Stop Node</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># verify instance running</span></span><br><span class="line">$ ps -ef | grep &lt;instance_name&gt; | grep pmon</span><br><span class="line"></span><br><span class="line"><span class="comment"># shutdown one of the instance on one of the nodes</span></span><br><span class="line">$ srvctl stop database -d &lt;database name&gt; -i &lt;instance name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># check status of instance to make sure it’s down</span></span><br><span class="line">$ <span class="variable">$CRS_HOME</span>/bin/crs_stat</span><br><span class="line"></span><br><span class="line"><span class="comment"># verify instance not running</span></span><br><span class="line">$ ps -ef | grep &lt;instance_name&gt; | grep pmon</span><br></pre></td></tr></table></figure>
+
 <h3 id="Manage-available-sessions"><a href="#Manage-available-sessions" class="headerlink" title="Manage available sessions"></a>Manage available sessions</h3><h4 id="Enabling-and-Disabling-Restricted-Session"><a href="#Enabling-and-Disabling-Restricted-Session" class="headerlink" title="Enabling and Disabling Restricted Session"></a>Enabling and Disabling Restricted Session</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> logins <span class="keyword">from</span> v$<span class="keyword">instance</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">enable</span> <span class="keyword">restricted</span> <span class="keyword">session</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">disable</span> <span class="keyword">restricted</span> <span class="keyword">session</span>;</span><br></pre></td></tr></table></figure>
+
 <h4 id="Disconnect-session"><a href="#Disconnect-session" class="headerlink" title="Disconnect session"></a>Disconnect session</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SID</span>, <span class="built_in">SERIAL</span><span class="comment">#, STATUS</span></span><br><span class="line">  <span class="keyword">FROM</span> V$<span class="keyword">SESSION</span></span><br><span class="line">  <span class="keyword">WHERE</span> USERNAME = <span class="string">'AWSUSER'</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">disconnect</span> <span class="keyword">session</span>;</span><br></pre></td></tr></table></figure>
+
 <h4 id="Kill-session"><a href="#Kill-session" class="headerlink" title="Kill session"></a>Kill session</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> <span class="keyword">kill</span> <span class="keyword">session</span> <span class="string">' sid, serial#'</span> <span class="keyword">IMMEDIATE</span>;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Resources:<br><a href="http://docs.oracle.com/cd/B28359_01/server.111/b28319/exp_imp.htm#i1023983" target="_blank" rel="noopener">http://docs.oracle.com/cd/B28359_01/server.111/b28319/exp_imp.htm#i1023983</a><br><a href="http://www.orafaq.com/wiki/Import_Export_FAQ" target="_blank" rel="noopener">http://www.orafaq.com/wiki/Import_Export_FAQ</a><br><a href="https://docs.oracle.com/cd/E11882_01/rac.112/e41960/admin.htm#RACAD812" target="_blank" rel="noopener">https://docs.oracle.com/cd/E11882_01/rac.112/e41960/admin.htm#RACAD812</a></p>
 </blockquote>
@@ -232,11 +245,11 @@
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://tech.itabas.com">itabas016</a>
+      <a href="https://ebanbox.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://tech.itabas.com/2016/09/27/database/oracle-kt-database-administrations/">https://tech.itabas.com/2016/09/27/database/oracle-kt-database-administrations/</a>
+      <a href="https://ebanbox.com/2016/09/27/database/oracle-kt-database-administrations/">https://ebanbox.com/2016/09/27/database/oracle-kt-database-administrations/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -296,9 +309,9 @@
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">itabas016</span>
-    <span class="icp">
-      <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-    </span>
+  </span>
+  <span class="icp">
+    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
   </span>
 </div>
 </footer>
@@ -308,7 +321,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://tech.itabas.com/2016/09/27/database/oracle-kt-database-administrations/';
+        this.page.url = 'https://ebanbox.com/2016/09/27/database/oracle-kt-database-administrations/';
         this.page.identifier = '2016/09/27/database/oracle-kt-database-administrations/';
         this.page.title = 'Oracle - Database Administrations';
     };

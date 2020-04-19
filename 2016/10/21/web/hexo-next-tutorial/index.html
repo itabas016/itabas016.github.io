@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Hexo + Next 踩坑提醒"><meta name="keywords" content="Hexo, Blog, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://tech.itabas.com/2016/10/21/web/hexo-next-tutorial/">
+<meta name="description" content="Hexo + Next 踩坑提醒"><meta name="keywords" content="Hexo, Blog, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://ebanbox.com/2016/10/21/web/hexo-next-tutorial/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,12 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Hexo + Next 踩坑提醒 - ITABAS</title>
-  </head>
+    <title>Hexo + Next 踩坑提醒 - 个人记录 | Technology</title>
+  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+</head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">ITABAS</a>
+    <a href="/." class="logo">个人记录 | Technology</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -90,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">ITABAS</a>
+  <a href="/." class="logo">个人记录 | Technology</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -142,23 +143,35 @@
     </div>
   </div><div class="post-content"><p>这几年NodeJS太火了，就准备把之前记录的blog用Hexo重构以下。网上的教程真是太多了，参照官方的文档<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a><br>本打算自己写主题的，现在还是用现成的吧<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">Next</a> | <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>, Yilia是基于webpack构建的其性能比Next要高。目前我采用的Next, 比较容易踩坑的地方记一下。</p>
 <a id="more"></a>
-<h3 id="How-to-create-new-menu"><a href="#How-to-create-new-menu" class="headerlink" title="How to create new menu"></a>How to create new menu</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page tags</span><br><span class="line"></span><br><span class="line">#修改`/tag/index.md`, type为tags, 禁用comments将value改为false</span><br><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2016-xx-xx 12:38:22</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<h3 id="How-to-change-social-icon"><a href="#How-to-change-social-icon" class="headerlink" title="How to change social icon"></a>How to change social icon</h3><p>对于缺少的icon可用globe代替，也可以通过<a href="http://fontawesome.io/icons/" target="_blank" rel="noopener">FontAwesome</a>搜索你喜欢的来替换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">social_icons:</span><br><span class="line">  enable: true</span><br><span class="line">  # Icon Mappings.</span><br><span class="line">  # KeyMapsToSocalItemKey: NameOfTheIconFromFontAwesome</span><br><span class="line">  GitHub: github</span><br><span class="line">  Twitter: twitter</span><br><span class="line">  Facebook: facebook</span><br><span class="line">  Telegram: telegram</span><br><span class="line">  Instagram: instagram</span><br><span class="line">  Weibo: weibo</span><br></pre></td></tr></table></figure></p>
-<h3 id="How-to-active-search-function"><a href="#How-to-active-search-function" class="headerlink" title="How to active search function"></a>How to active search function</h3><p>安装<code>hexo-generator-search</code>plugin, 生成blog content index. 更多详细配置参照<a href="https://github.com/PaicHyperionDev/hexo-generator-search" target="_blank" rel="noopener">hexo-generator-search</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-search --save</span><br><span class="line"></span><br><span class="line">#modify _config.yml 增加以下内容</span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br></pre></td></tr></table></figure></p>
-<h3 id="How-to-generate-feed-xml"><a href="#How-to-generate-feed-xml" class="headerlink" title="How to generate feed xml"></a>How to generate feed xml</h3><p>安装<code>hexo-generator-feed</code>plugin, 更多详细配置参照<a href="https://github.com/itabas016/hexo-generator-feed" target="_blank" rel="noopener">hexo-generator-feed</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-feed</span><br><span class="line"></span><br><span class="line">#modify _config.yml 增加以下内容</span><br><span class="line">#Feed Atom</span><br><span class="line">feed:</span><br><span class="line">  type: atom</span><br><span class="line">  path: atom.xml</span><br><span class="line">  limit: 20</span><br></pre></td></tr></table></figure></p>
-<h3 id="How-to-improve-SEO-by-sitemap"><a href="#How-to-improve-SEO-by-sitemap" class="headerlink" title="How to improve SEO by sitemap"></a>How to improve SEO by sitemap</h3><p>安装<code>hexo-generator-sitemap</code>plugin, 更多详细配置参照<a href="https://github.com/hexojs/hexo-generator-sitemap" target="_blank" rel="noopener">hexo-generator-sitemap</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-sitemap</span><br><span class="line"></span><br><span class="line">#modify _config.yml 增加以下内容</span><br><span class="line"></span><br><span class="line">#sitemap</span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br></pre></td></tr></table></figure></p>
-<h3 id="How-to-deploy-to-github"><a href="#How-to-deploy-to-github" class="headerlink" title="How to deploy to github"></a>How to deploy to github</h3><p>安装<code>hexo-deployer-git</code>plugin, 更多详细配置参照<a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
-<h3 id="How-to-bind-a-personal-domain"><a href="#How-to-bind-a-personal-domain" class="headerlink" title="How to bind a personal domain"></a>How to bind a personal domain</h3><p>cd source目录下，添加CNAME文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd source/</span><br><span class="line">$ touch CNAME</span><br><span class="line">$ vim CNAME # input you personal domain</span><br><span class="line">$ git add CNAME</span><br><span class="line">$ git commit -m &quot;add CNAME&quot;</span><br></pre></td></tr></table></figure></p>
 
+<h3 id="How-to-create-new-menu"><a href="#How-to-create-new-menu" class="headerlink" title="How to create new menu"></a>How to create new menu</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page tags</span><br><span class="line"></span><br><span class="line">#修改`/tag/index.md`, type为tags, 禁用comments将value改为false</span><br><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2016-xx-xx 12:38:22</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-change-social-icon"><a href="#How-to-change-social-icon" class="headerlink" title="How to change social icon"></a>How to change social icon</h3><p>对于缺少的icon可用globe代替，也可以通过<a href="http://fontawesome.io/icons/" target="_blank" rel="noopener">FontAwesome</a>搜索你喜欢的来替换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">social_icons:</span><br><span class="line">  enable: true</span><br><span class="line">  # Icon Mappings.</span><br><span class="line">  # KeyMapsToSocalItemKey: NameOfTheIconFromFontAwesome</span><br><span class="line">  GitHub: github</span><br><span class="line">  Twitter: twitter</span><br><span class="line">  Facebook: facebook</span><br><span class="line">  Telegram: telegram</span><br><span class="line">  Instagram: instagram</span><br><span class="line">  Weibo: weibo</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-active-search-function"><a href="#How-to-active-search-function" class="headerlink" title="How to active search function"></a>How to active search function</h3><p>安装<code>hexo-generator-search</code>plugin, 生成blog content index. 更多详细配置参照<a href="https://github.com/PaicHyperionDev/hexo-generator-search" target="_blank" rel="noopener">hexo-generator-search</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-search --save</span><br><span class="line"></span><br><span class="line">#modify _config.yml 增加以下内容</span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-generate-feed-xml"><a href="#How-to-generate-feed-xml" class="headerlink" title="How to generate feed xml"></a>How to generate feed xml</h3><p>安装<code>hexo-generator-feed</code>plugin, 更多详细配置参照<a href="https://github.com/itabas016/hexo-generator-feed" target="_blank" rel="noopener">hexo-generator-feed</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-feed</span><br><span class="line"></span><br><span class="line">#modify _config.yml 增加以下内容</span><br><span class="line">#Feed Atom</span><br><span class="line">feed:</span><br><span class="line">  type: atom</span><br><span class="line">  path: atom.xml</span><br><span class="line">  limit: 20</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-improve-SEO-by-sitemap"><a href="#How-to-improve-SEO-by-sitemap" class="headerlink" title="How to improve SEO by sitemap"></a>How to improve SEO by sitemap</h3><p>安装<code>hexo-generator-sitemap</code>plugin, 更多详细配置参照<a href="https://github.com/hexojs/hexo-generator-sitemap" target="_blank" rel="noopener">hexo-generator-sitemap</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-sitemap</span><br><span class="line"></span><br><span class="line">#modify _config.yml 增加以下内容</span><br><span class="line"></span><br><span class="line">#sitemap</span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-deploy-to-github"><a href="#How-to-deploy-to-github" class="headerlink" title="How to deploy to github"></a>How to deploy to github</h3><p>安装<code>hexo-deployer-git</code>plugin, 更多详细配置参照<a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-bind-a-personal-domain"><a href="#How-to-bind-a-personal-domain" class="headerlink" title="How to bind a personal domain"></a>How to bind a personal domain</h3><p>cd source目录下，添加CNAME文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd source/</span><br><span class="line">$ touch CNAME</span><br><span class="line">$ vim CNAME # input you personal domain</span><br><span class="line">$ git add CNAME</span><br><span class="line">$ git commit -m &quot;add CNAME&quot;</span><br></pre></td></tr></table></figure>
       </div>
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://tech.itabas.com">itabas016</a>
+      <a href="https://ebanbox.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://tech.itabas.com/2016/10/21/web/hexo-next-tutorial/">https://tech.itabas.com/2016/10/21/web/hexo-next-tutorial/</a>
+      <a href="https://ebanbox.com/2016/10/21/web/hexo-next-tutorial/">https://ebanbox.com/2016/10/21/web/hexo-next-tutorial/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -218,9 +231,9 @@
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">itabas016</span>
-    <span class="icp">
-      <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-    </span>
+  </span>
+  <span class="icp">
+    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
   </span>
 </div>
 </footer>
@@ -230,7 +243,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://tech.itabas.com/2016/10/21/web/hexo-next-tutorial/';
+        this.page.url = 'https://ebanbox.com/2016/10/21/web/hexo-next-tutorial/';
         this.page.identifier = '2016/10/21/web/hexo-next-tutorial/';
         this.page.title = 'Hexo + Next 踩坑提醒';
     };

@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Oracle - ASM(Automatic Storage Management)"><meta name="keywords" content="Oracle, KT, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://tech.itabas.com/2016/10/14/database/oracle-kt-asm/">
+<meta name="description" content="Oracle - ASM(Automatic Storage Management)"><meta name="keywords" content="Oracle, KT, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://ebanbox.com/2016/10/14/database/oracle-kt-asm/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,12 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Oracle - ASM(Automatic Storage Management) - ITABAS</title>
-  </head>
+    <title>Oracle - ASM(Automatic Storage Management) - 个人记录 | Technology</title>
+  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+</head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">ITABAS</a>
+    <a href="/." class="logo">个人记录 | Technology</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -90,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">ITABAS</a>
+  <a href="/." class="logo">个人记录 | Technology</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -144,6 +145,7 @@
 <p><code>Oracle ASM</code> is a volume manager and a file system for Oracle database files that supports <code>single-instance</code> Oracle Database and <code>Oracle Real Application Clusters</code> (<strong>Oracle RAC</strong>) configurations. <code>Oracle ASM</code> is Oracle’s recommended storage management solution that provides an alternative to conventional volume managers, file systems, and raw devices.</p>
 </blockquote>
 <a id="more"></a>
+
 <blockquote>
 <p>Oracle ASM uses <strong>disk groups</strong> to store data files, an Oracle ASM disk group is a collection of disks that Oracle ASM manages as a unit.<br>Within a disk group, Oracle ASM exposes a file system interface for Oracle database files. The content of files that are stored in <code>a disk group</code> is evenly distributed to eliminate hot spots and to provide uniform performance across the disks. </p>
 </blockquote>
@@ -191,9 +193,13 @@
 <p>Files that are stored in Oracle ASM disk groups are called <code>Oracle ASM files</code>. Each Oracle ASM file is contained within a <strong>single</strong> Oracle ASM disk group. Oracle Database communicates with Oracle ASM in terms of files.<br>This is similar to the way Oracle Database uses files on any file system. You can store the various file types in Oracle ASM disk groups.</p>
 </blockquote>
 <h3 id="How-to-Use-ASM"><a href="#How-to-Use-ASM" class="headerlink" title="How to Use ASM"></a>How to Use ASM</h3><h4 id="Start-amp-Stop"><a href="#Start-amp-Stop" class="headerlink" title="Start &amp; Stop"></a>Start &amp; Stop</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># start</span></span><br><span class="line">$ <span class="built_in">export</span> ORACLE_SID=+ASM</span><br><span class="line">$ sqlplus <span class="string">"/ as sysdba"</span></span><br><span class="line">SQL&gt; startup</span><br><span class="line">ASM instance started</span><br><span class="line">Total System Global Area   83886080 bytes</span><br><span class="line">Fixed Size                  1217836 bytes</span><br><span class="line">Variable Size              57502420 bytes</span><br><span class="line">ASM Cache                  25165824 bytes</span><br><span class="line">ASM diskgroups mounted</span><br><span class="line"></span><br><span class="line"><span class="comment"># stop</span></span><br><span class="line">$ <span class="built_in">export</span> ORACLE_SID=+ASM</span><br><span class="line">$ sqlplus <span class="string">"/ as sysdba"</span></span><br><span class="line">SQL&gt; shutdown immediate</span><br></pre></td></tr></table></figure>
+
 <h4 id="Adding-a-diskgroup"><a href="#Adding-a-diskgroup" class="headerlink" title="Adding a diskgroup"></a>Adding a diskgroup</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; create diskgroup orag2 external redundancy disk 'ORCL:VOL5';</span><br><span class="line">Diskgroup created.</span><br><span class="line"></span><br><span class="line">SQL&gt; select group_number,disk_number,mode_status,name from v$asm_disk;</span><br><span class="line">GROUP_NUMBER DISK_NUMBER MODE_STATUS    NAME</span><br><span class="line"><span class="comment">------------ ----------- -------------- -------------------------------------</span></span><br><span class="line">           0           5 ONLINE</span><br><span class="line">           1           0 ONLINE         VOL1</span><br><span class="line">           1           1 ONLINE         VOL2</span><br><span class="line">           1           2 ONLINE         VOL3</span><br><span class="line">           1           3 ONLINE         VOL4</span><br><span class="line">           2           0 ONLINE         VOL5</span><br><span class="line">6 rows selected.</span><br></pre></td></tr></table></figure>
+
 <h4 id="Recreating-a-diskgroup"><a href="#Recreating-a-diskgroup" class="headerlink" title="Recreating a diskgroup"></a>Recreating a diskgroup</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="keyword">if</span>=/dev/zero of=/dev/rdsk/c1t4d0s4 bs=8192 count=12800</span><br><span class="line"><span class="comment"># When done, restart ASM and create the diskgroup from scratch.</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="Rebalancing"><a href="#Rebalancing" class="headerlink" title="Rebalancing"></a>Rebalancing</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The rebalancing speed is controlled by the ASM_POWER_LIMIT initialization parameter.</span></span><br><span class="line"><span class="comment"># Setting it to 0 will disable disk rebalancing.</span></span><br><span class="line"><span class="comment"># To force rebalancing of a diskgroup:</span></span><br><span class="line">ALTER DISKGROUP data REBALANCE POWER 11 WAIT;</span><br></pre></td></tr></table></figure>
+
 <h4 id="Coverting-to-ASM"><a href="#Coverting-to-ASM" class="headerlink" title="Coverting to ASM"></a>Coverting to ASM</h4><blockquote>
 <p><strong>One can use <code>Rman</code> to convert a datafile, tablespace or entire database from/to <code>ASM</code>.</strong><br><strong>Here are the steps required to migrate an entire database to <code>ASM</code></strong></p>
 </blockquote>
@@ -201,31 +207,49 @@
 <p>Ensure the database is using an <code>SPFILE</code> and not a <code>PFILE</code> (it’s about time after all!).<br>Set parameters on the target database.<br>For example, if we set both <code>DB_CREATE_FILE_DEST</code> and <code>DB_RECOVERY_FILE_DEST</code> we should get mirrored controlfiles and duplexed log files by default:</p>
 </blockquote>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter system set DB_CREATE_FILE_DEST = '+DATA';</span><br><span class="line">SQL&gt; alter system set DB_RECOVERY_FILE_DEST_SIZE = 17G;</span><br><span class="line">SQL&gt; alter system set DB_RECOVERY_FILE_DEST = '+RECOVER';</span><br><span class="line">SQL&gt; alter system set CONTROL_FILES = '+DATA';</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>Start the database in <code>NOMOUNT</code> mode and <strong>restore the controlfile</strong> into the new location from the old location:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; connect target /</span><br><span class="line">RMAN&gt; STARTUP NOMOUNT</span><br><span class="line">RMAN&gt; RESTORE CONTROLFILE FROM 'old_control_file_name';</span><br></pre></td></tr></table></figure></p>
+<p>Start the database in <code>NOMOUNT</code> mode and <strong>restore the controlfile</strong> into the new location from the old location:</p>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; connect target /</span><br><span class="line">RMAN&gt; STARTUP NOMOUNT</span><br><span class="line">RMAN&gt; RESTORE CONTROLFILE FROM 'old_control_file_name';</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>Mount the database and copy the database into the <code>ASM disk group</code>:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; ALTER DATABASE MOUNT;</span><br><span class="line">RMAN&gt; CONFIGURE DEVICE TYPE DISK PARALLELISM 8;</span><br><span class="line">RMAN&gt; BACKUP AS COPY DATABASE FORMAT '+DATA';</span><br></pre></td></tr></table></figure></p>
+<p>Mount the database and copy the database into the <code>ASM disk group</code>:</p>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; ALTER DATABASE MOUNT;</span><br><span class="line">RMAN&gt; CONFIGURE DEVICE TYPE DISK PARALLELISM 8;</span><br><span class="line">RMAN&gt; BACKUP AS COPY DATABASE FORMAT '+DATA';</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>Switch <strong>all datafiles</strong> to the new <code>ASM</code> location and open the database:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; SWITCH DATABASE TO COPY;</span><br><span class="line">RMAN&gt; ALTER DATABASE OPEN;</span><br></pre></td></tr></table></figure></p>
+<p>Switch <strong>all datafiles</strong> to the new <code>ASM</code> location and open the database:</p>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RMAN&gt; SWITCH DATABASE TO COPY;</span><br><span class="line">RMAN&gt; ALTER DATABASE OPEN;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>Add <strong>new tempfiles</strong> and drop the <strong>old tempfiles</strong>:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter tablespace temp add tempfile;</span><br><span class="line">SQL&gt; alter database tempfile '...' DROP;</span><br><span class="line">SQL&gt; select * from dba_temp_files;</span><br></pre></td></tr></table></figure></p>
+<p>Add <strong>new tempfiles</strong> and drop the <strong>old tempfiles</strong>:</p>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter tablespace temp add tempfile;</span><br><span class="line">SQL&gt; alter database tempfile '...' DROP;</span><br><span class="line">SQL&gt; select * from dba_temp_files;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>Optionally, move <code>SPFILE</code> into <code>ASM</code>:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; CREATE SPFILE '+DATA' FROM PFILE;</span><br></pre></td></tr></table></figure></p>
+<p>Optionally, move <code>SPFILE</code> into <code>ASM</code>:</p>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; CREATE SPFILE '+DATA' FROM PFILE;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>Move <strong>redo log files</strong> into <code>ASM</code> - for each group:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; ALTER DATABASE DROP LOGFILE GROUP 1;</span><br><span class="line">SQL&gt; ALTER DATABASE ADD LOGFILE GROUP 1 SIZE 100M;</span><br></pre></td></tr></table></figure></p>
+<p>Move <strong>redo log files</strong> into <code>ASM</code> - for each group:</p>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; ALTER DATABASE DROP LOGFILE GROUP 1;</span><br><span class="line">SQL&gt; ALTER DATABASE ADD LOGFILE GROUP 1 SIZE 100M;</span><br></pre></td></tr></table></figure>
+
 <h5 id="Convert-a-tablespace-to-ASM"><a href="#Convert-a-tablespace-to-ASM" class="headerlink" title="Convert a tablespace to ASM"></a>Convert a tablespace to ASM</h5><blockquote>
-<p>Ensure the database in in <code>archive log mode</code>, and from <code>rman</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">connect target;</span><br><span class="line">sql <span class="string">"alter tablespace TSNAME offline"</span>;</span><br><span class="line">backup as copy tablespace TSNAME format <span class="string">'+DATA'</span>;</span><br><span class="line">switch tablespace TSNAME to copy;</span><br><span class="line">sql <span class="string">"alter tablespace TSNAME online"</span>;</span><br><span class="line"><span class="built_in">exit</span>;</span><br></pre></td></tr></table></figure></p>
+<p>Ensure the database in in <code>archive log mode</code>, and from <code>rman</code>:</p>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">connect target;</span><br><span class="line">sql <span class="string">"alter tablespace TSNAME offline"</span>;</span><br><span class="line">backup as copy tablespace TSNAME format <span class="string">'+DATA'</span>;</span><br><span class="line">switch tablespace TSNAME to copy;</span><br><span class="line">sql <span class="string">"alter tablespace TSNAME online"</span>;</span><br><span class="line"><span class="built_in">exit</span>;</span><br></pre></td></tr></table></figure>
+
 <h5 id="Convert-a-datafile-to-ASM"><a href="#Convert-a-datafile-to-ASM" class="headerlink" title="Convert a datafile to ASM"></a>Convert a datafile to ASM</h5><blockquote>
-<p>Ensure the database in in <code>archive log mode</code>, and from <code>rman</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">connect target;</span><br><span class="line">sql <span class="string">"alter database datafile '...' offline"</span>;</span><br><span class="line">backup as copy datafile <span class="string">'...'</span> format <span class="string">'+DATA'</span>;</span><br><span class="line">switch datafile <span class="string">'..'</span> to copy;</span><br><span class="line">sql <span class="string">"alter database datafile '...' online"</span>;</span><br><span class="line"><span class="built_in">exit</span>;</span><br></pre></td></tr></table></figure></p>
+<p>Ensure the database in in <code>archive log mode</code>, and from <code>rman</code>:</p>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">connect target;</span><br><span class="line">sql <span class="string">"alter database datafile '...' offline"</span>;</span><br><span class="line">backup as copy datafile <span class="string">'...'</span> format <span class="string">'+DATA'</span>;</span><br><span class="line">switch datafile <span class="string">'..'</span> to copy;</span><br><span class="line">sql <span class="string">"alter database datafile '...' online"</span>;</span><br><span class="line"><span class="built_in">exit</span>;</span><br></pre></td></tr></table></figure>
+
 <h4 id="Monitoring"><a href="#Monitoring" class="headerlink" title="Monitoring"></a>Monitoring</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">V$ASM_DISK <span class="comment">-- ASM disks</span></span><br><span class="line">V$ASM_DISK_STAT <span class="comment">-- cached view of V$ASM_DISK for faster access (used by Enterprise Manager)</span></span><br><span class="line">V$ASM_DISKGROUP <span class="comment">-- ASM diskgroups</span></span><br><span class="line">V$ASM_DISKGROUP_STAT <span class="comment">-- cached view of V$ASM_DISKGROUP for faster access (used by Enterprise Manager)</span></span><br><span class="line">V$ASM_OPERATION <span class="comment">-- status of ongoing disk operations (like rebalancing)</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Resources:<br><a href="https://docs.oracle.com/cd/E11882_01/server.112/e18951/asmcon.htm#OSTMG94057" target="_blank" rel="noopener">https://docs.oracle.com/cd/E11882_01/server.112/e18951/asmcon.htm#OSTMG94057</a><br><a href="http://www.orafaq.com/wiki/Automatic_Storage_Management" target="_blank" rel="noopener">http://www.orafaq.com/wiki/Automatic_Storage_Management</a></p>
 </blockquote>
@@ -234,11 +258,11 @@
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://tech.itabas.com">itabas016</a>
+      <a href="https://ebanbox.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://tech.itabas.com/2016/10/14/database/oracle-kt-asm/">https://tech.itabas.com/2016/10/14/database/oracle-kt-asm/</a>
+      <a href="https://ebanbox.com/2016/10/14/database/oracle-kt-asm/">https://ebanbox.com/2016/10/14/database/oracle-kt-asm/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -298,9 +322,9 @@
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">itabas016</span>
-    <span class="icp">
-      <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-    </span>
+  </span>
+  <span class="icp">
+    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
   </span>
 </div>
 </footer>
@@ -310,7 +334,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://tech.itabas.com/2016/10/14/database/oracle-kt-asm/';
+        this.page.url = 'https://ebanbox.com/2016/10/14/database/oracle-kt-asm/';
         this.page.identifier = '2016/10/14/database/oracle-kt-asm/';
         this.page.title = 'Oracle - ASM(Automatic Storage Management)';
     };

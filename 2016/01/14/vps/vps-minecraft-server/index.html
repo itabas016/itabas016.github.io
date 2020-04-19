@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Vps搭建Minecraft Server"><meta name="keywords" content="Linux, Vps, Minecraft, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://tech.itabas.com/2016/01/14/vps/vps-minecraft-server/">
+<meta name="description" content="Vps搭建Minecraft Server"><meta name="keywords" content="Linux, Vps, Minecraft, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://ebanbox.com/2016/01/14/vps/vps-minecraft-server/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,12 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Vps搭建Minecraft Server - ITABAS</title>
-  </head>
+    <title>Vps搭建Minecraft Server - 个人记录 | Technology</title>
+  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+</head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">ITABAS</a>
+    <a href="/." class="logo">个人记录 | Technology</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -90,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">ITABAS</a>
+  <a href="/." class="logo">个人记录 | Technology</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -144,16 +145,21 @@
 <p><a href="https://minecraft.net/" target="_blank" rel="noopener"><code>Minecraft</code></a>这是一款沙盒游戏，玩家可以再三维世界里用方块建造建筑物，中文译为<strong>我的世界</strong>。<br>听说这款游戏热度特别高，可以自搭私服，拉伙伴一起玩。就用现成的<code>VPS</code>尝试搭建一个<code>server</code>.</p>
 </blockquote>
 <a id="more"></a>
+
 <h3 id="Install-JDK"><a href="#Install-JDK" class="headerlink" title="Install JDK"></a>Install JDK</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CentOS</span></span><br><span class="line">yum -y install java-1.6.0-openjdk</span><br><span class="line"></span><br><span class="line"><span class="comment"># Debian:</span></span><br><span class="line">sudo apt-get install python-software-properties</span><br><span class="line">sudo add-apt-repository ppa:ferramroberto/java</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install sun-java6-jdk</span><br></pre></td></tr></table></figure>
+
 <h3 id="Install-Screen"><a href="#Install-Screen" class="headerlink" title="Install Screen"></a>Install Screen</h3><blockquote>
 <p>Because we can’t keep connection long time by SSH, so we need <code>Screen</code> tool to keep touch with the Minecraft server.</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CentOS</span></span><br><span class="line">yum -y install screen</span><br><span class="line"></span><br><span class="line"><span class="comment"># Debian</span></span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
+
 <h3 id="Download-Server-client"><a href="#Download-Server-client" class="headerlink" title="Download Server client"></a>Download Server client</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> / </span><br><span class="line">mkdir Minecraft </span><br><span class="line"><span class="built_in">cd</span> Minecraft </span><br><span class="line">wget http://s3.amazonaws.com/Minecraft.Download/versions/1.8.7/minecraft_server.1.8.7.jar</span><br></pre></td></tr></table></figure>
+
 <h3 id="Configure-Server"><a href="#Configure-Server" class="headerlink" title="Configure Server"></a>Configure Server</h3><blockquote>
 <p><code>Xmx</code> is mean the max used memory, <code>Xms</code> is mean the min used memory, so the min memory is better &gt; 256M, because is hard to start server when the value is below 256M.</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">screen -S Minecraft</span><br><span class="line"><span class="built_in">cd</span> /Minecraft</span><br><span class="line">java -Xmx768M -Xms256M -jar minecraft_server.1.8.7.jar nogui</span><br><span class="line"><span class="comment">#java -Xmx256M -Xms256M -jar minecraft_server.1.8.7.jar nogui</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h3><blockquote>
 <p>input <code>ip + 25565</code></p>
 </blockquote>
@@ -166,11 +172,11 @@
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://tech.itabas.com">itabas016</a>
+      <a href="https://ebanbox.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://tech.itabas.com/2016/01/14/vps/vps-minecraft-server/">https://tech.itabas.com/2016/01/14/vps/vps-minecraft-server/</a>
+      <a href="https://ebanbox.com/2016/01/14/vps/vps-minecraft-server/">https://ebanbox.com/2016/01/14/vps/vps-minecraft-server/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -231,9 +237,9 @@
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">itabas016</span>
-    <span class="icp">
-      <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-    </span>
+  </span>
+  <span class="icp">
+    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
   </span>
 </div>
 </footer>
@@ -243,7 +249,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://tech.itabas.com/2016/01/14/vps/vps-minecraft-server/';
+        this.page.url = 'https://ebanbox.com/2016/01/14/vps/vps-minecraft-server/';
         this.page.identifier = '2016/01/14/vps/vps-minecraft-server/';
         this.page.title = 'Vps搭建Minecraft Server';
     };

@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Raspberry & Linux Crontab Example"><meta name="keywords" content="Raspberry, Linux, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://tech.itabas.com/2016/09/10/raspberry/raspberry-linux-crontab-examples/">
+<meta name="description" content="Raspberry & Linux Crontab Example"><meta name="keywords" content="Raspberry, Linux, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://ebanbox.com/2016/09/10/raspberry/raspberry-linux-crontab-examples/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,12 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Raspberry & Linux Crontab Example - ITABAS</title>
-  </head>
+    <title>Raspberry & Linux Crontab Example - 个人记录 | Technology</title>
+  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+</head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">ITABAS</a>
+    <a href="/." class="logo">个人记录 | Technology</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -90,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">ITABAS</a>
+  <a href="/." class="logo">个人记录 | Technology</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -141,7 +142,9 @@
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Syntax"><span class="toc-text">Syntax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples"><span class="toc-text">Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Scheduling-a-Job-For-a-Specific-Time"><span class="toc-text">Scheduling a Job For a Specific Time</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Schedule-a-Job-For-More-Than-One-Instance-e-g-Twice-a-Day"><span class="toc-text">Schedule a Job For More Than One Instance (e.g. Twice a Day)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Schedule-a-Job-for-Specific-Range-of-Time-e-g-Only-on-Weekdays"><span class="toc-text">Schedule a Job for Specific Range of Time (e.g. Only on Weekdays)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cron-Job-every-weekday-during-working-hours"><span class="toc-text">Cron Job every weekday during working hours</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-View-Crontab-Entries"><span class="toc-text">How to View Crontab Entries?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-Edit-Crontab-Entries"><span class="toc-text">How to Edit Crontab Entries?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Schedule-a-Job-for-Every-Minute-Using-Cron"><span class="toc-text">Schedule a Job for Every Minute Using Cron.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Schedule-a-Background-Cron-Job-For-Every-10-Minutes"><span class="toc-text">Schedule a Background Cron Job For Every 10 Minutes.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Schedule-a-Job-For-First-Minute-of-Every-Year-using-yearly"><span class="toc-text">Schedule a Job For First Minute of Every Year using @yearly</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Schedule-a-Cron-Job-Beginning-of-Every-Month-using-monthly"><span class="toc-text">Schedule a Cron Job Beginning of Every Month using @monthly</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Schedule-a-Background-Job-Every-Day-using-daily"><span class="toc-text">Schedule a Background Job Every Day using @daily</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-Execute-a-Linux-Command-After-Every-Reboot-using-reboot"><span class="toc-text">How to Execute a Linux Command After Every Reboot using @reboot?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-Disable-Redirect-the-Crontab-Mail-Output-using-MAIL-keyword"><span class="toc-text">How to Disable/Redirect the Crontab Mail Output using MAIL keyword?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-Execute-a-Linux-Cron-Jobs-Every-Second-Using-Crontab"><span class="toc-text">How to Execute a Linux Cron Jobs Every Second Using Crontab.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Specify-PATH-Variable-in-the-Crontab"><span class="toc-text">Specify PATH Variable in the Crontab</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Installing-Crontab-From-a-Cron-File"><span class="toc-text">Installing Crontab From a Cron File</span></a></li></ol></li></ol>
     </div>
   </div><div class="post-content"><h2 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># m h  dom mon dow   command</span><br><span class="line"># * * * * *  command to execute</span><br><span class="line"># ┬ ┬ ┬ ┬ ┬</span><br><span class="line"># │ │ │ │ │</span><br><span class="line"># │ │ │ │ │</span><br><span class="line"># │ │ │ │ └───── day of week (0 - 7) (0 to 6 are Sun to Sat or use names; 7 is Sunday, the same as 0)</span><br><span class="line"># │ │ │ └────────── month (1 - 12)</span><br><span class="line"># │ │ └─────────────── day of month (1 - 31)</span><br><span class="line"># │ └──────────────────── hour (0 - 23)</span><br><span class="line"># └───────────────────────── min (0 - 59)</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h4 id="Scheduling-a-Job-For-a-Specific-Time"><a href="#Scheduling-a-Job-For-a-Specific-Time" class="headerlink" title="Scheduling a Job For a Specific Time"></a>Scheduling a Job For a Specific Time</h4><blockquote>
 <p>The basic usage of cron is to execute a job in a specific time as shown below. This will execute the Full backup shell script (full-backup) on 10th June 08:30 AM.</p>
 </blockquote>
@@ -149,6 +152,7 @@
 <p>Please note that the time field uses 24 hours format. So, for 8 AM use 8, and for 8 PM use 20.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">30 08 10 06 * /home/ramesh/full-backup`</span><br><span class="line"># * 30 – 30th Minute</span><br><span class="line"># * 08 – 08 AM</span><br><span class="line"># * 10 – 10th Day</span><br><span class="line"># * 06 – 6th Month (June)</span><br><span class="line"># * * – Every day of the week</span><br></pre></td></tr></table></figure>
+
 <h4 id="Schedule-a-Job-For-More-Than-One-Instance-e-g-Twice-a-Day"><a href="#Schedule-a-Job-For-More-Than-One-Instance-e-g-Twice-a-Day" class="headerlink" title="Schedule a Job For More Than One Instance (e.g. Twice a Day)"></a>Schedule a Job For More Than One Instance (e.g. Twice a Day)</h4><blockquote>
 <p>The following script take a incremental backup twice a day every day.</p>
 </blockquote>
@@ -156,54 +160,67 @@
 <p>This example executes the specified incremental backup shell script (incremental-backup) at 11:00 and 16:00 on every day. The comma separated value in a field specifies that the command needs to be executed in all the mentioned time.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">00 11,16 * * * /home/ramesh/bin/incremental-backup</span><br><span class="line"># * 00 – 0th Minute (Top of the hour)</span><br><span class="line"># * 11,16 – 11 AM and 4 PM</span><br><span class="line"># * * – Every day</span><br><span class="line"># * * – Every month</span><br><span class="line"># * * – Every day of the week</span><br></pre></td></tr></table></figure>
+
 <h4 id="Schedule-a-Job-for-Specific-Range-of-Time-e-g-Only-on-Weekdays"><a href="#Schedule-a-Job-for-Specific-Range-of-Time-e-g-Only-on-Weekdays" class="headerlink" title="Schedule a Job for Specific Range of Time (e.g. Only on Weekdays)"></a>Schedule a Job for Specific Range of Time (e.g. Only on Weekdays)</h4><blockquote>
 <p>If you wanted a job to be scheduled for every hour with in a specific range of time then use the following.<br>Cron Job everyday during working hoursThis example checks the status of the database everyday (including weekends) during the working hours 9 a.m – 6 p.m</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">00 09-18 * * * /home/ramesh/bin/check-db-status</span><br><span class="line"># * 00 – 0th Minute (Top of the hour)</span><br><span class="line"># * 09-18 – 9 am, 10 am,11 am, 12 am, 1 pm, 2 pm, 3 pm, 4 pm, 5 pm, 6 pm</span><br><span class="line"># * * – Every day</span><br><span class="line"># * * – Every month</span><br><span class="line"># * * – Every day of the week</span><br></pre></td></tr></table></figure>
+
 <h4 id="Cron-Job-every-weekday-during-working-hours"><a href="#Cron-Job-every-weekday-during-working-hours" class="headerlink" title="Cron Job every weekday during working hours"></a>Cron Job every weekday during working hours</h4><blockquote>
 <p>This example checks the status of the database every weekday (i.e excluding Sat and Sun) during the working hours 9 a.m – 6 p.m.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">00 09-18 * * 1-5 /home/ramesh/bin/check-db-status</span><br><span class="line"># * 00 – 0th Minute (Top of the hour)</span><br><span class="line"># * 09-18 – 9 am, 10 am,11 am, 12 am, 1 pm, 2 pm, 3 pm, 4 pm, 5 pm, 6 pm</span><br><span class="line"># * * – Every day</span><br><span class="line"># * * – Every month</span><br><span class="line"># * 1-5 -Mon, Tue, Wed, Thu and Fri (Every Weekday)</span><br></pre></td></tr></table></figure>
+
 <h4 id="How-to-View-Crontab-Entries"><a href="#How-to-View-Crontab-Entries" class="headerlink" title="How to View Crontab Entries?"></a>How to View Crontab Entries?</h4><blockquote>
 <p>View Current Logged-In User’s Crontab entries<br>To view your crontab entries type <code>crontab -l</code> from your unix account as shown below.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ramesh@dev-db$ crontab -l</span><br><span class="line">@yearly /home/ramesh/annual-maintenance</span><br><span class="line">*/10 * * * * /home/ramesh/check-disk-space</span><br><span class="line"></span><br><span class="line">#Note: This displays crontab of the current logged in user</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>View Root Crontab entriesLogin as root user <code>(su – root)</code> and do <code>crontab -l</code> as shown below.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@dev-db# crontab -l</span><br><span class="line">no crontab for root</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Crontab HowTo: View Other Linux User’s Crontabs entriesTo view crontab entries of other Linux users, login to root and use <code>-u {username} -l</code> as shown below.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@dev-db# crontab -u sathiya -l</span><br><span class="line">@monthly /home/sathiya/monthly-backup</span><br><span class="line">00 09-18 * * * /home/sathiya/check-db-status</span><br></pre></td></tr></table></figure>
+
 <h4 id="How-to-Edit-Crontab-Entries"><a href="#How-to-Edit-Crontab-Entries" class="headerlink" title="How to Edit Crontab Entries?"></a>How to Edit Crontab Entries?</h4><blockquote>
 <p>Edit Current Logged-In User’s Crontab entriesTo edit a crontab entries, use <code>crontab -e</code> as shown below. By default this will edit the current logged-in users crontab.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ramesh@dev-db$ crontab -e</span><br><span class="line">@yearly /home/ramesh/centos/bin/annual-maintenance</span><br><span class="line">*/10 * * * * /home/ramesh/debian/bin/check-disk-space</span><br><span class="line">~</span><br><span class="line">&quot;/tmp/crontab.XXXXyjWkHw&quot; 2L, 83C</span><br><span class="line"></span><br><span class="line">#Note: This will open the crontab file in Vim editor for editing.</span><br><span class="line">Please note cron created a temporary /tmp/crontab.XX...</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>When you save the above temporary file with <code>:wq</code>, it will save the crontab and display the following message indicating the crontab is successfully modified.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~</span><br><span class="line">&quot;crontab.XXXXyjWkHw&quot; 2L, 83C written</span><br><span class="line">crontab: installing new crontab</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Edit Root Crontab entriesLogin as root user <code>(su – root)</code> and do <code>crontab -e</code> as shown below.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@dev-db# crontab -e</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Edit Other Linux User’s Crontab File entriesTo edit crontab entries of other Linux users, login to root and use <code>-u {username} -e</code> as shown below.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@dev-db# crontab -u sathiya -e</span><br><span class="line">@monthly /home/sathiya/fedora/bin/monthly-backup</span><br><span class="line">00 09-18 * * * /home/sathiya/ubuntu/bin/check-db-status</span><br><span class="line">~</span><br><span class="line">~</span><br><span class="line">~</span><br><span class="line">&quot;/tmp/crontab.XXXXyjWkHw&quot; 2L, 83C</span><br></pre></td></tr></table></figure>
+
 <h4 id="Schedule-a-Job-for-Every-Minute-Using-Cron"><a href="#Schedule-a-Job-for-Every-Minute-Using-Cron" class="headerlink" title="Schedule a Job for Every Minute Using Cron."></a>Schedule a Job for Every Minute Using Cron.</h4><blockquote>
 <p>Ideally you may not have a requirement to schedule a job every minute. But understanding this example will will help you understand the other examples mentioned below in this article.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * CMD</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>The <code>*</code> means all the possible unit — i.e every minute of every hour through out the year. More than using this * directly, you will find it very useful in the following cases.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* When you specify */5 in minute field means every 5 minutes.</span><br><span class="line">* When you specify 0-10/2 in minute field mean every 2 minutes in the first 10 minute.</span><br><span class="line">* Thus the above convention can be used for all the other 4 fields.</span><br></pre></td></tr></table></figure>
+
 <h4 id="Schedule-a-Background-Cron-Job-For-Every-10-Minutes"><a href="#Schedule-a-Background-Cron-Job-For-Every-10-Minutes" class="headerlink" title="Schedule a Background Cron Job For Every 10 Minutes."></a>Schedule a Background Cron Job For Every 10 Minutes.</h4><blockquote>
 <p>Use the following, if you want to check the disk space every 10 minutes.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/10 * * * * /home/ramesh/check-disk-space</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>It executes the specified command check-disk-space every 10 minutes through out the year. But you may have a requirement of executing the command only during office hours or vice versa. The above examples shows how to do those things.</p>
 </blockquote>
@@ -220,6 +237,7 @@
 <p>This will execute the system annual maintenance using annual-maintenance shell script at 00:00 on Jan 1st for every year.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@yearly /home/ramesh/red-hat/bin/annual-maintenance</span><br></pre></td></tr></table></figure>
+
 <h4 id="Schedule-a-Cron-Job-Beginning-of-Every-Month-using-monthly"><a href="#Schedule-a-Cron-Job-Beginning-of-Every-Month-using-monthly" class="headerlink" title="Schedule a Cron Job Beginning of Every Month using @monthly"></a>Schedule a Cron Job Beginning of Every Month using <code>@monthly</code></h4><blockquote>
 <p>It is as similar as the @yearly as above. But executes the command monthly once using @monthly cron keyword.</p>
 </blockquote>
@@ -227,18 +245,22 @@
 <p>This will execute the shell script tape-backup at 00:00 on 1st of every month.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@monthly /home/ramesh/suse/bin/tape-backup</span><br></pre></td></tr></table></figure>
+
 <h4 id="Schedule-a-Background-Job-Every-Day-using-daily"><a href="#Schedule-a-Background-Job-Every-Day-using-daily" class="headerlink" title="Schedule a Background Job Every Day using @daily"></a>Schedule a Background Job Every Day using <code>@daily</code></h4><blockquote>
 <p>Using the @daily cron keyword, this will do a daily log file cleanup using cleanup-logs shell scriptat 00:00 on every day.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@daily /home/ramesh/arch-linux/bin/cleanup-logs &quot;day started&quot;</span><br></pre></td></tr></table></figure>
+
 <h4 id="How-to-Execute-a-Linux-Command-After-Every-Reboot-using-reboot"><a href="#How-to-Execute-a-Linux-Command-After-Every-Reboot-using-reboot" class="headerlink" title="How to Execute a Linux Command After Every Reboot using @reboot?"></a>How to Execute a Linux Command After Every Reboot using <code>@reboot</code>?</h4><blockquote>
 <p>Using the <code>@reboot</code> cron keyword, this will execute the specified command once after the machine got booted every time.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@reboot CMD</span><br></pre></td></tr></table></figure>
+
 <h4 id="How-to-Disable-Redirect-the-Crontab-Mail-Output-using-MAIL-keyword"><a href="#How-to-Disable-Redirect-the-Crontab-Mail-Output-using-MAIL-keyword" class="headerlink" title="How to Disable/Redirect the Crontab Mail Output using MAIL keyword?"></a>How to Disable/Redirect the Crontab Mail Output using MAIL keyword?</h4><blockquote>
 <p>By default crontab sends the job output to the user who scheduled the job. If you want to redirect the output to a specific user, add or update the MAIL variable in the crontab as shown below.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ramesh@dev-db$ crontab -l</span><br><span class="line">MAIL=&quot;ramesh&quot;</span><br><span class="line"></span><br><span class="line">@yearly /home/ramesh/annual-maintenance</span><br><span class="line">*/10 * * * * /home/ramesh/check-disk-space</span><br><span class="line"></span><br><span class="line">#Note: Crontab of the current logged in user with MAIL variable</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>If you wanted the mail not to be sent to anywhere, i.e to stop the crontab output to be emailed, add or update the MAIL variable in the crontab as shown below. MAIL=””</p>
 </blockquote>
@@ -252,21 +274,23 @@
 <p>For example, instead of specifying <code>/home/ramesh/tape-backup</code>, if you want to just specify tape-backup, then add the path <code>/home/ramesh</code> to the PATH variable in the crontab as shown below.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ramesh@dev-db$ crontab -l</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/home/ramesh</span><br><span class="line"></span><br><span class="line">@yearly annual-maintenance</span><br><span class="line">*/10 * * * * check-disk-space</span><br><span class="line"></span><br><span class="line">Note: Crontab of the current logged in user with PATH variable</span><br></pre></td></tr></table></figure>
+
 <h4 id="Installing-Crontab-From-a-Cron-File"><a href="#Installing-Crontab-From-a-Cron-File" class="headerlink" title="Installing Crontab From a Cron File"></a>Installing Crontab From a Cron File</h4><blockquote>
 <p>Instead of directly editing the crontab file, you can also add all the entries to a cron-file first. Once you have all thoese entries in the file, you can upload or install them to the cron as shown below.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ramesh@dev-db$ crontab -l</span><br><span class="line">no crontab for ramesh</span><br><span class="line"></span><br><span class="line">$ cat cron-file.txt</span><br><span class="line">@yearly /home/ramesh/annual-maintenance</span><br><span class="line">*/10 * * * * /home/ramesh/check-disk-space</span><br><span class="line"></span><br><span class="line">ramesh@dev-db$ crontab cron-file.txt</span><br><span class="line"></span><br><span class="line">ramesh@dev-db$ crontab -l</span><br><span class="line">@yearly /home/ramesh/annual-maintenance</span><br><span class="line">*/10 * * * * /home/ramesh/check-disk-space</span><br><span class="line"></span><br><span class="line">#Note: This will install the cron-file.txt to your crontab, </span><br><span class="line">#which will also remove your old cron entries. </span><br><span class="line">#So, please be careful while uploading cron entries from a cron-file.txt.</span><br></pre></td></tr></table></figure>
+
 <p>Resources:<br><a href="http://www.thegeekstuff.com/tag/productivity-tips-for-geeks/" target="_blank" rel="noopener">http://www.thegeekstuff.com/tag/productivity-tips-for-geeks/</a></p>
 
       </div>
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://tech.itabas.com">itabas016</a>
+      <a href="https://ebanbox.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://tech.itabas.com/2016/09/10/raspberry/raspberry-linux-crontab-examples/">https://tech.itabas.com/2016/09/10/raspberry/raspberry-linux-crontab-examples/</a>
+      <a href="https://ebanbox.com/2016/09/10/raspberry/raspberry-linux-crontab-examples/">https://ebanbox.com/2016/09/10/raspberry/raspberry-linux-crontab-examples/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -326,9 +350,9 @@
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">itabas016</span>
-    <span class="icp">
-      <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-    </span>
+  </span>
+  <span class="icp">
+    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
   </span>
 </div>
 </footer>
@@ -338,7 +362,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://tech.itabas.com/2016/09/10/raspberry/raspberry-linux-crontab-examples/';
+        this.page.url = 'https://ebanbox.com/2016/09/10/raspberry/raspberry-linux-crontab-examples/';
         this.page.identifier = '2016/09/10/raspberry/raspberry-linux-crontab-examples/';
         this.page.title = 'Raspberry & Linux Crontab Example';
     };

@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Oracle - Basic SQL, Store Procedures(Functions, Packages)"><meta name="keywords" content="Oracle, KT, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://tech.itabas.com/2016/09/14/database/oracle-kt-object-operation/">
+<meta name="description" content="Oracle - Basic SQL, Store Procedures(Functions, Packages)"><meta name="keywords" content="Oracle, KT, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://ebanbox.com/2016/09/14/database/oracle-kt-object-operation/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,12 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Oracle - Basic SQL, Store Procedures(Functions, Packages) - ITABAS</title>
-  </head>
+    <title>Oracle - Basic SQL, Store Procedures(Functions, Packages) - 个人记录 | Technology</title>
+  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+</head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">ITABAS</a>
+    <a href="/." class="logo">个人记录 | Technology</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -90,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">ITABAS</a>
+  <a href="/." class="logo">个人记录 | Technology</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -150,13 +151,18 @@
 <p><em>The detail about <strong>DML&amp;DDL</strong> click <a href="/../../../../2016/09/03/database/oracle-statements/">here</a></em></p>
 </blockquote>
 <a id="more"></a>
+
 <h3 id="Special-clause-in-DML"><a href="#Special-clause-in-DML" class="headerlink" title="Special clause in DML"></a>Special clause in DML</h3><h4 id="Special-clause"><a href="#Special-clause" class="headerlink" title="Special clause"></a>Special clause</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- group by syntax</span></span><br><span class="line"><span class="keyword">SELECT</span> expression1, expression2, ... expression_n, </span><br><span class="line">       aggregate_function (aggregate_expression)</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">tables</span></span><br><span class="line">[<span class="keyword">WHERE</span> conditions]</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> expression1, expression2, ... expression_n;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- having syntax</span></span><br><span class="line"><span class="keyword">SELECT</span> expression1, expression2, ... expression_n, </span><br><span class="line">       aggregate_function (aggregate_expression)</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">tables</span></span><br><span class="line">[<span class="keyword">WHERE</span> conditions]</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> expression1, expression2, ... expression_n</span><br><span class="line"><span class="keyword">HAVING</span> having_condition;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- order by syntax</span></span><br><span class="line"><span class="keyword">SELECT</span> expressions</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">tables</span></span><br><span class="line">[<span class="keyword">WHERE</span> conditions]</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> expression [ <span class="keyword">ASC</span> | <span class="keyword">DESC</span> ];</span><br><span class="line"></span><br><span class="line"><span class="comment">-- complex example</span></span><br><span class="line"><span class="keyword">SELECT</span> DEPTNO, <span class="keyword">COUNT</span>(*), <span class="keyword">SUM</span>(SAL) <span class="keyword">FROM</span> EMP</span><br><span class="line">	<span class="keyword">WHERE</span> JOB = <span class="string">'CLERK'</span></span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> DEPTNO</span><br><span class="line">	<span class="keyword">HAVING</span> <span class="keyword">SUM</span>(SAL) &gt;=<span class="number">500</span> <span class="keyword">AND</span> <span class="keyword">COUNT</span>(*) &lt;&gt; <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="Subqueries"><a href="#Subqueries" class="headerlink" title="Subqueries"></a>Subqueries</h4><blockquote>
 <p>see the below related clause examples:</p>
 </blockquote>
 <h5 id="WHERE-clause"><a href="#WHERE-clause" class="headerlink" title="WHERE clause"></a>WHERE clause</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> all_tables tabs</span><br><span class="line"><span class="keyword">WHERE</span> tabs.table_name <span class="keyword">IN</span> (<span class="keyword">SELECT</span> cols.table_name</span><br><span class="line">                          <span class="keyword">FROM</span> all_tab_columns cols</span><br><span class="line">                          <span class="keyword">WHERE</span> cols.column_name = <span class="string">'SUPPLIER_ID'</span>);</span><br></pre></td></tr></table></figure>
+
 <h5 id="FROM-clause"><a href="#FROM-clause" class="headerlink" title="FROM clause"></a>FROM clause</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> suppliers.name, subquery1.total_amt</span><br><span class="line"><span class="keyword">FROM</span> suppliers,</span><br><span class="line"> (<span class="keyword">SELECT</span> supplier_id, <span class="keyword">SUM</span>(orders.amount) <span class="keyword">AS</span> total_amt</span><br><span class="line">  <span class="keyword">FROM</span> orders</span><br><span class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> supplier_id) subquery1</span><br><span class="line"><span class="keyword">WHERE</span> subquery1.supplier_id = suppliers.supplier_id;</span><br></pre></td></tr></table></figure>
+
 <h5 id="SELECT-clause"><a href="#SELECT-clause" class="headerlink" title="SELECT clause"></a>SELECT clause</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> tbls.owner, tbls.table_name,</span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(column_name) <span class="keyword">AS</span> total_columns</span><br><span class="line">   <span class="keyword">FROM</span> all_tab_columns cols</span><br><span class="line">   <span class="keyword">WHERE</span> cols.owner = tbls.owner</span><br><span class="line">   <span class="keyword">AND</span> cols.table_name = tbls.table_name) subquery2</span><br><span class="line"><span class="keyword">FROM</span> all_tables tbls;</span><br></pre></td></tr></table></figure>
+
 <h4 id="Joins"><a href="#Joins" class="headerlink" title="Joins"></a>Joins</h4><blockquote>
 <ul>
 <li>Oracle <strong>INNER JOIN</strong> (or sometimes called <strong>SIMPLE JOIN</strong>)</li>
@@ -165,10 +171,18 @@
 <li>Oracle <strong>FULL OUTER JOIN</strong> (or sometimes called <strong>FULL JOIN</strong>)</li>
 </ul>
 </blockquote>
-<h5 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h5><p><img src="/../../../../ref/inner_join.gif" alt="inner-join"><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">columns</span></span><br><span class="line"><span class="keyword">FROM</span> table1 </span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.column = table2.column;</span><br></pre></td></tr></table></figure></p>
-<h5 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT JOIN"></a>LEFT JOIN</h5><p><img src="/../../../../ref/left_outer_join.gif" alt="left-join"><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">columns</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">LEFT</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.column = table2.column;</span><br></pre></td></tr></table></figure></p>
-<h5 id="RIGHT-JOIN"><a href="#RIGHT-JOIN" class="headerlink" title="RIGHT JOIN"></a>RIGHT JOIN</h5><p><img src="/../../../../ref/right_outer_join.gif" alt="right-join"><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">columns</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">RIGHT</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.column = table2.column;</span><br></pre></td></tr></table></figure></p>
-<h5 id="FULL-JOIN"><a href="#FULL-JOIN" class="headerlink" title="FULL JOIN"></a>FULL JOIN</h5><p><img src="/../../../../ref/full_outer_join.gif" alt="full-join"><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">columns</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">FULL</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.column = table2.column;</span><br></pre></td></tr></table></figure></p>
+<h5 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h5><p><img src="/../../../../ref/inner_join.gif" alt="inner-join"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">columns</span></span><br><span class="line"><span class="keyword">FROM</span> table1 </span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.column = table2.column;</span><br></pre></td></tr></table></figure>
+
+<h5 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT JOIN"></a>LEFT JOIN</h5><p><img src="/../../../../ref/left_outer_join.gif" alt="left-join"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">columns</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">LEFT</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.column = table2.column;</span><br></pre></td></tr></table></figure>
+
+<h5 id="RIGHT-JOIN"><a href="#RIGHT-JOIN" class="headerlink" title="RIGHT JOIN"></a>RIGHT JOIN</h5><p><img src="/../../../../ref/right_outer_join.gif" alt="right-join"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">columns</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">RIGHT</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.column = table2.column;</span><br></pre></td></tr></table></figure>
+
+<h5 id="FULL-JOIN"><a href="#FULL-JOIN" class="headerlink" title="FULL JOIN"></a>FULL JOIN</h5><p><img src="/../../../../ref/full_outer_join.gif" alt="full-join"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">columns</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">FULL</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.column = table2.column;</span><br></pre></td></tr></table></figure>
+
 <h3 id="Store-Procedures"><a href="#Store-Procedures" class="headerlink" title="Store Procedures"></a>Store Procedures</h3><blockquote>
 <p> PL/SQL is a third generation language that has the expected procedural and namespace constructs, and its tight integration with SQL makes it possible to build complex and powerful applications. Because PL/SQL is executed in the database, you can include SQL statements in your code without having to establish a separate connection.</p>
 </blockquote>
@@ -176,6 +190,7 @@
 <p>The main types of program units you can create with PL/SQL and store in the database are <strong>standalone procedures</strong> and <strong>functions</strong>, and <strong>packages</strong>. Once stored in the database, these PL/SQL components, collectively known as <strong>stored procedures</strong>, can be used as building blocks for several different applications.</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Creating Procedures and Functions syntax</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> procedure_name(arg1 data_type, ...) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  ....</span><br><span class="line"><span class="keyword">END</span> procedure_name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> function_name(arg1 data_type, ...) <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  ....</span><br><span class="line"><span class="keyword">END</span> function_name;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>Procedures</strong> and <strong>functions</strong> that are defined within a package are known as <strong>packaged subprograms</strong>. Procedures and functions that are nested within other subprograms or within a PL/SQL block are called <strong>local subprograms</strong>; they exist only inside the enclosing block and cannot be referenced externally.</p>
 </blockquote>
@@ -183,10 +198,12 @@
 <p>Packages usually have two parts: <strong>a specification</strong> and <strong>a body</strong>.</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- The standard package specification</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PACKAGE</span> package_name <span class="keyword">AS</span></span><br><span class="line">  <span class="keyword">type</span> definitions <span class="keyword">for</span> <span class="keyword">records</span>, <span class="keyword">index</span>-<span class="keyword">by</span> <span class="keyword">tables</span></span><br><span class="line">  constants</span><br><span class="line">  <span class="keyword">exceptions</span></span><br><span class="line">  <span class="keyword">global</span> <span class="keyword">variable</span> declarations</span><br><span class="line">  <span class="keyword">procedure</span> procedure_1(arg1, ...);</span><br><span class="line">  ...</span><br><span class="line">  function function_1(arg1,...) return datat_ype;</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">END</span> package_name;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>The <strong>package body</strong> contains the code that implements these subprograms, the code for all private subprograms that can only be invoked from within the package, and the queries for the cursors. You can change the implementation details inside the package body without invalidating the calling applications.</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PACKAGE</span> <span class="keyword">BODY</span> package_name <span class="keyword">AS</span></span><br><span class="line">  <span class="keyword">PROCEDURE</span> procedure_1(arg1,...) <span class="keyword">IS</span></span><br><span class="line">    <span class="keyword">BEGIN</span></span><br><span class="line">      ...</span><br><span class="line">    <span class="keyword">EXCEPTION</span> </span><br><span class="line">      ...</span><br><span class="line">    <span class="keyword">END</span> procedure_1;</span><br><span class="line">  ...</span><br><span class="line">  FUNCTION function_1(arg1,...)  RETURN data_type IS result_variable data_type</span><br><span class="line">    <span class="keyword">BEGIN</span></span><br><span class="line">      ...</span><br><span class="line">      <span class="keyword">RETURN</span> result_variable;</span><br><span class="line">    EXCEPTION</span><br><span class="line">      ...</span><br><span class="line">  <span class="keyword">END</span> function_1;</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">END</span> package_name;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Resources:<br><a href="https://docs.oracle.com/cd/B19306_01/server.102/b14200/queries007.htm" target="_blank" rel="noopener">https://docs.oracle.com/cd/B19306_01/server.102/b14200/queries007.htm</a><br><a href="https://docs.oracle.com/cd/B28359_01/appdev.111/b28843/tdddg_procedures.htm" target="_blank" rel="noopener">https://docs.oracle.com/cd/B28359_01/appdev.111/b28843/tdddg_procedures.htm</a></p>
 </blockquote>
@@ -195,11 +212,11 @@
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://tech.itabas.com">itabas016</a>
+      <a href="https://ebanbox.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://tech.itabas.com/2016/09/14/database/oracle-kt-object-operation/">https://tech.itabas.com/2016/09/14/database/oracle-kt-object-operation/</a>
+      <a href="https://ebanbox.com/2016/09/14/database/oracle-kt-object-operation/">https://ebanbox.com/2016/09/14/database/oracle-kt-object-operation/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -259,9 +276,9 @@
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">itabas016</span>
-    <span class="icp">
-      <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-    </span>
+  </span>
+  <span class="icp">
+    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
   </span>
 </div>
 </footer>
@@ -271,7 +288,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://tech.itabas.com/2016/09/14/database/oracle-kt-object-operation/';
+        this.page.url = 'https://ebanbox.com/2016/09/14/database/oracle-kt-object-operation/';
         this.page.identifier = '2016/09/14/database/oracle-kt-object-operation/';
         this.page.title = 'Oracle - Basic SQL, Store Procedures(Functions, Packages)';
     };

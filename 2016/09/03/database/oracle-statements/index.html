@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Oracle Statements - DDL, DML, DCL, TCL"><meta name="keywords" content="Oracle, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://tech.itabas.com/2016/09/03/database/oracle-statements/">
+<meta name="description" content="Oracle Statements - DDL, DML, DCL, TCL"><meta name="keywords" content="Oracle, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://ebanbox.com/2016/09/03/database/oracle-statements/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,12 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Oracle Statements - DDL, DML, DCL, TCL - ITABAS</title>
-  </head>
+    <title>Oracle Statements - DDL, DML, DCL, TCL - 个人记录 | Technology</title>
+  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+</head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">ITABAS</a>
+    <a href="/." class="logo">个人记录 | Technology</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -90,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">ITABAS</a>
+  <a href="/." class="logo">个人记录 | Technology</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -141,27 +142,33 @@
       <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL"><span class="toc-text">DDL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DML"><span class="toc-text">DML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DCL"><span class="toc-text">DCL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCL"><span class="toc-text">TCL</span></a></li></ol>
     </div>
   </div><div class="post-content"><h3 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a><code>DDL</code></h3><blockquote>
-<p><strong>Data Definition Language (DDL)</strong><br>statements are used to define the database structure or schema. Some examples:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> - <span class="keyword">to</span> <span class="keyword">create</span> objects <span class="keyword">in</span> the <span class="keyword">database</span></span><br><span class="line"><span class="keyword">ALTER</span> - alters the structure <span class="keyword">of</span> the <span class="keyword">database</span></span><br><span class="line"><span class="keyword">DROP</span> - <span class="keyword">delete</span> objects <span class="keyword">from</span> the <span class="keyword">database</span></span><br><span class="line"><span class="keyword">TRUNCATE</span> - remove <span class="keyword">all</span> <span class="keyword">records</span> <span class="keyword">from</span> a <span class="keyword">table</span>, <span class="keyword">including</span> <span class="keyword">all</span> spaces allocated <span class="keyword">for</span> the <span class="keyword">records</span> <span class="keyword">are</span> removed</span><br><span class="line"><span class="keyword">COMMENT</span> - <span class="keyword">add</span> comments <span class="keyword">to</span> the <span class="keyword">data</span> dictionary</span><br><span class="line"><span class="keyword">RENAME</span> - <span class="keyword">rename</span> an <span class="keyword">object</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Data Definition Language (DDL)</strong><br>statements are used to define the database structure or schema. Some examples:</p>
 </blockquote>
-<h3 id="DML"><a href="#DML" class="headerlink" title="DML"></a><code>DML</code></h3><blockquote>
-<p><strong>Data Manipulation Language (DML)</strong><br>statements are used for managing data within schema objects. Some examples:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> - retrieve <span class="keyword">data</span> <span class="keyword">from</span> the a <span class="keyword">database</span></span><br><span class="line"><span class="keyword">INSERT</span> - <span class="keyword">insert</span> <span class="keyword">data</span> <span class="keyword">into</span> a <span class="keyword">table</span></span><br><span class="line"><span class="keyword">UPDATE</span> - updates existing <span class="keyword">data</span> <span class="keyword">within</span> a <span class="keyword">table</span></span><br><span class="line"><span class="keyword">DELETE</span> - deletes <span class="keyword">all</span> <span class="keyword">records</span> <span class="keyword">from</span> a <span class="keyword">table</span>, the <span class="keyword">space</span> <span class="keyword">for</span> the <span class="keyword">records</span> remain</span><br><span class="line"><span class="keyword">MERGE</span> - <span class="keyword">UPSERT</span> operation (<span class="keyword">insert</span> <span class="keyword">or</span> <span class="keyword">update</span>)</span><br><span class="line"><span class="keyword">CALL</span> - <span class="keyword">call</span> a PL/<span class="keyword">SQL</span> <span class="keyword">or</span> <span class="keyword">Java</span> subprogram</span><br><span class="line"><span class="keyword">EXPLAIN</span> PLAN - <span class="keyword">explain</span> <span class="keyword">access</span> <span class="keyword">path</span> <span class="keyword">to</span> <span class="keyword">data</span></span><br><span class="line"><span class="keyword">LOCK</span> <span class="keyword">TABLE</span> - control concurrency</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="DCL"><a href="#DCL" class="headerlink" title="DCL"></a><code>DCL</code></h3><blockquote>
-<p><strong>Data Control Language (DCL)</strong><br>Some examples:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> - gives <span class="keyword">user</span><span class="string">'s access privileges to database</span></span><br><span class="line"><span class="string">REVOKE - withdraw access privileges given with the GRANT command</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="TCL"><a href="#TCL" class="headerlink" title="TCL"></a><code>TCL</code></h3><blockquote>
-<p><strong>Transaction Control (TCL)</strong><br>statements are used to manage the changes made by DML statements. It allows statements to be grouped together into logical transactions.<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">COMMIT</span> - <span class="keyword">save</span> <span class="keyword">work</span> done</span><br><span class="line"><span class="keyword">SAVEPOINT</span> - identify a point <span class="keyword">in</span> a <span class="keyword">transaction</span> <span class="keyword">to</span> which you can later roll back</span><br><span class="line"><span class="keyword">ROLLBACK</span> - <span class="keyword">restore</span> <span class="keyword">database</span> <span class="keyword">to</span> original since the <span class="keyword">last</span> <span class="keyword">COMMIT</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">TRANSACTION</span> - <span class="keyword">Change</span> <span class="keyword">transaction</span> options <span class="keyword">like</span> <span class="keyword">isolation</span> <span class="keyword">level</span> <span class="keyword">and</span> what <span class="keyword">rollback</span> <span class="keyword">segment</span> <span class="keyword">to</span> <span class="keyword">use</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> - <span class="keyword">to</span> <span class="keyword">create</span> objects <span class="keyword">in</span> the <span class="keyword">database</span></span><br><span class="line"><span class="keyword">ALTER</span> - alters the structure <span class="keyword">of</span> the <span class="keyword">database</span></span><br><span class="line"><span class="keyword">DROP</span> - <span class="keyword">delete</span> objects <span class="keyword">from</span> the <span class="keyword">database</span></span><br><span class="line"><span class="keyword">TRUNCATE</span> - remove <span class="keyword">all</span> <span class="keyword">records</span> <span class="keyword">from</span> a <span class="keyword">table</span>, <span class="keyword">including</span> <span class="keyword">all</span> spaces allocated <span class="keyword">for</span> the <span class="keyword">records</span> <span class="keyword">are</span> removed</span><br><span class="line"><span class="keyword">COMMENT</span> - <span class="keyword">add</span> comments <span class="keyword">to</span> the <span class="keyword">data</span> dictionary</span><br><span class="line"><span class="keyword">RENAME</span> - <span class="keyword">rename</span> an <span class="keyword">object</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="DML"><a href="#DML" class="headerlink" title="DML"></a><code>DML</code></h3><blockquote>
+<p><strong>Data Manipulation Language (DML)</strong><br>statements are used for managing data within schema objects. Some examples:</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> - retrieve <span class="keyword">data</span> <span class="keyword">from</span> the a <span class="keyword">database</span></span><br><span class="line"><span class="keyword">INSERT</span> - <span class="keyword">insert</span> <span class="keyword">data</span> <span class="keyword">into</span> a <span class="keyword">table</span></span><br><span class="line"><span class="keyword">UPDATE</span> - updates existing <span class="keyword">data</span> <span class="keyword">within</span> a <span class="keyword">table</span></span><br><span class="line"><span class="keyword">DELETE</span> - deletes <span class="keyword">all</span> <span class="keyword">records</span> <span class="keyword">from</span> a <span class="keyword">table</span>, the <span class="keyword">space</span> <span class="keyword">for</span> the <span class="keyword">records</span> remain</span><br><span class="line"><span class="keyword">MERGE</span> - <span class="keyword">UPSERT</span> operation (<span class="keyword">insert</span> <span class="keyword">or</span> <span class="keyword">update</span>)</span><br><span class="line"><span class="keyword">CALL</span> - <span class="keyword">call</span> a PL/<span class="keyword">SQL</span> <span class="keyword">or</span> <span class="keyword">Java</span> subprogram</span><br><span class="line"><span class="keyword">EXPLAIN</span> PLAN - <span class="keyword">explain</span> <span class="keyword">access</span> <span class="keyword">path</span> <span class="keyword">to</span> <span class="keyword">data</span></span><br><span class="line"><span class="keyword">LOCK</span> <span class="keyword">TABLE</span> - control concurrency</span><br></pre></td></tr></table></figure>
+
+<h3 id="DCL"><a href="#DCL" class="headerlink" title="DCL"></a><code>DCL</code></h3><blockquote>
+<p><strong>Data Control Language (DCL)</strong><br>Some examples:</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> - gives <span class="keyword">user</span><span class="string">'s access privileges to database</span></span><br><span class="line"><span class="string">REVOKE - withdraw access privileges given with the GRANT command</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="TCL"><a href="#TCL" class="headerlink" title="TCL"></a><code>TCL</code></h3><blockquote>
+<p><strong>Transaction Control (TCL)</strong><br>statements are used to manage the changes made by DML statements. It allows statements to be grouped together into logical transactions.</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">COMMIT</span> - <span class="keyword">save</span> <span class="keyword">work</span> done</span><br><span class="line"><span class="keyword">SAVEPOINT</span> - identify a point <span class="keyword">in</span> a <span class="keyword">transaction</span> <span class="keyword">to</span> which you can later roll back</span><br><span class="line"><span class="keyword">ROLLBACK</span> - <span class="keyword">restore</span> <span class="keyword">database</span> <span class="keyword">to</span> original since the <span class="keyword">last</span> <span class="keyword">COMMIT</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">TRANSACTION</span> - <span class="keyword">Change</span> <span class="keyword">transaction</span> options <span class="keyword">like</span> <span class="keyword">isolation</span> <span class="keyword">level</span> <span class="keyword">and</span> what <span class="keyword">rollback</span> <span class="keyword">segment</span> <span class="keyword">to</span> <span class="keyword">use</span></span><br></pre></td></tr></table></figure>
       </div>
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://tech.itabas.com">itabas016</a>
+      <a href="https://ebanbox.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://tech.itabas.com/2016/09/03/database/oracle-statements/">https://tech.itabas.com/2016/09/03/database/oracle-statements/</a>
+      <a href="https://ebanbox.com/2016/09/03/database/oracle-statements/">https://ebanbox.com/2016/09/03/database/oracle-statements/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -220,9 +227,9 @@
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">itabas016</span>
-    <span class="icp">
-      <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-    </span>
+  </span>
+  <span class="icp">
+    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
   </span>
 </div>
 </footer>
@@ -232,7 +239,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://tech.itabas.com/2016/09/03/database/oracle-statements/';
+        this.page.url = 'https://ebanbox.com/2016/09/03/database/oracle-statements/';
         this.page.identifier = '2016/09/03/database/oracle-statements/';
         this.page.title = 'Oracle Statements - DDL, DML, DCL, TCL';
     };
