@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Raspberry Pi3 打造无线中继服务器"><meta name="keywords" content="Raspberry, 树莓派, Wireless, Wireless Repeater, Wireless Bridger, Router, 无线中继, 个人记录 | Technology"><link rel="alternate" href="/atom.xml" title="个人记录 | Technology"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="https://ebanbox.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/">
+<meta name="description" content="Raspberry Pi3 打造无线中继服务器"><meta name="keywords" content="Raspberry, 树莓派, Wireless, Wireless Repeater, Wireless Bridger, Router, 无线中继, ITABAS"><link rel="alternate" href="/atom.xml" title="ITABAS"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://tech.itabas.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/">
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
@@ -59,13 +59,13 @@
   window.config = {"leancloud":{"app_id":"CoEy126Hk5NBPaVCgahS7P0p-gzGzoHsz","app_key":"Sd1OLyWqAE53kPjgBvFXuaCJ"},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Raspberry Pi3 打造无线中继服务器 - 个人记录 | Technology</title>
-  <link rel="alternate" href="/atom.xml" title="个人记录 | Technology" type="application/atom+xml">
+    <title>Raspberry Pi3 打造无线中继服务器 - ITABAS</title>
+  <link rel="alternate" href="/atom.xml" title="ITABAS" type="application/atom+xml">
 </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">个人记录 | Technology</a>
+    <a href="/." class="logo">ITABAS</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -91,7 +91,7 @@
 </nav>
 <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">个人记录 | Technology</a>
+  <a href="/." class="logo">ITABAS</a>
 </div>
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
@@ -148,7 +148,7 @@
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>主要参考了网上的教程</p>
 <p>我的是一个板子(包含内置的有线网卡eth0和无线网卡wlan0)，一根网线，一个无线网卡wlan1(用来做梯子用)。</p>
 <h3 id="Static-IP"><a href="#Static-IP" class="headerlink" title="Static IP"></a>Static IP</h3><p>之前已经准备好了eth0静态ip, wlan0动态获取。主要是有线网卡比较稳定适合用静态ip。</p>
-<p>静态ip设置参照<a href="https://tech.itabas.com/2016/06/10/raspberry/raspberry-pi3-config/#Configure-static-IP-amp-WIFI" target="_blank" rel="noopener">这里</a></p>
+<p>静态ip设置参照<a href="https://tech.itabas.com/2016/06/10/raspberry/raspberry-pi3-config/#Configure-static-IP-amp-WIFI">这里</a></p>
 <p>后面修改 <code>/etc/network/interfaces</code> 和 <code>/etc/dhcpcd.conf</code> 分别添加以下配置：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># modify /etc/network/interfaces</span></span><br><span class="line">sudo vim /etc/network/interfaces</span><br><span class="line"></span><br><span class="line"><span class="comment"># add wlan1 configuration</span></span><br><span class="line">allow-hotplug wlan1</span><br><span class="line">auto wlan1</span><br><span class="line">iface wlan1 inet manual</span><br><span class="line"></span><br><span class="line"><span class="comment"># modify /etc/dhcpcd.conf</span></span><br><span class="line">sudo vim /etc/dhcpcd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># add wlan1 dhcp configuration</span></span><br><span class="line">interface wlan1</span><br><span class="line">static ip_address=192.168.20.1/24</span><br><span class="line">static routers=192.168.11.1</span><br><span class="line">static domain_name_servers=114.114.114.114 119.29.29.29</span><br></pre></td></tr></table></figure>
 
@@ -181,11 +181,11 @@
       <div class="post-copyright">
     <p class="copyright-item">
       <span>Author: </span>
-      <a href="https://ebanbox.com">itabas016</a>
+      <a href="https://tech.itabas.com">itabas016</a>
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="https://ebanbox.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/">https://ebanbox.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/</a>
+      <a href="https://tech.itabas.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/">https://tech.itabas.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/</a>
     </p>
     <p class="copyright-item">
       <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><strong>CC BY-NC-ND 4.0</strong></a>
@@ -251,9 +251,6 @@
     </span>
     <span class="author">itabas016</span>
   </span>
-  <span class="icp">
-    <a class="icp-link" href="http://www.beian.miit.gov.cn/">鲁ICP备19063268号-1</a>
-  </span>
 </div>
 </footer>
 
@@ -262,7 +259,7 @@
       </div>
     </div><script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://ebanbox.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/';
+        this.page.url = 'https://tech.itabas.com/2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/';
         this.page.identifier = '2017/11/13/raspberry/raspberry-pi3-wireless-repeater-server/';
         this.page.title = 'Raspberry Pi3 打造无线中继服务器';
     };
